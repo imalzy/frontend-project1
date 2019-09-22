@@ -1,0 +1,72 @@
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{ option }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </form>
+
+            <span class="example-space"></span>
+            <button mat-raised-button color="primary" (click)="openDialog()">
+                <mat-icon>add</mat-icon>Tambah
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="example-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="Id Pemborong">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Id Pemborong </th>
+                <td mat-cell *matCellDef="let element"> {{element.id_pemborong}} </td>
+            </ng-container>
+
+            <!-- Name Column-->
+            <ng-container matColumnDef="Nama Pemborong">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nama Pemborong </th>
+                <td mat-cell *matCellDef="let element"> {{element.nama}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="NIK">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> NIK </th>
+                <td mat-cell *matCellDef="let element"> {{element.ktp}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="Alamat">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Alamat </th>
+                <td mat-cell *matCellDef="let element"> {{element.alamat}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Telepon">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. Telepon </th>
+                <td mat-cell *matCellDef="let element"> {{element.telpon}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                <td mat-cell *matCellDef="let element">
+                    <a class="action-pointer" (click)="openDialog('Update',element)">
+                        Edit
+                    </a>|
+                    <a class="action-pointer" (click)="openDialog('Delete',element)">Delete
+                    </a>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
+    </div>
+
+</div>

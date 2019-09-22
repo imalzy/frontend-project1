@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Tambah Data</h1>
+<hr class="new4">
+<mat-toolbar>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input type="hidden" name="id_pemborong" [(ngModel)]="Modelpemborong.id_pemborong">
+            <input name="nama" [(ngModel)]="Modelpemborong.nama" matInput placeholder="Nama Pemborong">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input name="nik" [(ngModel)]="Modelpemborong.nik" matInput placeholder="NIK">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input name="alamat" [(ngModel)]="Modelpemborong.alamat" matInput placeholder="Alamat">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input name="telpon" [(ngModel)]="Modelpemborong.telpon" matInput placeholder="No. Telepon">
+        </mat-form-field>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div mat-dialog-actions>
+    <button mat-button class="biru" (click)="save_data()" cdkFocusInitial>Simpan</button>
+    <button mat-button class="merah" (click)="onClick()">Batal</button>
+</div>

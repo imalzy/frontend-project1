@@ -1,0 +1,46 @@
+.example-container {
+    min-height: 200px;
+    overflow: auto;
+}
+
+.example-space,
+.example-form {
+    flex: 1 1 auto;
+}
+
+.mat-button,
+.mat-raised-button {
+    background-color: #303F9F;
+}
+
+.action-pointer {
+    cursor: pointer;
+}
+
+.example-container {
+    min-height: 200px;
+    width: 550px;
+    overflow: auto;
+}
+
+table {
+    width: 1000px;
+}
+
+td.mat-column-star {
+    width: 20px;
+    padding-right: 8px;
+}
+
+th.mat-column-position,
+td.mat-column-position {
+    padding-left: 8px;
+}
+
+.mat-table-sticky:first-child {
+    border-right: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky:last-child {
+    border-left: 1px solid #e0e0e0;
+}
