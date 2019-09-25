@@ -20,9 +20,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./daftarmenu.component.scss']
 })
 export class DaftarMenu implements OnInit {
-  displayedColumns = ['no_surat', 'tanggal_surat', 'nama', 'telpon'];
+  displayedColumns = ['no_surat', 'pekerjaan', 'nama', 'telpon', 'total_nilai'];
   dataSource = [];
-  Modelsurat = [];
+  dataNama = [];
+  Modelsurat: any = [];
   myControl: FormControl = new FormControl();
   options = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
@@ -54,15 +55,56 @@ export class DaftarMenu implements OnInit {
       });
   }
 
+  getnama() {
+    this.API.listNama().subscribe(
+      result => {
+        console.log(result.json().Output);
+        this.dataNama = result.json().Output;
+        console.log(this.dataNama);
+      });
+  }
   filter(val: string): string[] {
     return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
+  dialogSave(): void {
+    const dialogRef = this.dialog.open(Sample2ViewDialog, {
+      height: '450px',
+      width: '400px',
+      hasBackdrop: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.Modelsurat = result;
+      //this.save_data();
+    });
+  }
+
+}
+@Component({
+  selector: 'daftarmenu-dialog',
+  templateUrl: 'daftarmenu-dialog.html',
+  styleUrls: ['daftarmenu-dialog.component.scss']
+})
+export class Sample2ViewDialog {
+  Modelsurat: any = [];
+  constructor(
+    public dialogRef: MatDialogRef<Sample2ViewDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+export interface DialogData {
+  animal: string;
+  name: string;
 }
 
 @Component({
   selector: 'daftarmenu-dialog',
-  templateUrl: './daftarmenu-dialog.html',
+  templateUrl: 'daftarmenu-dialog.html',
   styleUrls: ['./daftarmenu.component.scss']
 })
 

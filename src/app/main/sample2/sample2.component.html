@@ -15,7 +15,7 @@
             </form>
 
             <span class="example-space"></span>
-            <button mat-raised-button color="primary" (click)="openDialog()">
+            <button mat-raised-button color="primary" (click)="dialogSave()">
                 <mat-icon>add</mat-icon>Tambah
             </button>
         </mat-toolbar-row>
@@ -23,13 +23,6 @@
 
     <div class="example-container mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort>
-
-            <!-- Position Column -->
-            <ng-container matColumnDef="Id Pemborong">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Id Pemborong </th>
-                <td mat-cell *matCellDef="let element"> {{element.id_pemborong}} </td>
-            </ng-container>
-
             <!-- Name Column-->
             <ng-container matColumnDef="Nama Pemborong">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nama Pemborong </th>
@@ -56,10 +49,10 @@
             <ng-container matColumnDef="Action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                 <td mat-cell *matCellDef="let element">
-                    <a class="action-pointer" (click)="openDialog('Update',element)">
+                    <a class="action-pointer">
                         Edit
                     </a>|
-                    <a class="action-pointer" (click)="openDialog('Delete',element)">Delete
+                    <a class="action-pointer">Delete
                     </a>
                 </td>
             </ng-container>

@@ -12,9 +12,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./sample2.component.scss']
 })
 export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
-  displayedColumns = ['Id Pemborong', 'Nama Pemborong', 'NIK', 'Alamat', 'Telepon', 'Action'];
+  displayedColumns = ['Nama Pemborong', 'NIK', 'Alamat', 'Telepon', 'Action'];
   dataSource = [];
-  Modelpemborong: any = {};
+  ModelPemborong: any = [];
+  ModelPemborongDelete: any = [];
   myControl: FormControl = new FormControl();
   options = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
@@ -43,7 +44,7 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
       });
   }
   save_data() {
-    this.API.Pemborong_CreatePemborong(this.Modelpemborong.nama, this.Modelpemborong.nik, this.Modelpemborong.alamat, this.Modelpemborong.telpon).subscribe(
+    this.API.Pemborong_CreatePemborong(this.ModelPemborong.Nama, this.ModelPemborong.nik, this.ModelPemborong.alamat, this.ModelPemborong.telpon).subscribe(
       result => {
         console.log(result);
         const status = result.json().status;
@@ -52,28 +53,62 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
         if (result.status === 200) {
           if (status === 'OK') {
             this.ambil_data();
-            this.Modelpemborong = [];
+            this.ModelPemborong = [];
           }
+          console.log(this.ModelPemborong);
         }
       }
     );
   }
+
+
   filter(val: string): string[] {
     return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
-  openDialog(): void {
+  dialogSave(): void {
     const dialogRef = this.dialog.open(Sample2ViewDialog, {
       height: '450px',
       width: '400px',
-      disableClose: true,
       hasBackdrop: true,
-      data: { name: this.name, animal: this.animal }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      this.ModelPemborong = result;
+      this.save_data();
+    });
+  }
+
+  delete_data() {
+    this.API.Pemborong_DeletePemborong(this.ModelPemborongDelete.id_pemborong).subscribe(
+      result => {
+        console.log(result);
+        const status = result.json().status;
+        const desc = result.json().desc;
+
+        if (result.status === 200) {
+          if (status === 'OK') {
+            console.log(result);
+            this.ambil_data();
+            this.ModelPemborongDelete = [];
+          }
+          console.log(this.ModelPemborongDelete);
+        }
+      }
+    );
+  }
+
+  dialogDelete(): void {
+    const dialogRef = this.dialog.open(viewdialogDelete, {
+      height: '180px',
+      width: '250px',
+      hasBackdrop: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ModelPemborongDelete = result;
+      console.log(this.ModelPemborongDelete);
+      //this.delete_data();
     });
   }
 }
@@ -90,7 +125,7 @@ export interface Pengguna {
   styleUrls: ['./sample2-dialog.component.scss']
 })
 export class Sample2ViewDialog {
-
+  ModelPemborong: any = [];
   constructor(
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
@@ -105,7 +140,20 @@ export interface DialogData {
   animal: string;
   name: string;
 }
+@Component({
+  selector: 'sample2-delete',
+  templateUrl: 'sample2-delete.html',
+  styleUrls: ['./sample2-dialog.component.scss']
+})
+export class viewdialogDelete {
+  ModelPemborongDelete: any = [];
+  constructor(
+    public dialogRef: MatDialogRef<viewdialogDelete>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
-export const COMPONENT_LIST = [
-  Sample2ViewDialog,
-];
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+export const COMPONENT_LIST = [Sample2ViewDialog, viewdialogDelete];

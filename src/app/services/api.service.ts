@@ -108,6 +108,7 @@ export class ApiService {
 
   //Pemborong Method
   Pemborong_CreatePemborong(Nama: string, nik: string, alamat: string, no_telpon: string): Observable<any> {
+    console.log(Nama);
     let opt: RequestOptions;
     const headers = new Headers();
     const formData: FormData = new FormData();
@@ -122,8 +123,28 @@ export class ApiService {
         return response;
       }));
   }
+  Pemborong_DeletePemborong(id_pemborong: string): Observable<any> {
+    let opt: RequestOptions;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    opt = new RequestOptions({
+      headers: headers
+    });
+
+    return this.http.get(this.BaseURL + 'pemborong/hapus/' + id_pemborong)
+      .pipe(map(response => {
+        return response;
+      }));
+  }
   ListPemborong() {
     return this.http.get(this.BaseURL + 'pemborong/')
+      .pipe(map(response => {
+        return response;
+      }));
+  }
+
+  listNama() {
+    return this.http.get(this.BaseURL + 'welcome/getnama')
       .pipe(map(response => {
         return response;
       }));
