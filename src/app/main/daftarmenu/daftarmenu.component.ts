@@ -43,7 +43,6 @@ export class DaftarMenu implements OnInit {
       startWith(''),
       map(val => this.filter(val))
     );
-    this.getnama();
     this.ambil_data();
   }
   constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
@@ -57,14 +56,6 @@ export class DaftarMenu implements OnInit {
       });
   }
 
-  getnama() {
-    this.API.listNama().subscribe(
-      result => {
-        console.log(result.json().Output);
-        this.namaList = result.json().Output;
-        console.log(this.namaList);
-      });
-  }
   filter(val: string): string[] {
     return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
@@ -95,12 +86,23 @@ export class Sample2ViewDialog {
   namaList: UsrNama[];
 
   constructor(
+    http: Http, private API: ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
     @Inject(MAT_DIALOG_DATA) public data: UsrNama) { }
 
   onNoClick(): void {
     this.dialogRef.close();
     console.log(this.namaList);
+  }
+  ngOnInit() {
+    this.getnama();
+  }
+  getnama() {
+    this.API.listNama().subscribe(
+      result => {
+        this.namaList = result.json().Output;
+        console.log(this.namaList);
+      });
   }
 
 }
