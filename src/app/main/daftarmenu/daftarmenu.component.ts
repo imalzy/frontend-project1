@@ -22,7 +22,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 export class DaftarMenu implements OnInit {
   displayedColumns = ['no_surat', 'pekerjaan', 'nama', 'telpon', 'total_nilai'];
   dataSource = [];
-  namaList: UsrNama[];
+  namaList: UsrNama[] = [];
   id_pemborong: string;
   nama: string;
   Modelsurat: any = [];
@@ -43,6 +43,7 @@ export class DaftarMenu implements OnInit {
       startWith(''),
       map(val => this.filter(val))
     );
+    this.getnama();
     this.ambil_data();
   }
   constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
@@ -51,7 +52,6 @@ export class DaftarMenu implements OnInit {
     this.API.ListHome()
       .subscribe(result => {
         console.log(result.json().Output);
-        // this.ELEMENT_DATA = result.json().Output;
         this.dataSource = result.json().Output;
         console.log(this.dataSource);
       });
@@ -78,9 +78,9 @@ export class DaftarMenu implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.Modelsurat = result;
+      console.log(result);
       this.namaList = result;
-      console.log(this.namaList);
+
       //this.save_data();
     });
   }

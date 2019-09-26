@@ -146,6 +146,7 @@ export class ApiService {
   listNama() {
     return this.http.get(this.BaseURL + 'welcome/getnama')
       .pipe(map(response => {
+        console.log(response);
         return response;
       }));
   }
