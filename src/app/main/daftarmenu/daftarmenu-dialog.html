@@ -1,28 +1,57 @@
 <h1 mat-dialog-title>Tambah Data</h1>
 <hr class="new4">
+
 <mat-toolbar>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <input matInput placeholder="Nama Pemborong">
+            <input matInput placeholder="No Surat">
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <input matInput placeholder="NIK">
+            <mat-select placeholder="Nama Pemborong">
+                <mat-option *ngFor="let item of namaList" [value]="item.id_pemborong"> {{item.nama}} </mat-option>
+            </mat-select>
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <input matInput placeholder="Alamat">
+            <input matInput [matDatepicker]="picker" placeholder="Tanggal Surat">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <input matInput placeholder="No. Telepon">
+            <input matInput placeholder="Pekerjaan">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input matInput placeholder="Proyek">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input matInput placeholder="Total Nilai">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input matInput placeholder="Waktu Pengerjaan">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input matInput placeholder="Awal Pekerjaan">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input matInput placeholder="Cara Pembayaran">
         </mat-form-field>
     </mat-toolbar-row>
 </mat-toolbar>
-
 
 <div mat-dialog-actions>
     <button mat-button class="biru" cdkFocusInitial>Simpan</button>

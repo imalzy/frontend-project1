@@ -22,7 +22,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 export class DaftarMenu implements OnInit {
   displayedColumns = ['no_surat', 'pekerjaan', 'nama', 'telpon', 'total_nilai'];
   dataSource = [];
-  dataNama = [];
+  namaList: UsrNama[];
+  id_pemborong: string;
+  nama: string;
   Modelsurat: any = [];
   myControl: FormControl = new FormControl();
   options = ['One', 'Two', 'Three'];
@@ -59,67 +61,52 @@ export class DaftarMenu implements OnInit {
     this.API.listNama().subscribe(
       result => {
         console.log(result.json().Output);
-        this.dataNama = result.json().Output;
-        console.log(this.dataNama);
+        this.namaList = result.json().Output;
+        console.log(this.namaList);
       });
   }
   filter(val: string): string[] {
     return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
+
   dialogSave(): void {
     const dialogRef = this.dialog.open(Sample2ViewDialog, {
-      height: '450px',
-      width: '400px',
+      height: '700px',
+      width: '500px',
       hasBackdrop: true,
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.Modelsurat = result;
+      this.namaList = result;
+      console.log(this.namaList);
       //this.save_data();
     });
   }
-
 }
 @Component({
   selector: 'daftarmenu-dialog',
   templateUrl: 'daftarmenu-dialog.html',
-  styleUrls: ['daftarmenu-dialog.component.scss']
+  styleUrls: ['./daftarmenu-dialog.component.scss']
 })
 export class Sample2ViewDialog {
   Modelsurat: any = [];
+  namaList: UsrNama[];
+
   constructor(
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: UsrNama) { }
 
   onNoClick(): void {
     this.dialogRef.close();
+    console.log(this.namaList);
   }
 
 }
 export interface DialogData {
   animal: string;
   name: string;
-}
-
-@Component({
-  selector: 'daftarmenu-dialog',
-  templateUrl: 'daftarmenu-dialog.html',
-  styleUrls: ['./daftarmenu.component.scss']
-})
-
-export class DialogDaftarmenu {
-  color = 'accent';
-  mode = 'indeterminate';
-  value = 30;
-  constructor(
-    public dialogRef: MatDialogRef<DialogDaftarmenu>,
-    @Inject(MAT_DIALOG_DATA) public data: any, ) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }
 
 @Component({
@@ -147,6 +134,10 @@ function createNewUser(category: string, id: string, image: string): UserData {
   };
 }
 
+export interface UsrNama {
+  id_pemborong: string;
+  nama: string;
+}
 export interface UserData {
   id: string;
   category: string;
@@ -155,6 +146,6 @@ export interface UserData {
 
 export const COMPONENT_LIST = [
   DaftarMenu,
-  DialogDaftarmenu,
+  Sample2ViewDialog,
   LoadingDaftarmenu,
-]
+];
