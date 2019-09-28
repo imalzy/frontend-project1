@@ -22,10 +22,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 export class DaftarMenu implements OnInit {
   displayedColumns = ['no_surat', 'pekerjaan', 'nama', 'telpon', 'total_nilai'];
   dataSource = [];
+  ModelSurat: any = [];
   namaList: UsrNama[] = [];
   id_pemborong: string;
   nama: string;
-  Modelsurat: any = [];
   myControl: FormControl = new FormControl();
   options = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
@@ -33,7 +33,6 @@ export class DaftarMenu implements OnInit {
   ref: any = [];
   items: any[];
   selectedRowIndex = [];
-  // displayedColumns = ['id', 'category'];
   loadRef: any = [];
 
   listmenu: UserData[] = [];
@@ -56,10 +55,29 @@ export class DaftarMenu implements OnInit {
       });
   }
 
+  save_data() {
+    this.API.Surat_CreateSurat(this.ModelSurat.pst_nosurat, this.ModelSurat.pst_idpemborong, this.ModelSurat.pst_tglsurat,
+      this.ModelSurat.pst_pekerjaan, this.ModelSurat.pst_proyek, this.ModelSurat.pst_nilai, this.ModelSurat.pst_pelaksanaan,
+      this.ModelSurat.pst_awlpekerjaan, this.ModelSurat.pst_akhirpekerjaan, this.ModelSurat.pst_carabayar).subscribe(
+        result => {
+          console.log(result);
+          const status = result.json().status;
+          const desc = result.json().desc;
+
+          if (result.status === 200) {
+            if (status === 'OK') {
+              this.ambil_data();
+              this.ModelSurat = [];
+            }
+            console.log(this.ModelSurat);
+          }
+        }
+      );
+  }
+
   filter(val: string): string[] {
     return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
-
 
   dialogSave(): void {
     const dialogRef = this.dialog.open(Sample2ViewDialog, {
@@ -69,10 +87,11 @@ export class DaftarMenu implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       this.namaList = result;
+      this.ModelSurat = result;
+      //console.log(this.ModelSurat = result);
+      this.save_data();
 
-      //this.save_data();
     });
   }
 }
@@ -82,9 +101,8 @@ export class DaftarMenu implements OnInit {
   styleUrls: ['./daftarmenu-dialog.component.scss']
 })
 export class Sample2ViewDialog {
-  Modelsurat: any = [];
+  ModelSurat: any = [];
   namaList: UsrNama[];
-
   constructor(
     http: Http, private API: ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
@@ -92,7 +110,7 @@ export class Sample2ViewDialog {
 
   onNoClick(): void {
     this.dialogRef.close();
-    console.log(this.namaList);
+    console.log(this.ModelSurat);
   }
   ngOnInit() {
     this.getnama();

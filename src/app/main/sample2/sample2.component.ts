@@ -88,9 +88,7 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
 
         if (result.status === 200) {
           if (status === 'OK') {
-            console.log(result);
-            this.ambil_data();
-            this.ModelPemborongDelete = [];
+            alert('Data Berhasil Di hapus');
           }
           console.log(this.ModelPemborongDelete);
         }

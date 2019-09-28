@@ -4,56 +4,64 @@
 <mat-toolbar>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <input matInput placeholder="No Surat">
+            <input matInput placeholder="No Surat" [(ngModel)]="ModelSurat.pst_nosurat">
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <mat-select placeholder="Nama Pemborong">
-                <mat-option *ngFor="let item of namaList" [value]="item.id_pemborong"> {{item.nama}} </mat-option>
+        <!-- <mat-form-field class="panjang">
+            <mat-select placeholder="Nama Pemborong>
+                <mat-option *ngFor=" let item of namaList" [value]="item.id_pemborong"> {{item.nama}} </mat-option>
             </mat-select>
+        </mat-form-field> -->
+        <mat-form-field class="panjang">
+            <input matInput placeholder="Id Pemborong" [(ngModel)]="ModelSurat.pst_idpemborong">
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <input matInput [matDatepicker]="picker" placeholder="Tanggal Surat">
+            <input matInput [matDatepicker]="picker" placeholder="Tanggal Surat" [(ngModel)]="ModelSurat.pst_tglsurat">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <textarea matInput placeholder="Pekerjaan"></textarea>
+            <textarea matInput placeholder="Pekerjaan" [(ngModel)]="ModelSurat.pst_pekerjaan"></textarea>
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <textarea matInput placeholder="Proyek"></textarea>
+            <textarea matInput placeholder="Proyek" [(ngModel)]="ModelSurat.pst_proyek"></textarea>
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <input matInput placeholder="Total Nilai">
+            <input matInput placeholder="Total Nilai" [(ngModel)]="ModelSurat.pst_nilai">
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <input matInput placeholder="Waktu Pengerjaan">
+            <input matInput placeholder="Waktu Pengerjaan" [(ngModel)]="ModelSurat.pst_pelaksanaan">
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <input matInput placeholder="Awal Pekerjaan">
+            <input matInput placeholder="Awal Pekerjaan" [(ngModel)]="ModelSurat.pst_awlpekerjaan">
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <input matInput placeholder="Cara Pembayaran">
+            <input matInput placeholder="Akhir Pekerjaan" [(ngModel)]="ModelSurat.pst_akhirpekerjaan">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input matInput placeholder="Cara Pembayaran" [(ngModel)]="ModelSurat.pst_carabayar">
         </mat-form-field>
     </mat-toolbar-row>
 </mat-toolbar>
 
 <div mat-dialog-actions>
-    <button mat-button class="biru" cdkFocusInitial>Simpan</button>
+    <button mat-button class="biru" cdkFocusInitial [mat-dialog-close]="ModelSurat">Simpan</button>
     <button mat-button class="merah" [mat-dialog-close]>Batal</button>
 </div>

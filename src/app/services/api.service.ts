@@ -74,11 +74,6 @@ export class ApiService {
     formData.append('Gender', Gender);
     formData.append('Password', Password);
 
-    // headers.append('Authorization', token);
-    // opt = new RequestOptions({
-    //   headers: headers,
-    // });
-
     return this.http.post(this.BaseURL + 'pengguna/buatpengguna/', formData)
       .pipe(map(response => {
         return response;
@@ -91,7 +86,22 @@ export class ApiService {
         return response;
       }));
   }
+  Pemborong_CreateHome(Nama: string, nik: string, alamat: string, no_telpon: string): Observable<any> {
+    console.log(Nama);
+    let opt: RequestOptions;
+    const headers = new Headers();
+    const formData: FormData = new FormData();
 
+    formData.append('nama_pemborong', Nama);
+    formData.append('ktp', nik);
+    formData.append('alamat', alamat);
+    formData.append('telpon', no_telpon);
+
+    return this.http.post(this.BaseURL + 'pemborong/tambahpemborong/', formData)
+      .pipe(map(response => {
+        return response;
+      }));
+  }
   ListHome() {
     return this.http.get(this.BaseURL + 'welcome/')
       .pipe(map(response => {
@@ -106,6 +116,31 @@ export class ApiService {
       }));
   }
 
+  Surat_CreateSurat(pst_nosurat: string, pst_idpemborong: string, pst_tglsurat: string, pst_pekerjaan: string,
+    pst_proyek: string, pst_nilai: string, pst_pelaksanaan: string,
+    pst_awlpekerjaan: string, pst_akhirpekerjaan: string,
+    pst_carabayar: string): Observable<any> {
+    let opt: RequestOptions;
+    const headers = new Headers();
+    const formData: FormData = new FormData();
+
+    formData.append('no_surat', pst_nosurat);
+    formData.append('id_pemborong', pst_idpemborong);
+    formData.append('tgl_surat', pst_tglsurat);
+    formData.append('pekerjaan', pst_pekerjaan);
+    formData.append('proyek', pst_proyek);
+    formData.append('total_nilai', pst_nilai);
+    formData.append('waktu_pelaksanaan', pst_pelaksanaan);
+    formData.append('awal_pekerjaan', pst_awlpekerjaan);
+    formData.append('akhir_pekerjaan', pst_akhirpekerjaan);
+    formData.append('cara_pembayaran', pst_carabayar);
+
+    return this.http.post(this.BaseURL + 'welcome/tambahsurat/', formData).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
   //Pemborong Method
   Pemborong_CreatePemborong(Nama: string, nik: string, alamat: string, no_telpon: string): Observable<any> {
     console.log(Nama);
