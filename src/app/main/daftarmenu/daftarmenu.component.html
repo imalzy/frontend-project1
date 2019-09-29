@@ -49,7 +49,7 @@
 
             <ng-container matColumnDef="total_nilai">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Nilai </th>
-                <td mat-cell *matCellDef="let element"> {{element.total_nilai}} </td>
+                <td mat-cell *matCellDef="let element">{{element.total_nilai | currency:'Rp ' }}</td>
             </ng-container>
 
             <!-- <ng-container matColumnDef="Action">
