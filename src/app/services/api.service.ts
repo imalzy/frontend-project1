@@ -124,7 +124,7 @@ export class ApiService {
     const headers = new Headers();
     const formData: FormData = new FormData();
 
-    formData.append('no_surat', pst_nosurat);
+    formData.append('nomor_surat', pst_nosurat);
     formData.append('id_pemborong', pst_idpemborong);
     formData.append('tgl_surat', pst_tglsurat);
     formData.append('pekerjaan', pst_pekerjaan);
