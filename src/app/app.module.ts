@@ -25,6 +25,7 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { SampleModule2 } from 'app/main/sample2/sample2.module';
 import { DaftarMenuModule } from 'app/main/daftarmenu/daftarmenu.module';
+import { PenggunaModule } from 'app/main/pengguna/pengguna.module';
 
 import { ApiService } from './services/api.service';
 
@@ -68,11 +69,12 @@ const appRoutes: Routes = [
         SampleModule,
         SampleModule2,
         DaftarMenuModule,
+        PenggunaModule,
 
 
     ],
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     providers: [ApiService],
     bootstrap: [

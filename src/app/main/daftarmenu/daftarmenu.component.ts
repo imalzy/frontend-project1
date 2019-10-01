@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-
 import { locale as english } from './i18n/en';
 import { locale as turkish } from './i18n/tr';
 import { Observable } from 'rxjs';

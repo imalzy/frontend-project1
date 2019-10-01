@@ -13,12 +13,12 @@ import {
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
-import { DaftarMenu} from './daftarmenu.component';
-import { COMPONENT_LIST} from './daftarmenu.component';
+import { DaftarMenu } from './daftarmenu.component';
+import { COMPONENT_LIST } from './daftarmenu.component';
 
 const routes = [
     {
-        path     : 'listmenu',
+        path: 'listmenu',
         component: DaftarMenu
     }
 ];
@@ -29,7 +29,7 @@ const routes = [
         DaftarMenu,
     ],
     entryComponents: COMPONENT_LIST,
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
         MatAutocompleteModule,
         MatBadgeModule,
@@ -67,10 +67,9 @@ const routes = [
         MatTooltipModule,
         MatTreeModule,
         TranslateModule,
-
         FuseSharedModule,
     ],
-    exports     : [
+    exports: [
         DaftarMenu,
         MatAutocompleteModule,
         MatBadgeModule,
@@ -110,6 +109,5 @@ const routes = [
     ]
 })
 
-export class DaftarMenuModule
-{
+export class DaftarMenuModule {
 }

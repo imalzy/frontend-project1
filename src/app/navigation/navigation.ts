@@ -47,28 +47,28 @@ export const navigation: FuseNavigation[] = [
             // },
         ]
     },
-    // {
-    //     id: 'User',
-    //     title: 'User',
-    //     translate: 'USER.APPLICATIONS',
-    //     type: 'group',
-    //     children: [
-    //         {
-    //             id: 'User',
-    //             title: 'User',
-    //             translate: 'USER.SAMPLE.TITLE',
-    //             type: 'item',
-    //             icon: 'email',
-    //             url: '/sample3',
-    //             // badge    : {
-    //             //     title    : '0',
-    //             //     translate: 'NAV.SAMPLE.BADGE',
-    //             //     bg       : '#F44336',
-    //             //     fg       : '#FFFFFF'
-    //             // }
+    {
+        id: 'User',
+        title: 'User',
+        translate: 'NAV.APPLICATIONS',
+        type: 'group',
+        children: [
+            {
+                id: 'User',
+                title: 'PENGGUNA',
+                translate: 'NAV.SLIDE.TITLE',
+                type: 'item',
+                icon: 'email',
+                url: '/pengguna',
+                // badge    : {
+                //     title    : '0',
+                //     translate: 'NAV.SAMPLE.BADGE',
+                //     bg       : '#F44336',
+                //     fg       : '#FFFFFF'
+                // }
 
-    //         },
+            },
 
-    //     ]
-    // }
+        ]
+    }
 ];

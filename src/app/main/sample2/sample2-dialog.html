@@ -8,7 +8,8 @@
     </mat-toolbar-row>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
-            <input [(ngModel)]="ModelPemborong.nik" matInput placeholder="NIK">
+            <input [(ngModel)]="ModelPemborong.nik" matInput placeholder="NIK" ng-minlength=16 ng-maxlength=16
+                ng-pattern="/^[0-9]{1,9}$/" required>
         </mat-form-field>
     </mat-toolbar-row>
     <mat-toolbar-row>

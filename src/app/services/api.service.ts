@@ -185,4 +185,12 @@ export class ApiService {
         return response;
       }));
   }
+
+  listPengguna() {
+    return this.http.get(this.BaseURL + 'pengguna/')
+      .pipe(map(response => {
+        console.log(response);
+        return response;
+      }));
+  }
 }
