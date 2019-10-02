@@ -1,0 +1,55 @@
+<h1 mat-dialog-title>Tambah Pengguna</h1>
+<hr class="new4">
+<form [formGroup]="myForm">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <mat-form-field class="panjang">
+                <input matInput placeholder="Nama Lengkap" [(ngModel)]="ModelPengguna.Nama_lengkap">
+            </mat-form-field>
+        </mat-toolbar-row>
+        <mat-toolbar-row>
+            <mat-form-field class="panjang">
+                <mat-select placeholder="Jenis Kelamin" [(ngModel)]="ModelPengguna.Gender"
+                    [ngModelOptions]="{standalone: true}">
+                    <mat-option [value]=" 1"> Laki-laki </mat-option>
+                    <mat-option [value]="2"> Perempuan </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-toolbar-row>
+        <mat-toolbar-row>
+            <mat-form-field class="panjang">
+                <mat-select placeholder="Level" [(ngModel)]="ModelPengguna.Level" [ngModelOptions]="{standalone: true}">
+                    <mat-option [value]=" 1"> Admin </mat-option>
+                    <mat-option [value]="2"> User </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-toolbar-row>
+        <mat-toolbar-row>
+            <mat-form-field class="panjang">
+                <input matInput placeholder="Username" [(ngModel)]="ModelPengguna.Username">
+            </mat-form-field>
+        </mat-toolbar-row>
+        <mat-toolbar-row>
+            <mat-form-field class="panjang">
+                <input matInput placeholder="Password" formControlName="password" [(ngModel)]="ModelPengguna.Password"
+                    required>
+                <mat-error *ngIf="myForm.hasError('required', 'password')">
+                    Password tidak boleh kosong
+                </mat-error>
+            </mat-form-field>
+        </mat-toolbar-row>
+        <mat-toolbar-row>
+            <mat-form-field class="panjang">
+                <input matInput placeholder="Konfirmasi password" formControlName="confirmPassword"
+                    [errorStateMatcher]="matcher">
+                <mat-error *ngIf="myForm.hasError('notSame')">
+                    Password tidak sama
+                </mat-error>
+            </mat-form-field>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</form>
+<div mat-dialog-actions>
+    <button mat-button class="biru" cdkFocusInitial [mat-dialog-close]="ModelPengguna">Simpan</button>
+    <button mat-button class="merah" [mat-dialog-close]>Batal</button>
+</div>

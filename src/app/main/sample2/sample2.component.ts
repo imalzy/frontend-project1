@@ -131,7 +131,6 @@ export class Sample2ViewDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }
 
 export interface DialogData {

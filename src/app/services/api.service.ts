@@ -193,4 +193,21 @@ export class ApiService {
         return response;
       }));
   }
+
+  Pengguna_CreatePengguna(Name: string, Level: string, Username: string, Password: string, Gender: string): Observable<any> {
+    let opt: RequestOptions;
+    const headers = new Headers();
+    const formData: FormData = new FormData();
+
+    formData.append('Name', Name);
+    formData.append('Level', Level);
+    formData.append('Username', Username);
+    formData.append('Password', Password);
+    formData.append('Gender', Gender);
+
+    return this.http.post(this.BaseURL + 'pengguna/buatpengguna/', formData)
+      .pipe(map(response => {
+        return response;
+      }));
+  }
 }
