@@ -18,7 +18,7 @@ import { COMPONENT_LIST } from './daftarmenu.component';
 
 const routes = [
     {
-        path: 'listmenu',
+        path: 'spmk',
         component: DaftarMenu
     }
 ];

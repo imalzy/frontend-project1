@@ -16,7 +16,7 @@ import { SampleComponent } from './sample.component';
 
 const routes = [
     {
-        path: 'sample',
+        path: 'sppr',
         component: SampleComponent
     }
 ];

@@ -9,11 +9,11 @@ export const navigation: FuseNavigation[] = [
         children: [
             {
                 id: 'daftarmenu',
-                title: 'SPPR',
+                title: 'SPMK',
                 translate: 'NAV.DETAIL.TITLE',
                 type: 'item',
-                icon: 'email',
-                url: '/listmenu',
+                icon: 'home',
+                url: '/spmk',
                 // badge: {
                 //     title: '',
                 //     translate: 'NAV.DETAIL.BADGE',
@@ -27,8 +27,8 @@ export const navigation: FuseNavigation[] = [
                 title: 'DATA PEMBORONG',
                 translate: 'NAV.SLIDE.TITLE',
                 type: 'item',
-                icon: 'email',
-                url: '/sample2',
+                icon: 'supervisor_account',
+                url: '/pemborong',
                 // badge    : {
                 //     title    : '1',
                 //     translate: 'NAV.SAMPLE.BADGE',
@@ -37,14 +37,30 @@ export const navigation: FuseNavigation[] = [
                 // }
 
             },
-            // {
-            //     id: 'sample',
-            //     title: 'DATA SURAT',
-            //     translate: 'NAV.PROMO.TITLE',
-            //     type: 'item',
-            //     icon: 'email',
-            //     url: '/sample',
-            // },
+            {
+                id: 'sample',
+                title: 'SPPR',
+                translate: 'NAV.PROMO.TITLE',
+                type: 'collapsable',
+                icon: 'border_all',
+                children: [
+                    {
+                        id: 'pembeli',
+                        title: 'Pembeli',
+                        type: 'item',
+                        icon: 'supervisor_account',
+                        url: '/pembeli',
+                    },
+
+                    {
+                        id: 'sppr',
+                        title: 'Surat SPPR',
+                        type: 'item',
+                        icon: 'email',
+                        url: '/sppr',
+                    }
+                ]
+            },
         ]
     },
     {

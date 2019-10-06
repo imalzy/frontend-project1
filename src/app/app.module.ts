@@ -26,6 +26,7 @@ import { SampleModule } from 'app/main/sample/sample.module';
 import { SampleModule2 } from 'app/main/sample2/sample2.module';
 import { DaftarMenuModule } from 'app/main/daftarmenu/daftarmenu.module';
 import { PenggunaModule } from 'app/main/pengguna/pengguna.module';
+import { PembeliModule } from 'app/main/pembeli/pembeli.module';
 
 import { ApiService } from './services/api.service';
 
@@ -70,6 +71,7 @@ const appRoutes: Routes = [
         SampleModule2,
         DaftarMenuModule,
         PenggunaModule,
+        PembeliModule,
 
 
     ],

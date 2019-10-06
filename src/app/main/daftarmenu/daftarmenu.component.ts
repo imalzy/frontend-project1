@@ -48,9 +48,7 @@ export class DaftarMenu implements OnInit {
   ambil_data() {
     this.API.ListHome()
       .subscribe(result => {
-        console.log(result.json().Output);
         this.dataSource = result.json().Output;
-        console.log(this.dataSource);
       });
   }
 

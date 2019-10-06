@@ -5,7 +5,7 @@ export const locale = {
         {
             'APPLICATIONS': 'APLIKASI',
             'DETAIL': {
-                'TITLE': 'SPPR',
+                'TITLE': 'SPMK',
                 'BADGE': '0'
             },
             'SLIDE': {

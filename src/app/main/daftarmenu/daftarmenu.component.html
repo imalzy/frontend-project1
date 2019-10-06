@@ -1,5 +1,4 @@
 <div class="page-layout blank p-24" fusePerfectScrollbar>
-
     <mat-toolbar>
         <mat-toolbar-row>
             <form class="example-form">
@@ -20,39 +19,39 @@
         </mat-toolbar-row>
     </mat-toolbar>
 
-    <div class="example-container mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
+    <!-- <div class="example-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort> -->
 
-            <!-- Position Column -->
-            <ng-container matColumnDef="no_surat">
+    <!-- Position Column -->
+    <!-- <ng-container matColumnDef="no_surat">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>No. Surat </th>
                 <td mat-cell *matCellDef="let element"> {{element.no_surat}} </td>
-            </ng-container>
+            </ng-container> -->
 
-            <!-- Name Column-->
-            <ng-container matColumnDef="pekerjaan">
+    <!-- Name Column-->
+    <!-- <ng-container matColumnDef="pekerjaan">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Tanggal Surat </th>
                 <td mat-cell *matCellDef="let element"> {{element.pekerjaan}} </td>
-            </ng-container>
+            </ng-container> -->
 
-            <!-- Weight Column -->
-            <ng-container matColumnDef="nama">
+    <!-- Weight Column -->
+    <!-- <ng-container matColumnDef="nama">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nama Pemborong </th>
                 <td mat-cell *matCellDef="let element"> {{element.nama}} </td>
-            </ng-container>
+            </ng-container> -->
 
 
-            <ng-container matColumnDef="telpon">
+    <!-- <ng-container matColumnDef="telpon">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>No. Telepon </th>
                 <td mat-cell *matCellDef="let element"> {{element.telpon}} </td> -->
-            </ng-container>
+    <!-- </ng-container> -->
 
-            <ng-container matColumnDef="total_nilai">
+    <!-- <ng-container matColumnDef="total_nilai">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Nilai </th>
                 <td mat-cell *matCellDef="let element">{{element.total_nilai | currency:'Rp ' }}</td>
-            </ng-container>
+            </ng-container> -->
 
-            <!-- <ng-container matColumnDef="Action">
+    <!-- <ng-container matColumnDef="Action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                 <td mat-cell *matCellDef="let element">
                     <a class="action-pointer" (click)="openDialog('Update',element)">
@@ -62,12 +61,60 @@
                     </a>
                 </td>
             </ng-container> -->
-            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
         <mat-paginator [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
-    </div>
+    </div> -->
 
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+            <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.id_surat}} </td>
+        </ng-container>
+
+        <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="no_surat">
+            <th mat-header-cell *matHeaderCellDef> No. Surat </th>
+            <td mat-cell *matCellDef="let element"><span> {{element.no_surat}}</span> </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="pekerjaan">
+            <th mat-header-cell *matHeaderCellDef> Pekerjaan </th>
+            <td mat-cell *matCellDef="let element"><span> {{element.pekerjaan}}</span> </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="nama">
+            <th mat-header-cell *matHeaderCellDef> Nama Pemborong </th>
+            <td mat-cell *matCellDef="let element"><span> {{element.nama}}</span> </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="telpon">
+            <th mat-header-cell *matHeaderCellDef> No. Telpon </th>
+            <td mat-cell *matCellDef="let element"><span> {{element.telpon}}</span> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total_nilai">
+            <th mat-header-cell *matHeaderCellDef> Total Nilai </th>
+            <td mat-cell *matCellDef="let element"><span> {{element.total_nilai}}</span>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+
+
+    <!-- Copyright 2019 Google Inc. All Rights Reserved.
+              Use of this source code is governed by an MIT-style license that
+              can be found in the LICENSE file at http://angular.io/license -->
 </div>
 <!-- <div class="page-layout blank p-24" fusePerfectScrollbar>
     <div *ngIf="dataSource && dataSource.data && dataSource.data.length > 0">

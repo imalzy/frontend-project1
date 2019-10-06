@@ -16,7 +16,7 @@ import { AutocompleteAutoActiveFirstOptionExample } from './sample2.component';
 import { COMPONENT_LIST } from './sample2.component';
 const routes = [
     {
-        path: 'sample2',
+        path: 'pemborong',
         component: AutocompleteAutoActiveFirstOptionExample
     }
 ];
