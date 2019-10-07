@@ -11,6 +11,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { componentFactoryName } from '@angular/compiler';
 
 
 @Component({
@@ -76,6 +77,14 @@ export class DaftarMenu implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
+  view_cetak(): void {
+    const dialogRef = this.dialog.open(viewCetak);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
   dialogSave(): void {
     const dialogRef = this.dialog.open(Sample2ViewDialog, {
       height: '700px',
@@ -92,6 +101,13 @@ export class DaftarMenu implements OnInit {
     });
   }
 }
+
+@Component({
+  selector: 'cetak',
+  templateUrl: 'cetak-dialog.html',
+})
+export class viewCetak { }
+
 @Component({
   selector: 'daftarmenu-dialog',
   templateUrl: 'daftarmenu-dialog.html',
@@ -165,4 +181,5 @@ export const COMPONENT_LIST = [
   DaftarMenu,
   Sample2ViewDialog,
   LoadingDaftarmenu,
+  viewCetak,
 ];
