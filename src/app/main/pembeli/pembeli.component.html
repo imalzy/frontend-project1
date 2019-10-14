@@ -1,5 +1,7 @@
 <div class="page-layout blank p-24" fusePerfectScrollbar>
-
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg mat-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
     <mat-toolbar>
         <mat-toolbar-row>
             <form class="example-form">
@@ -26,29 +28,29 @@
             <!-- Name Column-->
             <ng-container matColumnDef="nama">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nama Lengkap </th>
-                <td mat-cell *matCellDef="let element"> {{element.nama_lengkap}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.nama}} </td>
             </ng-container>
 
             <!-- Weight Column -->
-            <ng-container matColumnDef="username">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
-                <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+            <ng-container matColumnDef="ktp">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> KTP </th>
+                <td mat-cell *matCellDef="let element"> {{element.ktp}} </td>
             </ng-container>
 
 
-            <ng-container matColumnDef="gender">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Jenis Kelamin </th>
-                <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+            <ng-container matColumnDef="alamat_rumah">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Alamat Rumah </th>
+                <td mat-cell *matCellDef="let element"> {{element.alamat_rumah}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="keterangan">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Keterangan </th>
-                <td mat-cell *matCellDef="let element"> {{element.keterangan}} </td>
+            <ng-container matColumnDef="pekerjaan">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pekerjaan </th>
+                <td mat-cell *matCellDef="let element"> {{element.pekerjaan}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="level">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Level</th>
-                <td mat-cell *matCellDef="let element"> {{element.level}} </td>
+            <ng-container matColumnDef="alamat_kantor">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Alamat Kantor</th>
+                <td mat-cell *matCellDef="let element"> {{element.alamat_kantor}} </td>
             </ng-container>
 
             <ng-container matColumnDef="Action">

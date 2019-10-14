@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FuseSharedModule } from '@fuse/shared.module';
 import {
     MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
     MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
@@ -11,8 +10,10 @@ import {
     MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
     MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule
 } from '@angular/material';
+import { FuseSharedModule } from '@fuse/shared.module';
 import { MatMomentDateModule, } from '@angular/material-moment-adapter';
 import { SampleComponent } from './sample.component';
+import { COMPONENT_LIST } from './sample.component';
 
 const routes = [
     {
@@ -23,8 +24,10 @@ const routes = [
 
 @NgModule({
     declarations: [
+        [...COMPONENT_LIST],
         SampleComponent
     ],
+    entryComponents: COMPONENT_LIST,
     imports: [
         RouterModule.forChild(routes),
         MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,

@@ -1,0 +1,50 @@
+<mat-toolbar>
+    <h1 mat-dialog-title>Tambah Pembeli</h1>
+</mat-toolbar>
+<hr class="new4">
+<mat-toolbar>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input [(ngModel)]="ModelPembeli.nama_pembeli" matInput placeholder="Nama Pembeli">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input [(ngModel)]="ModelPembeli.ktp_pembeli" matInput placeholder="NIK" ng-minlength=16 ng-maxlength=16
+                ng-pattern="/^[0-9]{1,9}$/" required>
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input [(ngModel)]="ModelPembeli.alamat_pembeli" matInput placeholder="Alamat">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input [(ngModel)]="ModelPembeli.pekerjaan_pembeli" matInput placeholder="Pekerjaan">
+        </mat-form-field>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input [(ngModel)]="ModelPembeli.kantor_pembeli" matInput placeholder="Alamat kantor">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input [(ngModel)]="ModelPembeli.informasi_pembeli" matInput placeholder="Nama Istri/ Suami/ Orang tua"
+                required>
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input [(ngModel)]="ModelPembeli.alamat_lain" matInput placeholder="Alamat">
+        </mat-form-field>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div mat-dialog-actions>
+    <button mat-button class="biru" [mat-dialog-close]="ModelPembeli" cdkFocusInitial>Simpan</button>
+    <button mat-button class="merah" [mat-dialog-close]>Batal</button>
+</div>

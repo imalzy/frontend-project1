@@ -12,7 +12,7 @@ import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { componentFactoryName } from '@angular/compiler';
-
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'daftarmenu',
@@ -22,6 +22,7 @@ import { componentFactoryName } from '@angular/compiler';
 export class DaftarMenu implements OnInit {
   displayedColumns = ['no_surat', 'pekerjaan', 'nama', 'telpon', 'total_nilai'];
   dataSource = [];
+  BaseURL = environment.BaseUrl;
   ModelSurat: any = [];
   namaList: UsrNama[] = [];
   id_pemborong: string;
@@ -77,8 +78,11 @@ export class DaftarMenu implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
-  view_cetak(): void {
-    const dialogRef = this.dialog.open(viewCetak);
+  view_cetak(item): void {
+    console.log(item);
+    const dialogRef = this.dialog.open(viewCetak, {
+      data: item,
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -105,8 +109,24 @@ export class DaftarMenu implements OnInit {
 @Component({
   selector: 'cetak',
   templateUrl: 'cetak-dialog.html',
+  styleUrls: ['./cetak-dialog.component.scss']
 })
-export class viewCetak { }
+export class viewCetak {
+  BaseURL = environment.BaseUrl;
+  constructor(
+    http: Http, private API: ApiService, public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  ngOnInit() {
+    console.log(this.data);
+  }
+
+  Print($id) {
+    // alert($id);
+    var myWindow = window.open(this.BaseURL + 'cetaksurat/tampil/' + $id, 'MsgWindow', 'width=70%');
+  }
+
+}
 
 @Component({
   selector: 'daftarmenu-dialog',
@@ -119,7 +139,7 @@ export class Sample2ViewDialog {
   constructor(
     http: Http, private API: ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: UsrNama) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();

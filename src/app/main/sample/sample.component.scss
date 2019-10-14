@@ -1,8 +1,3 @@
-.example-container {
-    min-height: 200px;
-    overflow: auto;
-}
-
 .example-space,
 .example-form {
     flex: 1 1 auto;
@@ -13,34 +8,44 @@
     background-color: #303F9F;
 }
 
-.action-pointer {
-    cursor: pointer;
-}
-
-.example-container {
-    min-height: 200px;
-    width: 550px;
-    overflow: auto;
-}
 
 table {
-    width: 1000px;
+    width: 100%;
+    background: #ffffff;
+    padding: 10px;
 }
 
-td.mat-column-star {
-    width: 20px;
-    padding-right: 8px;
+.mat-row {
+    padding: 100px;
 }
 
-th.mat-column-position,
-td.mat-column-position {
-    padding-left: 8px;
+.mat-row span {
+    position: relative;
 }
 
-.mat-table-sticky:first-child {
-    border-right: 1px solid #e0e0e0;
+.mat-row td {
+    height: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    position: relative;
+    z-index: 1;
 }
 
-.mat-table-sticky:last-child {
-    border-left: 1px solid #e0e0e0;
+.mat-row td::before {
+    content: '';
+    width: 100%;
+    height: calc(100% - 0.5rem);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+
+.mat-row:hover td::before {
+    background-color: #03A9F4;
+    cursor: pointer;
+
 }

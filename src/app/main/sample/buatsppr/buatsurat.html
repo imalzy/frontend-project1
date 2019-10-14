@@ -1,0 +1,63 @@
+<mat-toolbar>
+    <mat-toolbar-row id="header">
+        <h1 mat-dialog-title>Tambah Data</h1>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="flex-kiri">
+    <mat-form-field class="example-full-width">
+        <mat-select placeholder="Nama Pembeli" [(ngModel)]="ModelSppr.post_idPembeli">
+            <mat-option *ngFor=" let item of namaList" [value]="item.id_pembeli" name="nama_pembeli">
+                {{item.nama}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input [(ngModel)]="ModelSppr.post_tipe" matInput placeholder="Tipe">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input [(ngModel)]="ModelSppr.post_harga" matInput placeholder="Harga Jual">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input [(ngModel)]="ModelSppr.post_tanah" matInput placeholder="Kelebihan Tanah">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input [(ngModel)]="ModelSppr.post_pagar" matInput placeholder="Kelebihan Pagar">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input [(ngModel)]="ModelSppr.post_tambahan" matInput placeholder="Pekerjaan Tambahan">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input [(ngModel)]="ModelSppr.post_potongan" matInput placeholder="Potongan Harga">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input [(ngModel)]="ModelSppr.book" matInput placeholder="Booking Fee">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input [(ngModel)]="ModelSppr.post_dp" matInput placeholder="Tipe">
+    </mat-form-field>
+</div>
+
+<div class="flex-kanan">
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Leave a comment"></textarea>
+    </mat-form-field>
+</div>
+
+<mat-toolbar>
+    <div mat-dialog-actions>
+        <button mat-button class="biru" [mat-dialog-close] cdkFocusInitial>Simpan</button>
+        <button mat-button class="merah" [mat-dialog-close]>Batal</button>
+    </div>
+</mat-toolbar>

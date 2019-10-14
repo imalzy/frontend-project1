@@ -1,64 +1,183 @@
-<h2 mat-dialog-title>Install Angular</h2>
+<h2 mat-dialog-title>Preview</h2>
 <mat-dialog-content class="mat-typography">
-    <h3>Develop across all platforms</h3>
-    <p>Learn one way to build applications with Angular and reuse your code and abilities to build
-        apps for any deployment target. For web, mobile web, native mobile and native desktop.</p>
 
-    <h3>Speed &amp; Performance</h3>
-    <p>Achieve the maximum speed possible on the Web Platform today, and take it further, via Web
-        Workers and server-side rendering. Angular puts you in control over scalability. Meet huge
-        data requirements by building data models on RxJS, Immutable.js or another push-model.</p>
 
-    <h3>Incredible tooling</h3>
-    <p>Build features quickly with simple, declarative templates. Extend the template language with
-        your own components and use a wide array of existing components. Get immediate Angular-specific
-        help and feedback with nearly every IDE and editor. All this comes together so you can focus
-        on building amazing apps rather than trying to make the code work.</p>
+    <!-- <p>{{data.no_surat}}</p> -->
+    <div class="container">
+        <table width=100% border="1" style="border-collapse: collapse;">
+            <tr>
+                <td rowspan="3" valign="top">PEMBANGUNAN PERUMAHAN</td>
+                <td>SURAT PERINTAH MULAI KERJA (SPMK)</td>
+            </tr>
+            <tr>
+                <td>NOMOR : {{data.tanggal_surat}}</td>
+            </tr>
+            <tr>
+                <td>TANGGAL : {{data.tanggal_surat}}</td>
+            </tr>
+        </table>
+        <br>
+        <p>Yang bertanda tangan dibawah ini :
+            .........................................................................................................
+        </p>
+        <table width=100% style="border-collapse: collapse;">
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td>Budiman</td>
+            </tr>
+            <tr>
+                <td>No. KTP</td>
+                <td>:</td>
+                <td>1237231902830001</td>
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <td>:</td>
+                <td>Jl. Binjai Km 12,5 Komp. Permata Hijau Blok A no 3</td>
+            </tr>
+            <tr>
+                <td colspan="3">Selanjutnya bertindak untuk dan atas nama Pribadi
+                <td>
+            </tr>
+            <tr>
+                <td colspan="3">selaku pengembang Perumahan Bumi Mi'raj Permai, dengan ini menunjuk dan
+                    memberi pekerjaan kepada : .............
+                <td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
 
-    <h3>Loved by millions</h3>
-    <p>From prototype through global deployment, Angular delivers the productivity and scalable
-        infrastructure that supports Google's largest applications.</p>
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td>{{data.nama}}</td>
+            </tr>
+            <tr>
+                <td>No. KTP</td>
+                <td>:</td>
+                <td>
+                    {{data.ktp}}</td>
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <td>:</td>
+                <td>{{data.alamat}}</td>
+            </tr>
+            <tr>
+                <td colspan="3">Selanjutnya bertindak dan untuk atas nama Pribadi selaku pelaksana : ................
+                <td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Pekerjaan</td>
+                <td>:</td>
+                <td>{{data.pekerjaan}}</td>
+            </tr>
+            <tr>
+                <td>Proyek</td>
+                <td>:</td>
+                <td>{{data.proyek}}</td>
+            </tr>
+            <tr>
+                <td>Total Nilai Borongan</td>
+                <td>:</td>
+                <td>{{data.total_nilai}}</td>
+            </tr>
+            <tr>
+                <td>Waktu Pelaksanaan</td>
+                <td>:</td>
+                <td>{{data.waktu_pelaksanaan}}</td>
+            </tr>
+            <tr>
+                <td>Awal Pekerjaan</td>
+                <td>:</td>
+                <td>{{data.awal_pekerjaan}}</td>
+            </tr>
+            <tr>
+                <td>Akhir Pekerjaan</td>
+                <td>:</td>
+                <td>{{data.akhir_pekerjaan}}</td>
+            </tr>
+            <tr>
+                <td rowspan="3">Cara Pembayaran</td>
+                <td rowspan="3">:</td>
+                <td>Termyn I : Dibayar 95% setelah 1(satu) bulan pekerjaan 100%</td>
+            </tr>
+            <tr>
+                <td>Termyn 2 : Retensi 5% dibayar setelah 2 minggu sejak pembayaran termyn I</td>
+            </tr>
+            <tr>
+                <td>Keterangan : Pencairan menggunakan SI (Standing Instraction) ke rekening SPMK,<br> rekening No
+                    :............................</td>
+            </tr>
+        </table>
+        <p>Demikian Surat Perintah Mulai Pekerjaan ini diterbitkan.</p>
+        <table border="1" style="border-collapse: collapse;">
+            <tr>
+                <td>Ditetapkan di</td>
+                <td>:</td>
+                <td>Medan</td>
+            </tr>
+            <tr>
+                <td>Tanggal</td>
+                <td>:</td>
+                <td>23 April 2019</td>
+            </tr>
+        </table>
+        <br><br>
+        <div class="row-surat">
+            <p>Penerima SPMK</p>
+            <br><br><br><br>
 
-    <h3>What is Angular?</h3>
+            <p><b><u>{{data.nama}}</u></b></p>
+        </div>
+        <div class="row-surat">
+            <p>Pemberi SPMK</p>
+            <br><br><br><br>
 
-    <p>Angular is a platform that makes it easy to build applications with the web. Angular
-        combines declarative templates, dependency injection, end to end tooling, and integrated
-        best practices to solve development challenges. Angular empowers developers to build
-        applications that live on the web, mobile, or the desktop</p>
-
-    <h3>Architecture overview</h3>
-
-    <p>Angular is a platform and framework for building client applications in HTML and TypeScript.
-        Angular is itself written in TypeScript. It implements core and optional functionality as a
-        set of TypeScript libraries that you import into your apps.</p>
-
-    <p>The basic building blocks of an Angular application are NgModules, which provide a compilation
-        context for components. NgModules collect related code into functional sets; an Angular app is
-        defined by a set of NgModules. An app always has at least a root module that enables
-        bootstrapping, and typically has many more feature modules.</p>
-
-    <p>Components define views, which are sets of screen elements that Angular can choose among and
-        modify according to your program logic and data. Every app has at least a root component.</p>
-
-    <p>Components use services, which provide specific functionality not directly related to views.
-        Service providers can be injected into components as dependencies, making your code modular,
-        reusable, and efficient.</p>
-
-    <p>Both components and services are simply classes, with decorators that mark their type and
-        provide metadata that tells Angular how to use them.</p>
-
-    <p>The metadata for a component class associates it with a template that defines a view. A
-        template combines ordinary HTML with Angular directives and binding markup that allow Angular
-        to modify the HTML before rendering it for display.</p>
-
-    <p>The metadata for a service class provides the information Angular needs to make it available
-        to components through Dependency Injection (DI).</p>
-
-    <p>An app's components typically define many views, arranged hierarchically. Angular provides
-        the Router service to help you define navigation paths among views. The router provides
-        sophisticated in-browser navigational capabilities.</p>
+            <p><b><u>Budiman</u></b></p>
+        </div>
+        <p>TAMBAHAN :</p>
+        <ol>
+            <li>Gambar denah terlampir</li>
+            <li>Apabila terjadi perubahan design (pekerjaan tambah kurang) akan dihitung melalui ADENDUM</li>
+            <li>Surat Perintah Mulai Kerja ini dapat dihentikan sepihak jika pihak pelaksana tidak dapat melaksanakan
+                sesuai
+                spesifikasi dan jadwal rencana pekerjaan</li>
+            <li>Pekerjaan sudah termasuk pembuatan jembatan masuk</li>
+            <li>Keterlambatan pekerjaan dikenakan denda dengan hitung 1/1000/hari</li>
+        </ol>
+    </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="Print(data.id_surat)">Cetak</button>
 </mat-dialog-actions>

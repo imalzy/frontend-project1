@@ -74,6 +74,7 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      alert('Data berhasil disimpan');
       this.ModelPemborong = result;
       this.save_data();
     });
@@ -126,17 +127,13 @@ export class Sample2ViewDialog {
   ModelPemborong: any = [];
   constructor(
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 }
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 @Component({
   selector: 'sample2-delete',
   templateUrl: 'sample2-delete.html',
@@ -146,7 +143,7 @@ export class viewdialogDelete {
   ModelPemborongDelete: any = [];
   constructor(
     public dialogRef: MatDialogRef<viewdialogDelete>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();

@@ -8,34 +8,30 @@ export const navigation: FuseNavigation[] = [
         type: 'group',
         children: [
             {
-                id: 'daftarmenu',
-                title: 'SPMK',
-                translate: 'NAV.DETAIL.TITLE',
-                type: 'item',
-                icon: 'home',
-                url: '/spmk',
-                // badge: {
-                //     title: '',
-                //     translate: 'NAV.DETAIL.BADGE',
-                //     bg: '#F44336',
-                //     fg: '#FFFFFF'
-                // }
+                id: 'sample',
+                title: 'Surat SPMK',
+                translate: 'NAV.PROMO.TITLE',
+                type: 'collapsable',
+                icon: 'border_all',
+                children: [
+                    {
+                        id: 'sample2',
+                        title: 'Data Pemborong',
+                        translate: 'NAV.SLIDE.TITLE',
+                        type: 'item',
+                        icon: 'supervisor_account',
+                        url: '/pemborong',
+                    },
 
-            },
-            {
-                id: 'sample2',
-                title: 'DATA PEMBORONG',
-                translate: 'NAV.SLIDE.TITLE',
-                type: 'item',
-                icon: 'supervisor_account',
-                url: '/pemborong',
-                // badge    : {
-                //     title    : '1',
-                //     translate: 'NAV.SAMPLE.BADGE',
-                //     bg       : '#F44336',
-                //     fg       : '#FFFFFF'
-                // }
-
+                    {
+                        id: 'daftarmenu',
+                        title: 'Surat SPMK',
+                        translate: 'NAV.DETAIL.TITLE',
+                        type: 'item',
+                        icon: 'email',
+                        url: '/spmk',
+                    }
+                ]
             },
             {
                 id: 'sample',
@@ -46,7 +42,7 @@ export const navigation: FuseNavigation[] = [
                 children: [
                     {
                         id: 'pembeli',
-                        title: 'Pembeli',
+                        title: 'Data Pembeli',
                         type: 'item',
                         icon: 'supervisor_account',
                         url: '/pembeli',
@@ -61,6 +57,22 @@ export const navigation: FuseNavigation[] = [
                     }
                 ]
             },
+            {
+                id: 'accounting',
+                title: 'ACCOUNTING',
+                translate: 'NAV.DETAIL.TITLE',
+                type: 'item',
+                icon: 'insert_chart',
+                url: '#',
+            },
+            {
+                id: 'pengeluaran_kas',
+                title: 'PENGELUARAN KAS',
+                translate: 'NAV.DETAIL.TITLE',
+                type: 'item',
+                icon: 'insert_chart',
+                url: '#',
+            },
         ]
     },
     {
@@ -74,7 +86,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'PENGGUNA',
                 translate: 'NAV.SLIDE.TITLE',
                 type: 'item',
-                icon: 'email',
+                icon: 'user',
                 url: '/pengguna',
                 // badge    : {
                 //     title    : '0',
@@ -82,7 +94,6 @@ export const navigation: FuseNavigation[] = [
                 //     bg       : '#F44336',
                 //     fg       : '#FFFFFF'
                 // }
-
             },
 
         ]

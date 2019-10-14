@@ -109,6 +109,39 @@ export class ApiService {
       }));
   }
 
+
+
+  ListSppr() {
+    return this.http.get(this.BaseURL + 'sppr/')
+      .pipe(map(response => {
+        return response;
+      }));
+  }
+  Sppr_CreateSppr(post_tipe: string, post_harga: string, post_tanah: string,
+    post_pagar: string,
+    post_tambahan: string, post_potongan: string, post_book: string,
+    post_dp: string, post_idPembeli: string): Observable<any> {
+    let opt: RequestOptions;
+    const headers = new Headers();
+    const formData: FormData = new FormData();
+
+    formData.append('post_tipe', post_tipe);
+    formData.append('post_harga', post_harga);
+    formData.append('post_tanah', post_tanah);
+    formData.append('post_pagar', post_pagar);
+    formData.append('post_tambahan', post_tambahan);
+    formData.append('post_potongan', post_potongan);
+    formData.append('post_book', post_book);
+    formData.append('post_dp', post_dp);
+    formData.append('post_idPembeli', post_idPembeli);
+
+    return this.http.post(this.BaseURL + 'welcome/tambahsurat/', formData).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
   ListSurat() {
     return this.http.get(this.BaseURL + 'surat/')
       .pipe(map(response => {
@@ -188,6 +221,37 @@ export class ApiService {
 
   listPengguna() {
     return this.http.get(this.BaseURL + 'pengguna/')
+      .pipe(map(response => {
+        console.log(response);
+        return response;
+      }));
+  }
+
+  listpembeli() {
+    return this.http.get(this.BaseURL + 'pembeli/')
+      .pipe(map(response => {
+        return response;
+      }));
+  }
+  Pembeli_CreatePembeli(nama_pembeli: string,
+    ktp_pembeli: string, pekerjaan_pembeli: string,
+    alamat_pembeli: string, kantor_pembeli: string,
+    informasi_pembeli: string,
+    alamat_lain: string): Observable<any> {
+    console.log(nama_pembeli, ktp_pembeli, pekerjaan_pembeli, alamat_pembeli, kantor_pembeli, informasi_pembeli, alamat_lain);
+    let opt: RequestOptions;
+    const headers = new Headers();
+    const formData: FormData = new FormData();
+
+    formData.append('nama_pembeli', nama_pembeli);
+    formData.append('ktp_pembeli', ktp_pembeli);
+    formData.append('pekerjaan_pembeli', pekerjaan_pembeli);
+    formData.append('alamat_pembeli', alamat_pembeli);
+    formData.append('kantor_pembeli', kantor_pembeli);
+    formData.append('informasi_pembeli', informasi_pembeli);
+    formData.append('alamat_lain', alamat_lain);
+
+    return this.http.post(this.BaseURL + 'pembeli/tambahpembeli/', formData)
       .pipe(map(response => {
         console.log(response);
         return response;
