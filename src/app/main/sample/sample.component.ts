@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Pembayaran } from 'app/main/pembayaran/pembayaran.component';
 
 
 @Component({
@@ -42,10 +43,10 @@ export class SampleComponent implements OnInit {
   }
 
   save_data() {
-    this.API.Sppr_CreateSppr(this.ModelSppr.post_tipe, this.ModelSppr.post_harga,
-      this.ModelSppr.post_tanah, this.ModelSppr.post_pagar, this.ModelSppr.post_tambahan,
-      this.ModelSppr.post_potongan, this.ModelSppr.book, this.ModelSppr.post_dp,
-      this.ModelSppr.post_idPembeli).subscribe(
+    this.API.Sppr_CreateSppr(this.ModelSppr.idPembeli, this.ModelSppr.tipe,
+      this.ModelSppr.hargaJual, this.ModelSppr.tanah, this.ModelSppr.pagar,
+      this.ModelSppr.pekerjaan, this.ModelSppr.potongan,
+      this.ModelSppr.bookFee, this.ModelSppr.dp).subscribe(
         result => {
           const status = result.json().status;
           const desc = result.json().desc;
@@ -67,16 +68,56 @@ export class SampleComponent implements OnInit {
 
   dialogSave(): void {
     const dialogRef = this.dialog.open(dialogTambah, {
-      height: '600px',
+      height: '500px',
       width: '800px',
       hasBackdrop: true,
     });
 
     dialogRef.afterClosed().subscribe(result => {
       alert('Data berhasil disimpan');
-      // this.ModelPemborong = result;
-      // this.save_data();
+      this.ModelSppr = result;
+      this.save_data();
     });
+  }
+
+
+  lihatdata(item) {
+    console.log(item);
+    const dialogRef = this.dialog.open(viewpembayaran, {
+      data: item,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+}
+
+
+
+@Component({
+  selector: 'viewPembayaran',
+  templateUrl: 'detailcicilan/detailcicilan.html',
+})
+export class viewpembayaran {
+  detail_bayar: any = [];
+  idPembeli = this.data.id_pembeli;
+  idSppr = this.data.id_sppr;
+  constructor(
+    http: Http, private API: ApiService, public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  detailPembayaran(idPembeli, idSppr) {
+    this.API.DetailPembayaran(idPembeli, idSppr)
+      .subscribe(result => {
+        this.detail_bayar = result.json().Output;
+        console.log(this.detail_bayar);
+      });
+  }
+
+  ngOnInit() {
+    console.log(this.idPembeli, this.idSppr);
+    this.detailPembayaran(this.idPembeli, this.idSppr);
   }
 }
 
@@ -89,6 +130,7 @@ export class SampleComponent implements OnInit {
 export class dialogTambah {
   ModelSppr: any = [];
   namaList: any = [];
+  namaTipe: any = [];
   constructor(
     http: Http, private API: ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<dialogTambah>,
@@ -100,6 +142,15 @@ export class dialogTambah {
 
   ngOnInit() {
     this.ambil_nama();
+    this.ambil_tipe();
+  }
+
+  ambil_tipe() {
+    this.API.ListTipe()
+      .subscribe(result => {
+        this.namaTipe = result.json().Output;
+        console.log(this.namaTipe);
+      });
   }
 
   ambil_nama() {
@@ -109,6 +160,7 @@ export class dialogTambah {
         console.log(this.namaList);
       });
   }
+
 }
 
-export const COMPONENT_LIST = [dialogTambah];
+export const COMPONENT_LIST = [dialogTambah, viewpembayaran];

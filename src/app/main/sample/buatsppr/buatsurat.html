@@ -3,61 +3,65 @@
         <h1 mat-dialog-title>Tambah Data</h1>
     </mat-toolbar-row>
 </mat-toolbar>
+
 <div class="flex-kiri">
     <mat-form-field class="example-full-width">
-        <mat-select placeholder="Nama Pembeli" [(ngModel)]="ModelSppr.post_idPembeli">
+        <mat-select placeholder="Nama Pembeli" [(ngModel)]="ModelSppr.idPembeli">
             <mat-option *ngFor=" let item of namaList" [value]="item.id_pembeli" name="nama_pembeli">
                 {{item.nama}}
             </mat-option>
         </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
-        <input [(ngModel)]="ModelSppr.post_tipe" matInput placeholder="Tipe">
+    <mat-form-field class="example-full-width">
+        <mat-select placeholder="Tipe Bangunan" [(ngModel)]="ModelSppr.tipe">
+            <mat-option *ngFor=" let tipe of namaTipe" [value]="tipe.id_tipe" name="jenis_tipe">
+                {{tipe.jenis_tipe}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
-        <input [(ngModel)]="ModelSppr.post_harga" matInput placeholder="Harga Jual">
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="ModelSppr.hargaJual" matInput placeholder="Harga Jual">
     </mat-form-field>
 
-    <mat-form-field>
-        <input [(ngModel)]="ModelSppr.post_tanah" matInput placeholder="Kelebihan Tanah">
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="ModelSppr.tanah" matInput placeholder="Kelebihan Tanah">
     </mat-form-field>
 
-    <mat-form-field>
-        <input [(ngModel)]="ModelSppr.post_pagar" matInput placeholder="Kelebihan Pagar">
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="ModelSppr.pagar" matInput placeholder="Kelebihan Pagar">
     </mat-form-field>
 
-    <mat-form-field>
-        <input [(ngModel)]="ModelSppr.post_tambahan" matInput placeholder="Pekerjaan Tambahan">
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="ModelSppr.pekerjaan" matInput placeholder="Pekerjaan Tambahan">
     </mat-form-field>
 
-    <mat-form-field>
-        <input [(ngModel)]="ModelSppr.post_potongan" matInput placeholder="Potongan Harga">
-    </mat-form-field>
 
-    <mat-form-field>
-        <input [(ngModel)]="ModelSppr.book" matInput placeholder="Booking Fee">
-    </mat-form-field>
-
-    <mat-form-field>
-        <input [(ngModel)]="ModelSppr.post_dp" matInput placeholder="Tipe">
-    </mat-form-field>
 </div>
 
 <div class="flex-kanan">
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Favorite food" value="Sushi">
+        <input [(ngModel)]="ModelSppr.potongan" matInput placeholder="Potongan Harga">
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Leave a comment"></textarea>
+        <input [(ngModel)]="ModelSppr.bookFee" matInput placeholder="Booking Fee">
     </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input [(ngModel)]="ModelSppr.dp" matInput placeholder="Uang Muka / Dp">
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+        <button mat-button class="biru" [mat-dialog-close]="ModelSppr" cdkFocusInitial>Simpan</button>
+        <button mat-button class="merah" [mat-dialog-close]>Batal</button>
+    </div>
 </div>
 
-<mat-toolbar>
+<!-- <mat-toolbar>
     <div mat-dialog-actions>
         <button mat-button class="biru" [mat-dialog-close] cdkFocusInitial>Simpan</button>
         <button mat-button class="merah" [mat-dialog-close]>Batal</button>
     </div>
-</mat-toolbar>
+</mat-toolbar> -->

@@ -110,32 +110,54 @@ export class ApiService {
   }
 
 
-
   ListSppr() {
     return this.http.get(this.BaseURL + 'sppr/')
       .pipe(map(response => {
         return response;
       }));
   }
-  Sppr_CreateSppr(post_tipe: string, post_harga: string, post_tanah: string,
-    post_pagar: string,
-    post_tambahan: string, post_potongan: string, post_book: string,
-    post_dp: string, post_idPembeli: string): Observable<any> {
+
+  ListPembayaran() {
+    return this.http.get(this.BaseURL + 'pembayaran/')
+      .pipe(map(response => {
+        return response;
+      }));
+  }
+
+  DetailPembayaran($idPembeli, $idSppr) {
+    return this.http.get(this.BaseURL + 'pembayaran/lihatdata/' + $idPembeli + '/' + $idSppr).pipe(
+      map(response => {
+        return response;
+      }));
+  }
+
+  ListTipe() {
+    return this.http.get(this.BaseURL + 'sppr/get_tipe/')
+      .pipe(map(response => {
+        return response;
+      }));
+  }
+
+  Sppr_CreateSppr(idPembeli: string, tipe: string, hargaJual: string,
+    tanah: string,
+    pagar: string, pekerjaan: string, potongan: string,
+    bookFee: string, dp: string): Observable<any> {
     let opt: RequestOptions;
     const headers = new Headers();
     const formData: FormData = new FormData();
 
-    formData.append('post_tipe', post_tipe);
-    formData.append('post_harga', post_harga);
-    formData.append('post_tanah', post_tanah);
-    formData.append('post_pagar', post_pagar);
-    formData.append('post_tambahan', post_tambahan);
-    formData.append('post_potongan', post_potongan);
-    formData.append('post_book', post_book);
-    formData.append('post_dp', post_dp);
-    formData.append('post_idPembeli', post_idPembeli);
+    formData.append('post_idpembeli', idPembeli);
+    formData.append('post_tipe', tipe);
+    formData.append('post_hargajual', hargaJual);
+    formData.append('post_tanah', tanah);
+    formData.append('post_pagar', pagar);
+    formData.append('post_pekerjaan', pekerjaan);
+    formData.append('post_potongan', potongan);
 
-    return this.http.post(this.BaseURL + 'welcome/tambahsurat/', formData).pipe(
+    formData.append('post_book', bookFee);
+    formData.append('post_dp', dp);
+
+    return this.http.post(this.BaseURL + 'sppr/tambahsppr/', formData).pipe(
       map(response => {
         return response;
       })

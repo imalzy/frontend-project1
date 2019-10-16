@@ -27,6 +27,9 @@ import { SampleModule2 } from 'app/main/sample2/sample2.module';
 import { DaftarMenuModule } from 'app/main/daftarmenu/daftarmenu.module';
 import { PenggunaModule } from 'app/main/pengguna/pengguna.module';
 import { PembeliModule } from 'app/main/pembeli/pembeli.module';
+import { PengeluarankasModule } from 'app/main/pengeluarankas/pengeluarankas.module';
+import { PerkiraanModule } from 'app/main/perkiraan/perkiraan.module';
+import { PembayaranModule } from 'app/main/pembayaran/pembayaran.module';
 
 import { ApiService } from './services/api.service';
 
@@ -72,6 +75,9 @@ const appRoutes: Routes = [
         DaftarMenuModule,
         PenggunaModule,
         PembeliModule,
+        PengeluarankasModule,
+        PerkiraanModule,
+        PembayaranModule,
 
 
     ],

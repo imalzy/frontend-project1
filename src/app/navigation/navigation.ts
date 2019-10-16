@@ -47,6 +47,13 @@ export const navigation: FuseNavigation[] = [
                         icon: 'supervisor_account',
                         url: '/pembeli',
                     },
+                    {
+                        id: 'pembayaran',
+                        title: 'Pembayaran / Cicilan',
+                        type: 'item',
+                        icon: 'money',
+                        url: '/pembayaran',
+                    },
 
                     {
                         id: 'sppr',
@@ -86,7 +93,7 @@ export const navigation: FuseNavigation[] = [
                 title: 'PENGGUNA',
                 translate: 'NAV.SLIDE.TITLE',
                 type: 'item',
-                icon: 'user',
+                icon: 'supervisor_account',
                 url: '/pengguna',
                 // badge    : {
                 //     title    : '0',

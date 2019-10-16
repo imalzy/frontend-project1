@@ -64,14 +64,15 @@
             <ng-container matColumnDef="angsuran">
                 <th mat-header-cell *matHeaderCellDef> Angsuran/ Cicilan </th>
                 <td mat-cell *matCellDef="let element"><span>
-                        <a class="action-pointer">
+                        <a class="action-pointer" (click)="lihatdata(element)">
                             Lihat data
                         </a></span>
                 </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="view_cetak(row)"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <!-- (click)="view_cetak(row)" -->
         </table>
         <mat-paginator [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
     </div>

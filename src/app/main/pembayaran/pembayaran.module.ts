@@ -13,19 +13,21 @@ import {
 } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatMomentDateModule, } from '@angular/material-moment-adapter';
-import { Pembeli, COMPONENT_LIST } from './pembeli.component';
+
+import { Pembayaran, COMPONENT_LIST } from './pembayaran.component';
 
 const routes = [
   {
-    path: 'pembeli',
-    component: Pembeli
+    path: 'pembayaran',
+    component: Pembayaran
   }
 ];
+
 
 @NgModule({
   declarations: [
     [...COMPONENT_LIST],
-    Pembeli,
+    Pembayaran,
   ],
   entryComponents: COMPONENT_LIST,
   imports: [
@@ -69,7 +71,7 @@ const routes = [
     FuseSharedModule,
   ],
   exports: [
-    Pembeli,
+    Pembayaran,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -107,4 +109,5 @@ const routes = [
     MatTreeModule,
   ]
 })
-export class PembeliModule { }
+
+export class PembayaranModule { }
