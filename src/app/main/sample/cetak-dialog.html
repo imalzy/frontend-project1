@@ -1,0 +1,166 @@
+<h2 mat-dialog-title>Preview</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="container">
+        <h3>SURAT PERNYATAAN PEMBELIAN RUMAH</h3>
+        <p>Yang bertanda tangan dibawah ini :</p>
+
+        <table style="width:100%">
+            <tr>
+                <td width="60%">Nama</td>
+                <td width="1%">:</td>
+                <td width="49%">{{data.nama}}</td>
+            </tr>
+            <tr>
+                <td>No. KTP</td>
+                <td>:</td>
+                <td>{{data.ktp}}</td>
+            </tr>
+            <tr>
+                <td>Pekerjaan</td>
+                <td>:</td>
+                <td>{{data.pekerjaan}}</td>
+            </tr>
+            <tr>
+                <td>Alamat Rumah</td>
+                <td>:</td>
+                <td>{{data.alamat_rumah}}</td>
+            </tr>
+            <tr>
+                <td>Alamat Kantor</td>
+                <td>:</td>
+                <td>{{data.alamat_kantor}}</td>
+            </tr>
+            <tr>
+                <td>Nama Istri/ Suami/ Orang Tua</td>
+                <td>:</td>
+                <td>{{data.informasi_lain}}</td>
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <td>:</td>
+                <td>alamat_informasi</td>
+            </tr>
+            <tr>
+                <td>Dalam pembelian ini menyatakan membeli</td>
+                <td>:</td>
+                <td> Rumah / Kavling</td>
+            </tr>
+        </table>
+        <p>Dengan Ini Menyatakan :</p>
+        <p>1. Menerima dan menyetujui harga serta pembayaran dengan rincian sebagai berikut :</p>
+        <table style="width:100%">
+            <tr>
+                <td width="30%">Tipe : {{data.jenis_tipe}}</td>
+                <td width="30%">No. Kavling / Blok : 35 / BB</td>
+                <td width="40%">Luas Tanah : 113.50 m2</td>
+            </tr><br>
+        </table>
+        <p><b>Pembelian Dilakukan Dengan Cara : KPR</b></p>
+        <p>Dengan Ini Menyatakan : </p>
+        <p>1. Menerima dan menyetujui harga serta pembarayan dengan rincian sebagai berikut :</p>
+        <table style="width:100%">
+            <tr>
+                <td width="20%">a. Harga Jual</td>
+                <td width="40%">-</td>
+                <td width="40%">{{data.harga_jual | currency: 'Rp. ':'symbol'}}</td>
+            </tr>
+            <tr>
+                <td>b. Kelebihan Tanah</td>
+                <td>-</td>
+                <td>{{data.kelebihan_tanah | currency: 'Rp. ':'symbol'}}</td>
+            </tr>
+            <tr>
+                <td>c. Kelebihan Pagar</td>
+                <td>-</td>
+                <td>{{data.kelebihan_pagar | currency: 'Rp. ':'symbol'}}</td>
+            </tr>
+            <tr>
+                <td>d. Pekerjaan Tambahan</td>
+                <td>-</td>
+                <td>{{data.pekerjaan_tambahan | currency: 'Rp. ':'symbol'}}</td>
+            </tr>
+            <tr>
+                <td>e. Potongan Harga</td>
+                <td>-</td>
+                <td>{{data.potongan_harga | currency: 'Rp. ':'symbol'}}</td>
+            </tr>
+        </table>
+        <hr>
+
+        <table style="width:100%">
+            <tr>
+                <td width="20%">Harga Pembelian</td>
+                <td width="40%">-</td>
+                <td width="40%">{{data.harga_pembelian | currency: 'Rp. ':'symbol'}}</td>
+            </tr>
+            <tr>
+                <td>Booking Fee</td>
+                <td>-</td>
+                <td>{{data.booking_fee | currency: 'Rp. ':'symbol'}}</td>
+            </tr>
+            <tr>
+                <td>Uang Muka /Dp</td>
+                <td>-</td>
+                <td>{{data.uang_dp | currency: 'Rp. ':'symbol'}}</td>
+            </tr>
+            <tr>
+                <td>Kredit / Cicilan</td>
+                <td>Cara Pelunasan : KPR</td>
+                <td>{{data.cicilan | currency: 'Rp. ':'symbol'}}</td>
+            </tr>
+        </table>
+        <p>2. Angsuran pembayaran/uang muka akan dibayarkan dengan cara sebagai berikut:</p>
+        <table style="width:100%;border: 1px solid black;">
+            <tr>
+                <td width="10%">No.</td>
+                <td width="30%">Tgl Jth Tempo</td>
+                <td width="40%">Keterangan</td>
+                <td>Jumlah</td>
+            </tr>
+            <tr *ngFor="let row of detail_bayar">
+                <td>{{ row.no }}</td>
+                <td>{{ row.tgl_tempo }}</td>
+                <td>{{ row.keterangan }}</td>
+                <td>{{ row.jumlah | currency: 'Rp. ':'symbol' }}</td>
+            </tr>
+        </table>
+        <div class="ttd">
+            <div class="kolom">
+                <p>Diterima Oleh,</p>
+
+                <br><br><br><br><br><br><br><br>
+                <hr>
+            </div>
+            <div class="kolom">
+                <p>Diketahui Oleh,</p>
+                <br><br><br><br><br><br><br><br>
+                <hr>
+            </div>
+            <div class="kolom">
+                <p> Pekanbaru, 07-Jan-19 </p>
+                <span>Pemesan/Pembeli</span>
+                <br><br><br><br><br><br><br>
+                {{data.nama}}
+                <hr>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<!-- 
+<p>berhasil memperoleh cetak
+    {{data.id_pembeli}}
+</p>
+
+<table>
+    <tr *ngFor="let row of detail_bayar">
+        <td>
+            <b>{{ row.id_sppr }}</b>
+        </td>
+    </tr>
+</table> -->
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial
+        (click)="Print(data.id_pembeli, data.id_sppr)">Cetak</button>
+</mat-dialog-actions>

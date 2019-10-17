@@ -7,6 +7,7 @@ import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Pembayaran } from 'app/main/pembayaran/pembayaran.component';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -85,6 +86,20 @@ export class SampleComponent implements OnInit {
     console.log(item);
     const dialogRef = this.dialog.open(viewpembayaran, {
       data: item,
+      height: '300px',
+      width: '800px',
+      hasBackdrop: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  preview(item): void {
+    console.log(item);
+    const dialogRef = this.dialog.open(viewCetak, {
+      data: item,
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -93,13 +108,50 @@ export class SampleComponent implements OnInit {
   }
 }
 
+@Component({
+  selector: 'cetak',
+  templateUrl: 'cetak-dialog.html',
+  styleUrls: ['./cetak-dialog.component.scss']
+})
+export class viewCetak {
+  BaseURL = environment.BaseUrl;
+  detail_bayar: any = [];
+  data2 = [];
+  idPembeli = this.data.id_pembeli;
+  idSppr = this.data.id_sppr;
 
+  constructor(
+    http: Http, private API: ApiService, public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  detailPembayaran(idPembeli, idSppr) {
+    this.API.DetailPembayaran(idPembeli, idSppr)
+      .subscribe(result => {
+        this.detail_bayar = result.json().Output;
+        console.log(this.detail_bayar);
+      });
+  }
+
+  ngOnInit() {
+    console.log(this.data);
+    this.detailPembayaran(this.idPembeli, this.idSppr);
+    console.log('ini adalah log 20' + this.detail_bayar);
+  }
+
+  Print($id, $sppr) {
+    // alert($id);
+    var myWindow = window.open(this.BaseURL + 'cetaksurat/tampil_sppr/' + $id + '/' + $sppr, 'MsgWindow', 'width=70%');
+  }
+
+}
 
 @Component({
   selector: 'viewPembayaran',
   templateUrl: 'detailcicilan/detailcicilan.html',
+  styleUrls: ['./sample.component.scss']
 })
 export class viewpembayaran {
+  displayedColumns = ['nama', 'kode', 'nomor', 'tgl', 'keterangan', 'jumlah'];
   detail_bayar: any = [];
   idPembeli = this.data.id_pembeli;
   idSppr = this.data.id_sppr;
@@ -116,8 +168,9 @@ export class viewpembayaran {
   }
 
   ngOnInit() {
-    console.log(this.idPembeli, this.idSppr);
+    //console.log('ini adalah log 1' + this.idPembeli, this.idSppr);
     this.detailPembayaran(this.idPembeli, this.idSppr);
+    console.log('ini adalah log 20' + this.detail_bayar);
   }
 }
 
@@ -163,4 +216,8 @@ export class dialogTambah {
 
 }
 
-export const COMPONENT_LIST = [dialogTambah, viewpembayaran];
+export const COMPONENT_LIST = [
+  dialogTambah,
+  viewpembayaran,
+  viewCetak,
+];

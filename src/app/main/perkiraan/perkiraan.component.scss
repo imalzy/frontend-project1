@@ -1,0 +1,32 @@
+.example-container {
+    min-height: 200px;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.example-space,
+.example-form {
+    flex: 1 1 auto;
+}
+
+.mat-button,
+.mat-raised-button {
+    background-color: #303F9F;
+}
+
+.action-pointer {
+    cursor: pointer;
+}
+
+td .mat-cell {
+    whiteSpace: 'normal';
+    wordWrap: 'break-word';
+}
+
+th .mat-header-cell {
+    display: flex;
+    justify-content: center;
+}

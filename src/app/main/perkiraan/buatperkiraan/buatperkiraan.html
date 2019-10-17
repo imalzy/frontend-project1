@@ -1,0 +1,27 @@
+<mat-toolbar>
+    <h1 mat-dialog-title>Tambah Pengeluaran rek</h1>
+</mat-toolbar>
+<hr class="new4">
+<mat-toolbar>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input [(ngModel)]="rek.glid" matInput placeholder="GL ID">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input [(ngModel)]="rek.rekening" matInput placeholder="Nama Rekening Perkiraan">
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <mat-form-field class="panjang">
+            <input [(ngModel)]="rek.kelompok" matInput placeholder="Kelompok">
+        </mat-form-field>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div mat-dialog-actions>
+    <button mat-button class="biru" [mat-dialog-close]="rek" cdkFocusInitial>Simpan</button>
+    <button mat-button class="merah" [mat-dialog-close]>Batal</button>
+</div>

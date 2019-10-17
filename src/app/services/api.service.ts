@@ -124,6 +124,60 @@ export class ApiService {
       }));
   }
 
+  listperkiraan() {
+    return this.http.get(this.BaseURL + 'Perkiraan/').pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  perkiraan_Create(glid: string, rekening: string,
+    kelompok: string): Observable<any> {
+    let opt: RequestOptions;
+    const headers = new Headers();
+    const formData: FormData = new FormData();
+
+    formData.append('post_glid', glid);
+    formData.append('post_nmrekening', rekening);
+    formData.append('post_kelompok', kelompok);
+
+    return this.http.post(this.BaseURL + 'Perkiraan/tambahperkiraan/', formData).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  listPengeluarankas() {
+    return this.http.get(this.BaseURL + 'pengeluarankas/').pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  pengeluaran_CreateKas(no_bukti: string, tanggal: string, rekening: string,
+    perkiraan: string,
+    keterangan: string, jumlah: string): Observable<any> {
+    let opt: RequestOptions;
+    const headers = new Headers();
+    const formData: FormData = new FormData();
+
+    formData.append('no_bukti', no_bukti);
+    formData.append('tgl', tanggal);
+    formData.append('rekening', rekening);
+    formData.append('perkiraan', perkiraan);
+    formData.append('keterangan', keterangan);
+    formData.append('jumlah', jumlah);
+
+    return this.http.post(this.BaseURL + 'pengeluarankas/tambahpembeli/', formData).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
   DetailPembayaran($idPembeli, $idSppr) {
     return this.http.get(this.BaseURL + 'pembayaran/lihatdata/' + $idPembeli + '/' + $idSppr).pipe(
       map(response => {

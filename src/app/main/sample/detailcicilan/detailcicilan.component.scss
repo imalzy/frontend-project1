@@ -3,11 +3,10 @@
     flex: 1 1 auto;
 }
 
-.mat-button,
+button .mat-button,
 .mat-raised-button {
-    background-color: #303F9F;
+    background-color: grey;
 }
-
 
 table {
     width: 100%;
@@ -44,11 +43,11 @@ table {
 }
 
 
-// .mat-row:hover td::before {
-//     background-color: #03A9F4;
-//     cursor: pointer;
+.mat-row:hover td::before {
+    background-color: #03A9F4;
+    cursor: pointer;
 
-// }
+}
 
 .action-pointer {
     cursor: pointer;

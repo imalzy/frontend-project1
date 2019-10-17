@@ -1,3 +1,52 @@
-<p>
-  perkiraan works!
-</p>
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg mat-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{ option }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </form>
+
+            <span class="example-space"></span>
+            <button mat-raised-button color="primary" (click)="dialogSave()">
+                <mat-icon>add</mat-icon>Tambah
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="example-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <!-- Name Column-->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>GL ID</th>
+                <td mat-cell *matCellDef="let element"> {{element.gl_id}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="rekening">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nama Rekening Perkiraan </th>
+                <td mat-cell *matCellDef="let element"> {{element.nama_rekening}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="kelompok">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Kelompok </th>
+                <td mat-cell *matCellDef="let element"> {{element.kelompok}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
+    </div>
+
+</div>

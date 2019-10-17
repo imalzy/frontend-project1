@@ -109,7 +109,7 @@
             <tr>
                 <td>Total Nilai Borongan</td>
                 <td>:</td>
-                <td>{{data.total_nilai}}</td>
+                <td>{{data.total_nilai | currency: 'Rp. ':'symbol'}}</td>
             </tr>
             <tr>
                 <td>Waktu Pelaksanaan</td>
@@ -140,16 +140,18 @@
             </tr>
         </table>
         <p>Demikian Surat Perintah Mulai Pekerjaan ini diterbitkan.</p>
-        <table border="1" style="border-collapse: collapse;">
+        <table style="border-collapse: collapse; width:100%">
             <tr>
-                <td>Ditetapkan di</td>
+                <td width=60%></td>
+                <td width=10%>Ditetapkan di</td>
                 <td>:</td>
                 <td>Medan</td>
             </tr>
             <tr>
-                <td>Tanggal</td>
+                <td width=60%></td>
+                <td width=10%>Tanggal</td>
                 <td>:</td>
-                <td>23 April 2019</td>
+                <td> {{data.tanggal_surat}}</td>
             </tr>
         </table>
         <br><br>

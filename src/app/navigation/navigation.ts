@@ -66,11 +66,11 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id: 'accounting',
-                title: 'ACCOUNTING',
+                title: 'REKENING PERKIRAAN',
                 translate: 'NAV.DETAIL.TITLE',
                 type: 'item',
                 icon: 'insert_chart',
-                url: '#',
+                url: '/perkiraan',
             },
             {
                 id: 'pengeluaran_kas',
@@ -78,7 +78,7 @@ export const navigation: FuseNavigation[] = [
                 translate: 'NAV.DETAIL.TITLE',
                 type: 'item',
                 icon: 'insert_chart',
-                url: '#',
+                url: '/pengeluarankas',
             },
         ]
     },
