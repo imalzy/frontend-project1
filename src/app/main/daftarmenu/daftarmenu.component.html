@@ -3,8 +3,8 @@
             <mat-toolbar-row>
                 <form class="example-form">
                     <mat-form-field class="example-full-width">
-                        <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl"
-                            [matAutocomplete]="auto">
+                        <input type="text" placeholder="Cari" aria-label="Number" matInput
+                            (keyup)="applyFilter($event.target.value)" [matAutocomplete]="auto">
                         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                 {{ option }}

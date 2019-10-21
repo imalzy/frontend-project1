@@ -124,6 +124,28 @@ export class ApiService {
       }));
   }
 
+  pembayaran_create(idPembeli: string, idSppr: string,
+    nomor: string, tglTempo: string, keterangan: string, jlh: string): Observable<any> {
+    let opt: RequestOptions;
+    const headers = new Headers();
+    const formData: FormData = new FormData();
+
+    formData.append('post_idPembeli', idPembeli);
+    formData.append('post_idSppr', idSppr);
+    formData.append('post_nomor', nomor);
+    formData.append('post_tglTempo', tglTempo);
+    formData.append('post_ket', keterangan);
+    formData.append('post_jumlah', jlh);
+
+
+
+    return this.http.post(this.BaseURL + 'pembayaran/tambahPembayaran/', formData).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
   listperkiraan() {
     return this.http.get(this.BaseURL + 'Perkiraan/').pipe(
       map(response => {

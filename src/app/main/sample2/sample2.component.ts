@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -20,8 +20,7 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
   options = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
   ELEMENT_DATA: Pengguna[] = [];
-  animal: string;
-  name: string = '';
+  dialogRef: any;
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -30,6 +29,7 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
     );
     this.ambil_data();
   }
+
   constructor(http: Http, private API: ApiService, public dialog: MatDialog) {
 
   }
@@ -67,14 +67,11 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
   }
 
   dialogSave(): void {
-    const dialogRef = this.dialog.open(Sample2ViewDialog, {
-      height: '450px',
-      width: '400px',
-      hasBackdrop: true,
+    this.dialogRef = this.dialog.open(Sample2ViewDialog, {
+      panelClass: 'tambah-pemborong'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      alert('Data berhasil disimpan');
+    this.dialogRef.afterClosed().subscribe(result => {
       this.ModelPemborong = result;
       this.save_data();
     });
@@ -120,12 +117,23 @@ export interface Pengguna {
 
 @Component({
   selector: 'sample2-dialog',
-  templateUrl: 'sample2-dialog.html',
-  styleUrls: ['./sample2-dialog.component.scss']
+  templateUrl: 'buatpemborong/sample2-dialog.html',
+  styleUrls: ['./buatpemborong/sample2-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class Sample2ViewDialog {
   ModelPemborong: any = [];
+
+
+  /**
+    * Constructor
+    *
+    * @param {MatDialogRef<ContactsContactFormDialogComponent>} matDialogRef
+    * @param _data
+    * @param {FormBuilder} _formBuilder
+    */
   constructor(
+    public matDialogRef: MatDialogRef<Sample2ViewDialog>,
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -137,7 +145,7 @@ export class Sample2ViewDialog {
 @Component({
   selector: 'sample2-delete',
   templateUrl: 'sample2-delete.html',
-  styleUrls: ['./sample2-dialog.component.scss']
+  styleUrls: ['./buatpemborong/sample2-dialog.component.scss']
 })
 export class viewdialogDelete {
   ModelPemborongDelete: any = [];

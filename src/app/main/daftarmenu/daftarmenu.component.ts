@@ -21,7 +21,7 @@ import { environment } from '../../../environments/environment';
 })
 export class DaftarMenu implements OnInit {
   displayedColumns = ['no_surat', 'pekerjaan', 'nama', 'telpon', 'total_nilai'];
-  dataSource = [];
+  // dataSource = [];
   BaseURL = environment.BaseUrl;
   ModelSurat: any = [];
   namaList: UsrNama[] = [];
@@ -35,8 +35,10 @@ export class DaftarMenu implements OnInit {
   items: any[];
   selectedRowIndex = [];
   loadRef: any = [];
-
   listmenu: UserData[] = [];
+
+  listmenu1: MenuData[] = [];
+  dataSource: MatTableDataSource<MenuData>;
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -46,12 +48,23 @@ export class DaftarMenu implements OnInit {
     this.ambil_data();
   }
   constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
-
+  filter(val: string): string[] {
+    return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
+  }
   ambil_data() {
     this.API.ListHome()
       .subscribe(result => {
         this.dataSource = result.json().Output;
       });
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   save_data() {
@@ -72,10 +85,6 @@ export class DaftarMenu implements OnInit {
           }
         }
       );
-  }
-
-  filter(val: string): string[] {
-    return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 
   view_cetak(item): void {
@@ -108,8 +117,8 @@ export class DaftarMenu implements OnInit {
 
 @Component({
   selector: 'cetak',
-  templateUrl: 'cetak-dialog.html',
-  styleUrls: ['./cetak-dialog.component.scss']
+  templateUrl: 'cetakdialog/cetak-dialog.html',
+  styleUrls: ['./cetakdialog/cetak-dialog.component.scss']
 })
 export class viewCetak {
   BaseURL = environment.BaseUrl;
@@ -130,8 +139,8 @@ export class viewCetak {
 
 @Component({
   selector: 'daftarmenu-dialog',
-  templateUrl: 'daftarmenu-dialog.html',
-  styleUrls: ['./daftarmenu-dialog.component.scss']
+  templateUrl: 'buatspmk/daftarmenu-dialog.html',
+  styleUrls: ['./buatspmk/daftarmenu-dialog.component.scss']
 })
 export class Sample2ViewDialog {
   ModelSurat: any = [];
@@ -195,6 +204,14 @@ export interface UserData {
   id: string;
   category: string;
   image: string;
+}
+
+export interface MenuData {
+  no_surat: string;
+  pekerjaan: string;
+  nama: string;
+  telpon: string;
+  total_nilai: string;
 }
 
 export const COMPONENT_LIST = [

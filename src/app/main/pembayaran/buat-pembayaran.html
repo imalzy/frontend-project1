@@ -1,0 +1,92 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Buat Transaksi</span>
+            <button mat-icon-button [mat-dialog-close] aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+
+    <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+
+        <!-- <form #transaksiGroup="ngForm">
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input required ngModel name="firstName" id="firstName" class="form-control"
+                        placeholder="First Name" #firstName="ngModel" />
+                    <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">First Name is required
+                    </div>
+                </mat-form-field>
+            </div>
+            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+                <button type="submit" class="save-button mat-accent" [disabled]="!transaksiGroup.valid"
+                    aria-label="SAVE">
+                    SAVE
+                </button>
+            </div>
+        </form> -->
+
+        <form name="transaksiFrom" [formGroup]="transaksiFrom">
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Nama Pembeli" required [(ngModel)]="ModelTransaksi.idPembeli"
+                        [formControl]="namaPembeliFormControl">
+                    <mat-error *ngIf="namaPembeliFormControl.invalid">
+                        {{getRequiredErrorMessage('namaPembeliGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Kode Transaksi" required [(ngModel)]="ModelTransaksi.idSppr"
+                        [formControl]="transaksiFormControl">
+                    <mat-error *ngIf="transaksiFormControl.invalid">
+                        {{getRequiredErrorMessage('transaksiGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Nomor" required [(ngModel)]="ModelTransaksi.nomor"
+                        [formControl]="noFormControl">
+                    <mat-error *ngIf="noFormControl.invalid">
+                        {{getRequiredErrorMessage('noGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Tgl Jatuh Tempo" required [(ngModel)]="ModelTransaksi.tglTempo"
+                        [formControl]="tglTempoFormControl">
+                    <mat-error *ngIf="tglTempoFormControl.invalid">
+                        {{getRequiredErrorMessage('tglGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Keterangan" required [(ngModel)]="ModelTransaksi.keterangan"
+                        [formControl]="ketFormControl">
+                    <mat-error *ngIf="ketFormControl.invalid">
+                        {{getRequiredErrorMessage('ketGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Jumlah" required [(ngModel)]="ModelTransaksi.jlh"
+                        [formControl]="jumlahFormControl">
+                    <mat-error *ngIf="jumlahFormControl.invalid">
+                        {{getRequiredErrorMessage('jumlahGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-raised-button class="save-button mat-accent" aria-label="SAVE"
+                    [disabled]="transaksiFrom.invalid">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -13,6 +13,7 @@ $yellow-theme-warn: mat-palette($mat-red);
 // Create the Material theme object
 $yellow-theme: mat-light-theme($yellow-theme-primary, $yellow-theme-accent, $yellow-theme-warn);
 
+
 // Add ".yellow-theme" class to the body to activate this theme
 .yellow-theme {
 
