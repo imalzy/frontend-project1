@@ -9,6 +9,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { merge, Observable, BehaviorSubject, fromEvent, Subject } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseUtils } from '@fuse/utils';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-pembayaran',
@@ -36,7 +37,7 @@ export class Pembayaran implements OnInit {
     );
     this.ambil_data();
   }
-  constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
+  constructor(http: Http, private API: ApiService, public dialog: MatDialog, private toastr: ToastrService) { }
 
   ambil_data() {
     this.API.ListPembayaran()
@@ -76,9 +77,18 @@ export class Pembayaran implements OnInit {
     this.dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       this.ModelTransaksi = result;
+      console.log(this.ModelTransaksi);
       this.save_data();
 
     });
+  }
+  showToaster() {
+    this.toastr.success("Data Berhasil disimpan", 'Informasi');
+    // this.toastr.info("Important News", 'Information');
+    // this.toastr.error('everything is broken', 'Major Error', {
+    //   timeOut: 3000
+    // });
+    // this.toastr.info('Are you the 6 fingered man?')
   }
 }
 
@@ -95,7 +105,7 @@ export class transaksiDialog {
   constructor(
     http: Http, private API: ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<transaksiDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private toastr: ToastrService) { }
 
 
   namaPembeliFormControl = new FormControl('', [Validators.required]);
@@ -115,6 +125,12 @@ export class transaksiDialog {
     jumlahGroup: this.jumlahFormControl
   });
 
+  showToaster() {
+    this.toastr.success("Data Berhasil disimpan", 'Informasi');
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
   getRequiredErrorMessage(field: any) {
     return this.transaksiFrom.get(field).hasError('required') ? 'You must enter a value' : '';

@@ -83,9 +83,10 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
+            <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
                 <button mat-raised-button class="save-button mat-accent" aria-label="SAVE"
-                    [disabled]="transaksiFrom.invalid">Simpan</button>
+                    [disabled]="transaksiFrom.invalid" [mat-dialog-close]="ModelTransaksi"
+                    (click)="showToaster()">Simpan</button>
             </div>
         </form>
     </div>

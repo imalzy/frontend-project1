@@ -20,6 +20,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { fuseConfig } from 'app/fuse-config';
 
+import { ToastrModule } from 'ngx-toastr';
+
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
@@ -45,6 +47,15 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            timeOut: 10000,
+            // toast-top-full-width
+            //top-Right
+            positionClass: 'toast-bottom-right',
+            preventDuplicates: true,
+            closeButton: true,
+        }),
+
         HttpClientModule,
         HttpModule,
         RouterModule.forRoot(appRoutes),
