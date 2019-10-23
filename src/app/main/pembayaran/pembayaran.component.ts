@@ -4,12 +4,29 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { map, startWith, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { DataSource } from '@angular/cdk/collections';
 import { merge, Observable, BehaviorSubject, fromEvent, Subject } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseUtils } from '@fuse/utils';
 import { ToastrService } from 'ngx-toastr';
+
+export interface Element {
+  alamat_informasi: string;
+  alamat_kantor: string;
+  alamat_rumah: string;
+  id_pembayaran: string;
+  id_pembeli: string;
+  id_sppr: string;
+  informasi_lain: string;
+  jumlah: number;
+  keterangan: string;
+  ktp: string;
+  nama: string;
+  no: string;
+  pekerjaan: string;
+  tgl_tempo: string;
+}
 
 @Component({
   selector: 'app-pembayaran',
@@ -20,6 +37,9 @@ import { ToastrService } from 'ngx-toastr';
 export class Pembayaran implements OnInit {
   displayedColumns = ['nama', 'kode', 'tgl', 'ket', 'jlh'];
   dataSource = [];
+  arrDataSource: Element[] = [];
+  sourceData = new MatTableDataSource(this.arrDataSource);
+  data_Source = this.sourceData.data;
   ModelTransaksi: any = [];
   myControl: FormControl = new FormControl();
 
@@ -42,10 +62,18 @@ export class Pembayaran implements OnInit {
   ambil_data() {
     this.API.ListPembayaran()
       .subscribe(result => {
-        console.log(result.json().Output);
+        //console.log(result.json().Output);
         this.dataSource = result.json().Output;
-        console.log(this.dataSource);
+        this.dataSource.forEach((item, index) => {
+          this.arrDataSource.push(item);
+        });
+        // console.log(this.dataSource);
       });
+  }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.sourceData.filter = filterValue;
   }
 
   save_data() {
@@ -58,7 +86,7 @@ export class Pembayaran implements OnInit {
 
           if (result.status === 200) {
             if (status === 'OK') {
-              this.ambil_data();
+              // this.ambil_data();
               this.ModelTransaksi = [];
             }
             console.log(this.ModelTransaksi);
@@ -73,6 +101,8 @@ export class Pembayaran implements OnInit {
       width: '500px',
       hasBackdrop: true,
     });
+    console.log(this.sourceData);
+    console.log(this.data_Source);
 
     this.dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

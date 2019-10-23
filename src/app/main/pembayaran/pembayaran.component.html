@@ -29,7 +29,7 @@
                     <mat-icon class="secondary-text">search</mat-icon>
                 </label>
                 <mat-form-field floatLabel="never" fxFlex="1 0 auto">
-                    <input id="search" matInput #filter placeholder="Search">
+                    <input id="search" matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
                 </mat-form-field>
             </div>
             <!-- / SEARCH -->
@@ -44,8 +44,8 @@
         <!-- CONTENT CARD -->
         <div class="content-card mat-white-bg">
 
-            <mat-table class="products-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
-                fusePerfectScrollbar>
+            <mat-table class="transaksi-table" #table [dataSource]="data_Source" matSort
+                [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
 
                 <!-- ID Column -->
                 <ng-container matColumnDef="nama">
