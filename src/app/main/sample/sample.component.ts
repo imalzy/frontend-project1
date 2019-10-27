@@ -8,12 +8,14 @@ import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Pembayaran } from 'app/main/pembayaran/pembayaran.component';
 import { environment } from '../../../environments/environment';
+import { fuseAnimations } from '@fuse/animations';
 
 
 @Component({
   selector: 'sample',
   templateUrl: './sample.component.html',
-  styleUrls: ['./sample.component.scss']
+  styleUrls: ['./sample.component.scss'],
+  animations: fuseAnimations
 })
 
 export class SampleComponent implements OnInit {

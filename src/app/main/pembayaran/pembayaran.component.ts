@@ -70,6 +70,7 @@ export class Pembayaran implements OnInit {
         // console.log(this.dataSource);
       });
   }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -132,6 +133,8 @@ export class Pembayaran implements OnInit {
 export class transaksiDialog {
 
   ModelTransaksi: any = [];
+  dataSource = [];
+  listNama = [];
   constructor(
     http: Http, private API: ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<transaksiDialog>,
@@ -160,6 +163,10 @@ export class transaksiDialog {
   }
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  ngOnInit(): void {
+
   }
 
   getRequiredErrorMessage(field: any) {

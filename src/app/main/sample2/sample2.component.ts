@@ -5,14 +5,16 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'sample',
   templateUrl: './sample2.component.html',
-  styleUrls: ['./sample2.component.scss']
+  styleUrls: ['./sample2.component.scss'],
+  animations: fuseAnimations
 })
 export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
-  displayedColumns = ['Nama Pemborong', 'NIK', 'Alamat', 'Telepon', 'Action'];
+  displayedColumns = ['Nama Pemborong', 'NIK', 'Alamat', 'Telepon'];
   dataSource = [];
   ModelPemborong: any = [];
   ModelPemborongDelete: any = [];

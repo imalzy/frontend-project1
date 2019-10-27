@@ -14,6 +14,7 @@ import {
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatMomentDateModule, } from '@angular/material-moment-adapter';
 import { Pembeli, COMPONENT_LIST } from './pembeli.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes = [
   {
@@ -30,6 +31,7 @@ const routes = [
   entryComponents: COMPONENT_LIST,
   imports: [
     RouterModule.forChild(routes),
+    BrowserAnimationsModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,

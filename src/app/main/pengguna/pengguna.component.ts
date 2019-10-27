@@ -7,11 +7,13 @@ import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ErrorStateMatcher } from '@angular/material/core';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'pengguna',
   templateUrl: './pengguna.component.html',
-  styleUrls: ['./pengguna.component.scss']
+  styleUrls: ['./pengguna.component.scss'],
+  animations: fuseAnimations
 })
 
 export class Pengguna implements OnInit {
@@ -42,8 +44,8 @@ export class Pengguna implements OnInit {
   }
 
   save_data() {
-    this.API.Pengguna_CreatePengguna(this.ModelPengguna.Nama_lengkap, this.ModelPengguna.Level,
-      this.ModelPengguna.Username, this.ModelPengguna.Password, this.ModelPengguna.Gender).subscribe(
+    this.API.Pengguna_CreatePengguna(this.ModelPengguna.post_password, this.ModelPengguna.post_username,
+      this.ModelPengguna.nama_lengkap, this.ModelPengguna.post_gender, this.ModelPengguna.post_level).subscribe(
         result => {
           console.log(result);
           const status = result.json().status;
@@ -103,9 +105,12 @@ export class Sample2ViewDialog {
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private formBuilder: FormBuilder) {
     this.myForm = this.formBuilder.group({
       password: ['', [Validators.required]],
-      confirmPassword: ['']
+      confirmPassword: [''],
+      nama: new FormControl(),
+      username: new FormControl(),
     },
-      { validator: this.checkPasswords });
+      { validator: this.checkPasswords },
+    );
 
   }
 

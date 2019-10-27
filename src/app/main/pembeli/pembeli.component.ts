@@ -5,11 +5,13 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'pembeli',
   templateUrl: './pembeli.component.html',
-  styleUrls: ['./pembeli.component.scss']
+  styleUrls: ['./pembeli.component.scss'],
+  animations: fuseAnimations
 })
 export class Pembeli implements OnInit {
   displayedColumns = ['nama', 'ktp', 'alamat_rumah', 'pekerjaan', 'alamat_kantor'];

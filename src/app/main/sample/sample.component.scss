@@ -1,55 +1,89 @@
-.example-space,
-.example-form {
-    flex: 1 1 auto;
-}
+@import "src/@fuse/scss/fuse";
 
-.mat-button,
-.mat-raised-button {
-    background-color: #303F9F;
-}
+:host {
 
+    #products {
 
-table {
-    width: 100%;
-    background: #ffffff;
-    padding: 10px;
-}
+        .top-bg {
+            @include media-breakpoint-down(xs) {
+                height: 240px;
+            }
+        }
 
-.mat-row {
-    padding: 100px;
-}
+        >.center {
 
-.mat-row span {
-    position: relative;
-}
+            >.header {
 
-.mat-row td {
-    height: 100%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    position: relative;
-    z-index: 1;
-}
+                .search-input-wrapper {
+                    max-width: 480px;
+                }
 
-.mat-row td::before {
-    content: '';
-    width: 100%;
-    height: calc(100% - 0.5rem);
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-}
+                @include media-breakpoint-down(xs) {
+                    margin: 8px 0;
+                    height: 192px !important;
+                    min-height: 192px !important;
+                    max-height: 192px !important;
+                }
+            }
+        }
+    }
 
+    .transaksi-table {
+        flex: 1 1 auto;
+        border-bottom: 1px solid rgba(0, 0, 0, .12);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
 
-// .mat-row:hover td::before {
-//     background-color: #03A9F4;
-//     cursor: pointer;
+        .mat-header-row {
+            min-height: 64px;
+        }
 
-// }
+        .product {
+            position: relative;
+            cursor: pointer;
+            height: 84px;
+        }
 
-.action-pointer {
-    cursor: pointer;
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .mat-column-id {
+            flex: 0 1 84px;
+        }
+
+        .mat-column-image {
+            flex: 0 1 84px;
+
+            .product-image {
+                width: 52px;
+                height: 52px;
+                border: 1px solid rgba(0, 0, 0, .12);
+            }
+        }
+
+        .mat-column-buttons {
+            flex: 0 1 80px;
+        }
+
+        .quantity-indicator {
+            display: inline-block;
+            vertical-align: middle;
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            margin-right: 8px;
+
+            &+span {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+
+        .active-icon {
+            border-radius: 50%;
+        }
+    }
 }

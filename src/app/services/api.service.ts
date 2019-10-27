@@ -356,16 +356,16 @@ export class ApiService {
       }));
   }
 
-  Pengguna_CreatePengguna(Name: string, Level: string, Username: string, Password: string, Gender: string): Observable<any> {
+  Pengguna_CreatePengguna(post_password: string, post_username: string, nama_lengkap: string, post_gender: string, post_level: string): Observable<any> {
     let opt: RequestOptions;
     const headers = new Headers();
     const formData: FormData = new FormData();
 
-    formData.append('Name', Name);
-    formData.append('Level', Level);
-    formData.append('Username', Username);
-    formData.append('Password', Password);
-    formData.append('Gender', Gender);
+    formData.append('Password', post_password);
+    formData.append('Username', post_username);
+    formData.append('Name', nama_lengkap);
+    formData.append('Gender', post_gender);
+    formData.append('Level', post_level);
 
     return this.http.post(this.BaseURL + 'pengguna/buatpengguna/', formData)
       .pipe(map(response => {

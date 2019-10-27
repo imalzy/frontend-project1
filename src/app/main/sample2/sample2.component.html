@@ -1,65 +1,96 @@
-<div class="page-layout blank p-24" fusePerfectScrollbar>
+<div id="products" class="page-layout carded fullwidth inner-scroll">
 
-    <mat-toolbar>
-        <mat-toolbar-row>
-            <form class="example-form">
-                <mat-form-field class="example-full-width">
-                    <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto">
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                            {{ option }}
-                        </mat-option>
-                    </mat-autocomplete>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg mat-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header mat-accent-bg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+            fxLayoutAlign.gt-xs="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    archive
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Data Pemborong
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-input-wrapper mx-24 m-md-0" fxFlex="1 0 auto" fxLayout="row"
+                fxLayoutAlign="start center">
+                <label for="search" class="mr-8">
+                    <mat-icon class="secondary-text">search</mat-icon>
+                </label>
+                <mat-form-field floatLabel="never" fxFlex="1 0 auto">
+                    <input id="search" matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
                 </mat-form-field>
-            </form>
+            </div>
+            <!-- / SEARCH -->
 
-            <span class="example-space"></span>
-            <button mat-raised-button color="primary" (click)="dialogSave()">
-                <mat-icon>add</mat-icon>Tambah
+            <button mat-raised-button class="add-product-button mat-white-bg my-12 mt-sm-0" (click)="dialogSave()">
+                <span>Tambah Pemborong</span>
             </button>
-        </mat-toolbar-row>
-    </mat-toolbar>
 
-    <div class="example-container mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
-            <!-- Name Column-->
-            <ng-container matColumnDef="Nama Pemborong">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nama Pemborong </th>
-                <td mat-cell *matCellDef="let element"> {{element.nama}} </td>
-            </ng-container>
+        </div>
+        <!-- / HEADER -->
 
-            <!-- Weight Column -->
-            <ng-container matColumnDef="NIK">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> NIK </th>
-                <td mat-cell *matCellDef="let element"> {{element.ktp}} </td>
-            </ng-container>
+        <!-- CONTENT CARD -->
+        <div class="content-card mat-white-bg">
 
+            <mat-table class="transaksi-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+                fusePerfectScrollbar>
 
-            <ng-container matColumnDef="Alamat">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Alamat </th>
-                <td mat-cell *matCellDef="let element"> {{element.alamat}} </td>
-            </ng-container>
+                <!-- ID Column -->
+                <ng-container matColumnDef="Nama Pemborong">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Nama Pemborong</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <p class="text-truncate">{{element.nama}}</p>
+                    </mat-cell>
+                </ng-container>
 
-            <ng-container matColumnDef="Telepon">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. Telepon </th>
-                <td mat-cell *matCellDef="let element"> {{element.telpon}} </td>
-            </ng-container>
+                <!-- Image Column -->
+                <ng-container matColumnDef="NIK">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>NIK</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <p class="text-truncate">{{element.ktp}}</p>
+                    </mat-cell>
+                </ng-container>
 
-            <ng-container matColumnDef="Action">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-                <td mat-cell *matCellDef="let element">
-                    <a class="action-pointer">
-                        Edit
-                    </a>|
-                    <a class="action-pointer">Delete
-                    </a>
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
+                <!-- Name Column -->
+                <ng-container matColumnDef="Alamat">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Alamat</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <p class="text-truncate">{{element.alamat}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Category Column -->
+                <ng-container matColumnDef="Telepon">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>No. Telepon</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <p class="text-truncate"> {{element.telpon}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="product" matRipple>
+                </mat-row>
+
+            </mat-table>
+
+            <mat-paginator #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+
+        </div>
+        <!-- / CONTENT CARD -->
     </div>
-
+    <!-- / CENTER -->
 </div>

@@ -12,7 +12,7 @@ import {
 } from '@angular/material';
 
 import { FuseSharedModule } from '@fuse/shared.module';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DaftarMenu } from './daftarmenu.component';
 import { COMPONENT_LIST } from './daftarmenu.component';
 
@@ -31,6 +31,7 @@ const routes = [
     entryComponents: COMPONENT_LIST,
     imports: [
         RouterModule.forChild(routes),
+        BrowserAnimationsModule,
         MatAutocompleteModule,
         MatBadgeModule,
         MatBottomSheetModule,

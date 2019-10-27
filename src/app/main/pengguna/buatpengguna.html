@@ -4,12 +4,13 @@
     <mat-toolbar>
         <mat-toolbar-row>
             <mat-form-field class="panjang">
-                <input matInput placeholder="Nama Lengkap" [(ngModel)]="ModelPengguna.Nama_lengkap">
+                <input matInput placeholder="Nama Lengkap" [(ngModel)]="ModelPengguna.nama_lengkap"
+                    formControlName="nama">
             </mat-form-field>
         </mat-toolbar-row>
         <mat-toolbar-row>
             <mat-form-field class="panjang">
-                <mat-select placeholder="Jenis Kelamin" [(ngModel)]="ModelPengguna.Gender"
+                <mat-select placeholder="Jenis Kelamin" [(ngModel)]="ModelPengguna.post_gender"
                     [ngModelOptions]="{standalone: true}">
                     <mat-option [value]=" 1"> Laki-laki </mat-option>
                     <mat-option [value]="2"> Perempuan </mat-option>
@@ -18,7 +19,8 @@
         </mat-toolbar-row>
         <mat-toolbar-row>
             <mat-form-field class="panjang">
-                <mat-select placeholder="Level" [(ngModel)]="ModelPengguna.Level" [ngModelOptions]="{standalone: true}">
+                <mat-select placeholder="Level" [(ngModel)]="ModelPengguna.post_level"
+                    [ngModelOptions]="{standalone: true}">
                     <mat-option [value]=" 1"> Admin </mat-option>
                     <mat-option [value]="2"> User </mat-option>
                 </mat-select>
@@ -26,13 +28,14 @@
         </mat-toolbar-row>
         <mat-toolbar-row>
             <mat-form-field class="panjang">
-                <input matInput placeholder="Username" [(ngModel)]="ModelPengguna.Username">
+                <input matInput placeholder="Username" [(ngModel)]="ModelPengguna.post_username"
+                    formControlName="username">
             </mat-form-field>
         </mat-toolbar-row>
         <mat-toolbar-row>
             <mat-form-field class="panjang">
-                <input matInput placeholder="Password" formControlName="password" [(ngModel)]="ModelPengguna.Password"
-                    required>
+                <input matInput placeholder="Password" formControlName="password"
+                    [(ngModel)]="ModelPengguna.post_password" required>
                 <mat-error *ngIf="myForm.hasError('required', 'password')">
                     Password tidak boleh kosong
                 </mat-error>

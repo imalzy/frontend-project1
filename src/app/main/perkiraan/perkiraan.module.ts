@@ -13,7 +13,8 @@ import {
 } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatMomentDateModule, } from '@angular/material-moment-adapter';
-import { Perkiraan, COMPONENT_LIST } from './perkiraan.component'
+import { Perkiraan, COMPONENT_LIST } from './perkiraan.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes = [
   {
@@ -29,7 +30,7 @@ const routes = [
   ],
   entryComponents: COMPONENT_LIST,
   imports: [
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes), BrowserAnimationsModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,

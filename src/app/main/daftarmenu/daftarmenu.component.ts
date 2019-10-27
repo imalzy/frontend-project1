@@ -13,11 +13,13 @@ import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { componentFactoryName } from '@angular/compiler';
 import { environment } from '../../../environments/environment';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'daftarmenu',
   templateUrl: './daftarmenu.component.html',
-  styleUrls: ['./daftarmenu.component.scss']
+  styleUrls: ['./daftarmenu.component.scss'],
+  animations: fuseAnimations
 })
 export class DaftarMenu implements OnInit {
   displayedColumns = ['no_surat', 'pekerjaan', 'nama', 'telpon', 'total_nilai'];

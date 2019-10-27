@@ -5,12 +5,15 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { fuseAnimations } from '@fuse/animations';
+
 
 
 @Component({
   selector: 'perkiraan',
   templateUrl: './perkiraan.component.html',
-  styleUrls: ['./perkiraan.component.scss']
+  styleUrls: ['./perkiraan.component.scss'],
+  animations: fuseAnimations
 })
 export class Perkiraan implements OnInit {
   displayedColumns = ['id', 'rekening', 'kelompok'];

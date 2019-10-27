@@ -12,6 +12,7 @@ import {
 } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatMomentDateModule, } from '@angular/material-moment-adapter';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Pengguna } from './pengguna.component';
 import { COMPONENT_LIST } from './pengguna.component';
 
@@ -29,6 +30,7 @@ const routes = [
   entryComponents: COMPONENT_LIST,
   imports: [
     RouterModule.forChild(routes),
+    BrowserAnimationsModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
