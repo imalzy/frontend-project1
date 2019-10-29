@@ -1,11 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'pembeli',
@@ -65,8 +66,8 @@ export class Pembeli implements OnInit {
 
   dialogSave(): void {
     const dialogRef = this.dialog.open(Sample2ViewDialog, {
-      height: '650px',
-      width: '400px',
+      panelClass: 'dialog',
+      width: '500px',
       hasBackdrop: true,
     });
 
@@ -82,13 +83,40 @@ export class Pembeli implements OnInit {
 @Component({
   selector: 'buatpembeli',
   templateUrl: '/buatpembeli/buatpembeli.html',
-  styleUrls: ['./buatpembeli/buatpembeli.component.scss']
+  styleUrls: ['./buatpembeli/buatpembeli.component.scss'],
+  animations: fuseAnimations
 })
 export class Sample2ViewDialog {
   ModelPembeli: any = [];
   constructor(
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private toastr: ToastrService) { }
+
+  namapembeliFormControl = new FormControl('', [Validators.required]);
+  nikControl = new FormControl('', [Validators.required]);
+  alamatControl = new FormControl('', [Validators.required]);
+  pekerjaanControl = new FormControl('', [Validators.required]);
+  kantorControl = new FormControl('', [Validators.required]);
+  informasilainControl = new FormControl('', [Validators.required]);
+  alamatlainControl = new FormControl('', [Validators.required]);
+
+  pembeliForm: FormGroup = new FormGroup({
+    namapembeliGroup: this.namapembeliFormControl,
+    nikGroup: this.nikControl,
+    alamatGroup: this.alamatControl,
+    pekerjaanGroup: this.pekerjaanControl,
+    kantorGroup: this.kantorControl,
+    informasilainGroup: this.informasilainControl,
+    alamatlainGroup: this.alamatlainControl,
+
+  });
+
+  showToaster() {
+    this.toastr.success("Data Berhasil disimpan", 'Informasi');
+  }
+  getRequiredErrorMessage(field: any) {
+    return this.pembeliForm.get(field).hasError('required') ? 'You must enter a value' : '';
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

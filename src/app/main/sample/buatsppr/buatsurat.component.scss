@@ -1,81 +1,31 @@
-.flex {
-    -webkit-flex: 1 1 0%;
-    -ms-flex: 1 1 0%;
-    flex: 1 1 0%;
-    box-sizing: border-box;
-    border: 1px solid red;
-}
+@import "src/@fuse/scss/fuse";
 
-.flex-20 {
-    -webkit-flex: 1 1 20%;
-    -ms-flex: 1 1 20%;
-    flex: 1 1 20%;
-    max-width: 20%;
-    max-height: 100%;
-    box-sizing: border-box;
-}
+.dialog {
 
-.layout-row .flex-33 {
-    -webkit-flex: 1 1 calc(100% / 3);
-    -ms-flex: 1 1 calc(100% / 3);
-    flex: 1 1 calc(100% / 3);
-    box-sizing: border-box;
-}
+    @include media-breakpoint('xs') {
+        width: 100%;
+    }
 
-.layout-row .flex-66 {
-    -webkit-flex: 1 1 calc(200% / 3);
-    -ms-flex: 1 1 calc(200% / 3);
-    flex: 1 1 calc(200% / 3);
-    box-sizing: border-box;
-    border: 1px solid red;
-}
+    @include media-breakpoint-up('xs') {
+        width: 400px;
+    }
 
-.layout-row .flex-33 {
-    max-width: calc(100% / 3);
-    max-height: 100%;
-}
+    .mat-dialog-container {
+        padding: 0;
 
-.layout-row .flex-66 {
-    max-width: calc(200% / 3);
-    max-height: 100%;
-}
+        .mat-toolbar {
+            flex: 1 0 auto;
+            min-height: initial;
+        }
 
-.layout-column .flex-33 {
-    max-width: 100%;
-    max-height: calc(100% / 3);
-    border: 1px solid red;
-}
+        .toolbar-bottom {
+            height: auto;
+        }
+    }
 
-.layout-column .flex-66 {
-    max-width: 100%;
-    max-height: calc(200% / 3);
-}
-
-//berlaku
-.flex-kiri {
-    width: 48%;
-    min-height: 100%;
-    display: block;
-    float: left;
-    flex: 1 1 auto;
-    overflow: auto;
-    padding-top: 10px;
-}
-
-.flex-kanan {
-    width: 48%;
-    min-height: 100%;
-    display: block;
-    float: right;
-    flex: 1 1 auto;
-    overflow: auto;
-    padding-top: 10px;
-}
-
-#header {
-    background-color: #03A9F4;
-}
-
-.example-full-width {
-    width: 80%;
+    .dialog-content-wrapper {
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+    }
 }

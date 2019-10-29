@@ -1,4 +1,84 @@
-<mat-toolbar>
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Tambah Pengeluaran Kas</span>
+            <button mat-icon-button [mat-dialog-close] aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+
+    <form name="kasForm" [formGroup]="kasForm">
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Nomor Bukti" required [(ngModel)]="kas.no_bukti"
+                    [formControl]="nobuktiFormControl">
+                <mat-error *ngIf="nobuktiFormControl.invalid">
+                    {{getRequiredErrorMessage('nobuktiGroup')}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+            <mat-form-field fxFlex>
+                <input matInput [matDatepicker]="picker" placeholder="Tanggal" [(ngModel)]="kas.tgl"
+                    [formControl]="tglFormControl" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="tglFormControl.invalid">
+                    {{getRequiredErrorMessage('tglGroup')}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Rekening" required [(ngModel)]="kas.rekening"
+                    [formControl]="rekeningFormControl">
+                <mat-error *ngIf="rekeningFormControl.invalid">
+                    {{getRequiredErrorMessage('rekeningGroup')}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Perkiraan" required [(ngModel)]="kas.perkiraan"
+                    [formControl]="perkiraanFormControl">
+                <mat-error *ngIf="perkiraanFormControl.invalid">
+                    {{getRequiredErrorMessage('perkiraanGroup')}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Keterangan" required [(ngModel)]="kas.keterangan"
+                    [formControl]="ketFormControl">
+                <mat-error *ngIf="ketFormControl.invalid">
+                    {{getRequiredErrorMessage('ketGroup')}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Jumlah" required [(ngModel)]="kas.jumlah" [formControl]="jlhFormControl">
+                <mat-error *ngIf="jlhFormControl.invalid">
+                    {{getRequiredErrorMessage('jlhGroup')}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+
+        <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
+            <button mat-raised-button class="save-button mat-accent" aria-label="SAVE" [disabled]="kasForm.invalid"
+                [mat-dialog-close]="kas" (click)="showToaster()">Simpan</button>
+        </div>
+    </form>
+</div>
+<!-- <mat-toolbar>
     <h1 mat-dialog-title>Tambah Pengeluaran Kas</h1>
 </mat-toolbar>
 <hr class="new4">
@@ -42,4 +122,4 @@
 <div mat-dialog-actions>
     <button mat-button class="biru" [mat-dialog-close]="kas" cdkFocusInitial>Simpan</button>
     <button mat-button class="merah" [mat-dialog-close]>Batal</button>
-</div>
+</div> -->

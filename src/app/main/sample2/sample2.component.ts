@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'sample',
@@ -70,7 +71,9 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
 
   dialogSave(): void {
     this.dialogRef = this.dialog.open(Sample2ViewDialog, {
-      panelClass: 'tambah-pemborong'
+      panelClass: 'dialog',
+      width: '500px',
+      hasBackdrop: true,
     });
 
     this.dialogRef.afterClosed().subscribe(result => {
@@ -98,8 +101,8 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
 
   dialogDelete(): void {
     const dialogRef = this.dialog.open(viewdialogDelete, {
-      height: '180px',
-      width: '250px',
+      panelClass: 'dialog',
+      width: '500px',
       hasBackdrop: true,
     });
 
@@ -134,11 +137,30 @@ export class Sample2ViewDialog {
     * @param _data
     * @param {FormBuilder} _formBuilder
     */
-  constructor(
+  constructor(http: Http, private API: ApiService, public dialog: MatDialog,
     public matDialogRef: MatDialogRef<Sample2ViewDialog>,
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private toastr: ToastrService) { }
 
+
+  namaPemborongFormControl = new FormControl('', [Validators.required]);
+  nikPemborongFormControl = new FormControl('', [Validators.required]);
+  alamatPemborongFormControl = new FormControl('', [Validators.required]);
+  telponPemborongFormControl = new FormControl('', [Validators.required]);
+
+  pemborongFrom: FormGroup = new FormGroup({
+    namaPemborongGroup: this.namaPemborongFormControl,
+    nikPemborongGroup: this.nikPemborongFormControl,
+    alamatPemborongGroup: this.alamatPemborongFormControl,
+    telponPemborongGroup: this.telponPemborongFormControl,
+  });
+
+  showToaster() {
+    this.toastr.success("Data Berhasil disimpan", 'Informasi');
+  }
+  getRequiredErrorMessage(field: any) {
+    return this.pemborongFrom.get(field).hasError('required') ? 'You must enter a value' : '';
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -4,7 +4,7 @@ import { locale as turkish } from './i18n/tr';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource, MatProgressSpinnerModule } from '@angular/material';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -14,6 +14,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { componentFactoryName } from '@angular/compiler';
 import { environment } from '../../../environments/environment';
 import { fuseAnimations } from '@fuse/animations';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'daftarmenu',
@@ -49,10 +51,15 @@ export class DaftarMenu implements OnInit {
     );
     this.ambil_data();
   }
-  constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
+  constructor(http: Http, private API: ApiService, public dialog: MatDialog, private toastr: ToastrService) { }
   filter(val: string): string[] {
     return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
+
+  showToaster() {
+    this.toastr.success("Data Berhasil disimpan", 'Informasi');
+  }
+
   ambil_data() {
     this.API.ListHome()
       .subscribe(result => {
@@ -102,7 +109,7 @@ export class DaftarMenu implements OnInit {
 
   dialogSave(): void {
     const dialogRef = this.dialog.open(Sample2ViewDialog, {
-      height: '700px',
+      panelClass: 'dialog',
       width: '500px',
       hasBackdrop: true,
     });
@@ -120,7 +127,8 @@ export class DaftarMenu implements OnInit {
 @Component({
   selector: 'cetak',
   templateUrl: 'cetakdialog/cetak-dialog.html',
-  styleUrls: ['./cetakdialog/cetak-dialog.component.scss']
+  styleUrls: ['./cetakdialog/cetak-dialog.component.scss'],
+  animations: fuseAnimations
 })
 export class viewCetak {
   BaseURL = environment.BaseUrl;
@@ -142,7 +150,8 @@ export class viewCetak {
 @Component({
   selector: 'daftarmenu-dialog',
   templateUrl: 'buatspmk/daftarmenu-dialog.html',
-  styleUrls: ['./buatspmk/daftarmenu-dialog.component.scss']
+  styleUrls: ['./buatspmk/daftarmenu-dialog.component.scss'],
+  animations: fuseAnimations
 })
 export class Sample2ViewDialog {
   ModelSurat: any = [];
@@ -150,7 +159,32 @@ export class Sample2ViewDialog {
   constructor(
     http: Http, private API: ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private toastr: ToastrService) { }
+
+  nosuratFormControl = new FormControl('', [Validators.required]);
+  idpemborongControl = new FormControl('', [Validators.required]);
+  tglsuratControl = new FormControl('', [Validators.required]);
+  pekerjaanControl = new FormControl('', [Validators.required]);
+  proyekControl = new FormControl('', [Validators.required]);
+  totalnilaiControl = new FormControl('', [Validators.required]);
+  waktupengerjaanControl = new FormControl('', [Validators.required]);
+  awalkerjaControl = new FormControl('', [Validators.required]);
+  akhirkerjaControl = new FormControl('', [Validators.required]);
+  carabayarControl = new FormControl('', [Validators.required]);
+
+  spmkForm: FormGroup = new FormGroup({
+    nosuratGroup: this.nosuratFormControl,
+    idpemborongGroup: this.idpemborongControl,
+    tglsuratGroup: this.tglsuratControl,
+    pekerjaanGroup: this.pekerjaanControl,
+    proyekGroup: this.proyekControl,
+    totalnilaiGroup: this.totalnilaiControl,
+    waktupengerjaanGroup: this.waktupengerjaanControl,
+    awalkerjaGroup: this.awalkerjaControl,
+    akhirkerjaGroup: this.akhirkerjaControl,
+    carabayarGroup: this.carabayarControl,
+
+  });
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -159,6 +193,14 @@ export class Sample2ViewDialog {
   ngOnInit() {
     this.getnama();
   }
+
+  showToaster() {
+    this.toastr.success("Data Berhasil disimpan", 'Informasi');
+  }
+  getRequiredErrorMessage(field: any) {
+    return this.spmkForm.get(field).hasError('required') ? 'You must enter a value' : '';
+  }
+
   getnama() {
     this.API.listNama().subscribe(
       result => {
@@ -176,7 +218,8 @@ export interface DialogData {
 @Component({
   selector: 'daftarmenu-loading',
   templateUrl: './daftarmenu-loading.html',
-  styleUrls: ['./daftarmenu.component.scss']
+  styleUrls: ['./daftarmenu.component.scss'],
+  animations: fuseAnimations
 })
 export class LoadingDaftarmenu {
   color = 'accent';

@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'pengeluarankas',
@@ -63,8 +64,8 @@ export class Pengeluarankas implements OnInit {
 
   dialogSave(): void {
     const dialogRef = this.dialog.open(formDialogSimpan, {
-      height: '650px',
-      width: '400px',
+      panelClass: 'dialog',
+      width: '500px',
       hasBackdrop: true,
     });
 
@@ -86,7 +87,32 @@ export class formDialogSimpan {
   kas: any = [];
   constructor(
     public dialogRef: MatDialogRef<formDialogSimpan>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private toastr: ToastrService) { }
+
+
+  nobuktiFormControl = new FormControl('', [Validators.required]);
+  tglFormControl = new FormControl('', [Validators.required]);
+  rekeningFormControl = new FormControl('', [Validators.required]);
+  perkiraanFormControl = new FormControl('', [Validators.required]);
+  ketFormControl = new FormControl('', [Validators.required]);
+  jlhFormControl = new FormControl('', [Validators.required]);
+
+  kasForm: FormGroup = new FormGroup({
+    nobuktiGroup: this.nobuktiFormControl,
+    tglGroup: this.tglFormControl,
+    rekeningGroup: this.rekeningFormControl,
+    perkiraanGroup: this.perkiraanFormControl,
+    ketGroup: this.ketFormControl,
+    jlhGroup: this.jlhFormControl
+  });
+
+  showToaster() {
+    this.toastr.success("Data Berhasil disimpan", 'Informasi');
+  }
+
+  getRequiredErrorMessage(field: any) {
+    return this.kasForm.get(field).hasError('required') ? 'You must enter a value' : '';
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

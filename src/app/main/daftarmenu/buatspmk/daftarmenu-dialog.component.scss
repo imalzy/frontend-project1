@@ -1,37 +1,31 @@
-.panjang {
-    width: 300px;
-}
+@import "src/@fuse/scss/fuse";
 
-.example-space {
-    flex: 1 1 auto;
-}
+.dialog {
 
-.example-container {
-    min-height: 200px;
-    overflow: auto;
-}
+    @include media-breakpoint('xs') {
+        width: 100%;
+    }
 
-hr.new4 {
-    border: 1px solid #303F9F;
-}
+    @include media-breakpoint-up('xs') {
+        width: 400px;
+    }
 
-.mat-button,
-.mat-raised-button,
-.biru {
-    background-color: #303F9F;
-    color: white;
-}
+    .mat-dialog-container {
+        padding: 0;
 
-.merah {
-    background-color: red;
-    color: white;
-}
+        .mat-toolbar {
+            flex: 1 0 auto;
+            min-height: initial;
+        }
 
-.formleft {
-    float: left;
-    margin-right: 50px;
-}
+        .toolbar-bottom {
+            height: auto;
+        }
+    }
 
-.formright {
-    float: left;
+    .dialog-content-wrapper {
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+    }
 }

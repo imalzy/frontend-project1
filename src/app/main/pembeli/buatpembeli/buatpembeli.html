@@ -1,7 +1,98 @@
-<mat-toolbar>
-    <h1 mat-dialog-title>Tambah Pembeli</h1>
-</mat-toolbar>
-<hr class="new4">
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Buat Pembeli</span>
+            <button mat-icon-button [mat-dialog-close] aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+        <form name="pembeliForm" [formGroup]="pembeliForm">
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Nama Pembeli" required [(ngModel)]="ModelPembeli.nama_pembeli"
+                        [formControl]="namapembeliFormControl">
+                    <mat-error *ngIf="namapembeliFormControl.invalid">
+                        {{getRequiredErrorMessage('namapembeliGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="NIK" required [(ngModel)]="ModelPembeli.ktp_pembeli"
+                        [formControl]="nikControl">
+                    <mat-error *ngIf="nikControl.invalid">
+                        {{getRequiredErrorMessage('nikGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Alamat" [(ngModel)]="ModelPembeli.alamat_pembeli"
+                        [formControl]="alamatControl">
+                    <!-- <mat-error *ngIf="alamatControl.invalid">
+                        {{getRequiredErrorMessage('alamatGroup')}}
+                    </mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Pekerjaan" [(ngModel)]="ModelPembeli.pekerjaan_pembeli"
+                        [formControl]="pekerjaanControl">
+                    <!-- <mat-error *ngIf="pekerjaanControl.invalid">
+                            {{getRequiredErrorMessage('pekerjaanGroup')}}
+                        </mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Alamat kantor" [(ngModel)]="ModelPembeli.kantor_pembeli"
+                        [formControl]="kantorControl">
+                    <!-- <mat-error *ngIf="kantorControl.invalid">
+                                {{getRequiredErrorMessage('kantorGroup')}}
+                            </mat-error> -->
+                </mat-form-field>
+            </div>
+
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Nama Istri/ Suami/ Orang tua" [(ngModel)]="ModelPembeli.kantor_pembeli"
+                        [formControl]="informasilainControl">
+                    <!-- <mat-error *ngIf="kantorControl.invalid">
+                                    {{getRequiredErrorMessage('informasilainGroup')}}
+                                </mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Alamat" [(ngModel)]="ModelPembeli.alamat_lain"
+                        [formControl]="alamatlainControl">
+                    <!-- <mat-error *ngIf="alamatlainControl.invalid">
+                                        {{getRequiredErrorMessage('alamatlainGroup')}}
+                                    </mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-raised-button class="save-button mat-accent" aria-label="SAVE"
+                    [disabled]="pembeliForm.invalid" [mat-dialog-close]="ModelPembeli" (click)="showToaster()">Simpan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<!-- 
 <mat-toolbar>
     <mat-toolbar-row>
         <mat-form-field class="panjang">
@@ -47,4 +138,4 @@
 <div mat-dialog-actions>
     <button mat-button class="biru" [mat-dialog-close]="ModelPembeli" cdkFocusInitial>Simpan</button>
     <button mat-button class="merah" [mat-dialog-close]>Batal</button>
-</div>
+</div> -->

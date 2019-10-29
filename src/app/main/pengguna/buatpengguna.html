@@ -1,6 +1,89 @@
-<h1 mat-dialog-title>Tambah Pengguna</h1>
-<hr class="new4">
-<form [formGroup]="myForm">
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Buat Pengguna</span>
+            <button mat-icon-button [mat-dialog-close] aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+        <form name="penggunaForm" [formGroup]="penggunaForm">
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Nama Lengkap" required [(ngModel)]="ModelPengguna.nama_lengkap"
+                        [formControl]="namalengkapFormControl">
+                    <mat-error *ngIf="namalengkapFormControl.invalid">
+                        {{getRequiredErrorMessage('namalengkapGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <mat-select placeholder="Jenis Kelamin" [(ngModel)]="ModelPengguna.post_gender"
+                        [formControl]="jkControl">
+                        <mat-option [value]="1"> Laki-laki </mat-option>
+                        <mat-option [value]="2"> Perempuan </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="jkControl.invalid">
+                        {{getRequiredErrorMessage('jkControlGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <mat-select placeholder="Level Pengguna" [(ngModel)]="ModelPengguna.post_level"
+                        [formControl]="lvlControl">
+                        <mat-option [value]="1"> Admin </mat-option>
+                        <mat-option [value]="2"> User </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="lvlControl.invalid">
+                        {{getRequiredErrorMessage('lvlControlGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Username" required [(ngModel)]="ModelPengguna.post_username"
+                        [formControl]="usernameControl">
+                    <mat-error *ngIf="usernameControl.invalid">
+                        {{getRequiredErrorMessage('usernameControlGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Password" required [(ngModel)]="ModelPengguna.pst_password"
+                        [formControl]="passControl">
+                    <mat-error *ngIf="passControl.invalid">
+                        {{getRequiredErrorMessage('passControlGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Konfirmasi password" required [formControl]="confpassControl">
+                    <mat-error *ngIf="confpassControl.invalid">
+                        Password Tidak Sama
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-raised-button class="save-button mat-accent" aria-label="SAVE"
+                    [disabled]="penggunaForm.invalid" [mat-dialog-close]="ModelPengguna" (click)="showToaster()">Simpan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <form [formGroup]="myForm">
     <mat-toolbar>
         <mat-toolbar-row>
             <mat-form-field class="panjang">
@@ -55,4 +138,4 @@
 <div mat-dialog-actions>
     <button mat-button class="biru" cdkFocusInitial [mat-dialog-close]="ModelPengguna">Simpan</button>
     <button mat-button class="merah" [mat-dialog-close]>Batal</button>
-</div>
+</div> -->

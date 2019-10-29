@@ -1,44 +1,60 @@
-<h1 mat-dialog-title>Tambah Data</h1>
-<hr class="new4">
-<mat-toolbar>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <input [(ngModel)]="ModelPemborong.Nama" matInput placeholder="Nama Pemborong" required minlength="4"
-                #name="ngModel" name="name" appForbiddenName="bob" role="form">
-        </mat-form-field>
-        <div *ngIf="name.invalid && (name.dirty || name.touch)" class="alert alert-danger">
-            <div *ngIf="name.errors.required">
-                Name is required.
-            </div>
-            <div *ngIf="name.errors.minlength">
-                Name must be at least 4 characters long.
-            </div>
-            <div *ngIf="name.errors.forbiddenName">
-                Name cannot be Bob.
-            </div>
-        </div>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <input [(ngModel)]="ModelPemborong.nik" matInput placeholder="NIK" ng-minlength=16 ng-maxlength=16
-                ng-pattern="/^[0-9]{1,9}$/" required>
-        </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <input [(ngModel)]="ModelPemborong.alamat" matInput placeholder="Alamat">
-        </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <input [(ngModel)]="ModelPemborong.telpon" matInput placeholder="No. Telepon">
-        </mat-form-field>
-    </mat-toolbar-row>
-</mat-toolbar>
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">Tambah Pemborong</span>
+            <button mat-icon-button [mat-dialog-close] aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
 
+    <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+        <form name="pemborongFrom" [formGroup]="pemborongFrom">
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Nama Pemborong" required [(ngModel)]="ModelPemborong.Nama"
+                        [formControl]="namaPemborongFormControl">
+                    <mat-error *ngIf="namaPemborongFormControl.invalid">
+                        {{getRequiredErrorMessage('namaPemborongGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
 
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="NIK" required [(ngModel)]="ModelPemborong.nik"
+                        [formControl]="nikPemborongFormControl">
+                    <mat-error *ngIf="nikPemborongFormControl.invalid">
+                        {{getRequiredErrorMessage('nikPemborongGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
 
-<div mat-dialog-actions>
-    <button mat-button class="biru" [mat-dialog-close]="ModelPemborong" cdkFocusInitial>Simpan</button>
-    <button mat-button class="merah" [mat-dialog-close]>Batal</button>
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Alamat" [(ngModel)]="ModelPemborong.alamat"
+                        [formControl]="alamatPemborongFormControl">
+                    <mat-error *ngIf="alamatPemborongFormControl.invalid">
+                        {{getRequiredErrorMessage('alamatPemborongGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="No. Telepon" [(ngModel)]="ModelPemborong.telpon"
+                        [formControl]="telponPemborongFormControl">
+                    <mat-error *ngIf="telponPemborongFormControl.invalid">
+                        {{getRequiredErrorMessage('telponPemborongGroup')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-raised-button class="save-button mat-accent" aria-label="SAVE"
+                    [disabled]="pemborongFrom.invalid" [mat-dialog-close]="ModelPemborong"
+                    (click)="showToaster()">Simpan</button>
+            </div>
+        </form>
+    </div>
 </div>

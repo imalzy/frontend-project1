@@ -16,6 +16,7 @@ import { SampleComponent } from './sample.component';
 import { COMPONENT_LIST } from './sample.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 const routes = [
     {
         path: 'sppr',

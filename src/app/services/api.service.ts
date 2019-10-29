@@ -356,12 +356,12 @@ export class ApiService {
       }));
   }
 
-  Pengguna_CreatePengguna(post_password: string, post_username: string, nama_lengkap: string, post_gender: string, post_level: string): Observable<any> {
+  Pengguna_CreatePengguna(pst_password: string, post_username: string, nama_lengkap: string, post_gender: string, post_level: string): Observable<any> {
     let opt: RequestOptions;
     const headers = new Headers();
     const formData: FormData = new FormData();
 
-    formData.append('Password', post_password);
+    formData.append('Password', pst_password);
     formData.append('Username', post_username);
     formData.append('Name', nama_lengkap);
     formData.append('Gender', post_gender);

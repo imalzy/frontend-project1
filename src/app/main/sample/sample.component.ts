@@ -1,7 +1,7 @@
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
@@ -9,6 +9,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Pembayaran } from 'app/main/pembayaran/pembayaran.component';
 import { environment } from '../../../environments/environment';
 import { fuseAnimations } from '@fuse/animations';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -71,13 +72,12 @@ export class SampleComponent implements OnInit {
 
   dialogSave(): void {
     const dialogRef = this.dialog.open(dialogTambah, {
-      height: '500px',
-      width: '800px',
+      panelClass: 'dialog',
+      width: '500px',
       hasBackdrop: true,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      alert('Data berhasil disimpan');
       this.ModelSppr = result;
       this.save_data();
     });
@@ -113,7 +113,8 @@ export class SampleComponent implements OnInit {
 @Component({
   selector: 'cetak',
   templateUrl: 'cetak-dialog.html',
-  styleUrls: ['./cetak-dialog.component.scss']
+  styleUrls: ['./cetak-dialog.component.scss'],
+  animations: fuseAnimations
 })
 export class viewCetak {
   BaseURL = environment.BaseUrl;
@@ -122,9 +123,13 @@ export class viewCetak {
   idPembeli = this.data.id_pembeli;
   idSppr = this.data.id_sppr;
 
-  constructor(
+  constructor(private toastr: ToastrService,
     http: Http, private API: ApiService, public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  showToaster() {
+    this.toastr.success("Data Berhasil disimpan", 'Informasi');
+  }
 
   detailPembayaran(idPembeli, idSppr) {
     this.API.DetailPembayaran(idPembeli, idSppr)
@@ -150,7 +155,8 @@ export class viewCetak {
 @Component({
   selector: 'viewPembayaran',
   templateUrl: 'detailcicilan/detailcicilan.html',
-  styleUrls: ['./sample.component.scss']
+  styleUrls: ['./sample.component.scss'],
+  animations: fuseAnimations
 })
 export class viewpembayaran {
   displayedColumns = ['nama', 'kode', 'nomor', 'tgl', 'keterangan', 'jumlah'];
@@ -180,16 +186,47 @@ export class viewpembayaran {
 @Component({
   selector: 'buatsppr',
   templateUrl: 'buatsppr/buatsurat.html',
-  styleUrls: ['buatsppr/buatsurat.component.scss']
+  styleUrls: ['buatsppr/buatsurat.component.scss'],
+  animations: fuseAnimations
 })
 export class dialogTambah {
   ModelSppr: any = [];
   namaList: any = [];
   namaTipe: any = [];
+
   constructor(
     http: Http, private API: ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<dialogTambah>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private toastr: ToastrService) { }
+
+  idpembeliFormControl = new FormControl('', [Validators.required]);
+  tipeFormControl = new FormControl('', [Validators.required]);
+  hrgajualFormControl = new FormControl('', [Validators.required]);
+  kelebihantanahFormControl = new FormControl('', [Validators.required]);
+  kelebihanpagarFormControl = new FormControl('', [Validators.required]);
+  pekerjaantambahanFormControl = new FormControl('', [Validators.required]);
+  potonganhargaFormControl = new FormControl('', [Validators.required]);
+  bookingFormControl = new FormControl('', [Validators.required]);
+  dpFormControl = new FormControl('', [Validators.required]);
+
+  spprForm: FormGroup = new FormGroup({
+    idpembeliGroup: this.idpembeliFormControl,
+    tipeGroup: this.tipeFormControl,
+    hrgajualGroup: this.hrgajualFormControl,
+    kelebihantanahGroup: this.kelebihantanahFormControl,
+    kelebihanpagarGroup: this.kelebihanpagarFormControl,
+    pekerjaantambahanGroup: this.pekerjaantambahanFormControl,
+    potonganhargaGroup: this.potonganhargaFormControl,
+    bookingGroup: this.bookingFormControl,
+    dpGroup: this.dpFormControl
+  });
+
+  showToaster() {
+    this.toastr.success("Data Berhasil disimpan", 'Informasi');
+  }
+  getRequiredErrorMessage(field: any) {
+    return this.spprForm.get(field).hasError('required') ? 'You must enter a value' : '';
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

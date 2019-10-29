@@ -83,7 +83,8 @@ export class Perkiraan implements OnInit {
 @Component({
   selector: 'buatkas',
   templateUrl: '/buatperkiraan/buatperkiraan.html',
-  styleUrls: ['./buatperkiraan/buatperkiraan.component.scss']
+  styleUrls: ['./buatperkiraan/buatperkiraan.component.scss'],
+  animations: fuseAnimations
 })
 export class formDialogSimpan {
   rek: any = [];
