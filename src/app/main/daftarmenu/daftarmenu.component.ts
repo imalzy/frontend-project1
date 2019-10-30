@@ -16,6 +16,23 @@ import { environment } from '../../../environments/environment';
 import { fuseAnimations } from '@fuse/animations';
 import { ToastrService } from 'ngx-toastr';
 
+export interface Element {
+  no_surat: string;
+  pekerjaan: string;
+  nama: string;
+  telpon: string;
+  total_nilai: number;
+  // id_sppr: string;
+  // informasi_lain: string;
+  // jumlah: number;
+  // keterangan: string;
+  // ktp: string;
+  // nama: string;
+  // no: string;
+  // pekerjaan: string;
+  // tgl_tempo: string;
+}
+
 
 @Component({
   selector: 'daftarmenu',
@@ -39,10 +56,13 @@ export class DaftarMenu implements OnInit {
   items: any[];
   selectedRowIndex = [];
   loadRef: any = [];
-  listmenu: UserData[] = [];
 
-  listmenu1: MenuData[] = [];
-  dataSource: MatTableDataSource<MenuData>;
+  dataSource: MatTableDataSource<Element>;
+
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  constructor(http: Http, private API: ApiService, public dialog: MatDialog, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -51,7 +71,7 @@ export class DaftarMenu implements OnInit {
     );
     this.ambil_data();
   }
-  constructor(http: Http, private API: ApiService, public dialog: MatDialog, private toastr: ToastrService) { }
+
   filter(val: string): string[] {
     return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
@@ -63,7 +83,10 @@ export class DaftarMenu implements OnInit {
   ambil_data() {
     this.API.ListHome()
       .subscribe(result => {
-        this.dataSource = result.json().Output;
+        // this.dataSource = result.json().Output;
+        this.dataSource = new MatTableDataSource(result.json().Output);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
 
@@ -188,14 +211,14 @@ export class Sample2ViewDialog {
 
   onNoClick(): void {
     this.dialogRef.close();
-    console.log(this.ModelSurat);
   }
   ngOnInit() {
     this.getnama();
   }
 
   showToaster() {
-    this.toastr.success("Data Berhasil disimpan", 'Informasi');
+    // this.toastr.success("Data Berhasil disimpan", 'Informasi');
+    console.log(this.ModelSurat);
   }
   getRequiredErrorMessage(field: any) {
     return this.spmkForm.get(field).hasError('required') ? 'You must enter a value' : '';
@@ -249,14 +272,6 @@ export interface UserData {
   id: string;
   category: string;
   image: string;
-}
-
-export interface MenuData {
-  no_surat: string;
-  pekerjaan: string;
-  nama: string;
-  telpon: string;
-  total_nilai: string;
 }
 
 export const COMPONENT_LIST = [

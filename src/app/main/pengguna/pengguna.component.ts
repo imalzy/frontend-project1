@@ -1,14 +1,22 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormControl, FormBuilder, FormGroup, Validators, FormGroupDirective, NgForm, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { fuseAnimations } from '@fuse/animations';
 import { ToastrService } from 'ngx-toastr';
+
+export interface Element {
+  nama_lengkap: string;
+  username: string;
+  gender: string;
+  keterangan: string;
+  level: string;
+}
 
 @Component({
   selector: 'pengguna',
@@ -19,11 +27,17 @@ import { ToastrService } from 'ngx-toastr';
 
 export class Pengguna implements OnInit {
   displayedColumns = ['nama', 'username', 'gender', 'keterangan', 'level'];
-  dataSource = [];
+  dataSource: MatTableDataSource<Element>;
   ModelPengguna: any = [];
   myControl: FormControl = new FormControl();
   options = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
+
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  // tslint:disable-next-line: deprecation
+  constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
 
 
   ngOnInit() {
@@ -33,14 +47,14 @@ export class Pengguna implements OnInit {
     );
     this.ambil_data();
   }
-  constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
 
+  // tslint:disable-next-line: typedef
   ambil_data() {
     this.API.listPengguna()
       .subscribe(result => {
-        console.log(result.json().Output);
-        this.dataSource = result.json().Output;
-        console.log(this.dataSource);
+        this.dataSource = new MatTableDataSource(result.json().Output);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
 
@@ -61,6 +75,15 @@ export class Pengguna implements OnInit {
           }
         }
       );
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   filter(val: string): string[] {

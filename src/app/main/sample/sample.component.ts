@@ -1,5 +1,5 @@
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -10,7 +10,30 @@ import { Pembayaran } from 'app/main/pembayaran/pembayaran.component';
 import { environment } from '../../../environments/environment';
 import { fuseAnimations } from '@fuse/animations';
 import { ToastrService } from 'ngx-toastr';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
+export interface Element {
+  alamat_informasi: string;
+  alamat_kantor: string;
+  alamat_rumah: string;
+  booking_fee: number;
+  cicilan: number;
+  harga_jual: number;
+  harga_pembelian: number;
+  id_pembeli: string;
+  id_sppr: string;
+  id_tipe: string;
+  informasi_lain: string;
+  jenis_tipe: string;
+  kelebihan_pagar: number;
+  kelebihan_tanah: number;
+  ktp: string;
+  nama: string;
+  pekerjaan: string;
+  pekerjaan_tambahan: string;
+  potongan_harga: number;
+  uang_dp: number;
+}
 
 @Component({
   selector: 'sample',
@@ -22,11 +45,15 @@ import { ToastrService } from 'ngx-toastr';
 export class SampleComponent implements OnInit {
   displayedColumns = ['nama', 'alamat', 'pekerjaan', 'tipe', 'harga',
     'dp', 'angsuran'];
-  dataSource = [];
+  dataSource: MatTableDataSource<Element>;
   ModelSppr: any = [];
   myControl: FormControl = new FormControl();
   options = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -35,14 +62,17 @@ export class SampleComponent implements OnInit {
     );
     this.ambil_data();
   }
-  constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
+
 
   ambil_data() {
     this.API.ListSppr()
       .subscribe(result => {
-        console.log(result.json().Output);
-        this.dataSource = result.json().Output;
-        console.log(this.dataSource);
+        // console.log(result.json().Output);
+        // this.dataSource = result.json().Output;
+        // console.log(this.dataSource);
+        this.dataSource = new MatTableDataSource(result.json().Output);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
 
@@ -64,6 +94,15 @@ export class SampleComponent implements OnInit {
           }
         }
       );
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   filter(val: string): string[] {

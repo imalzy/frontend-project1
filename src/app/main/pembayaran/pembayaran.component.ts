@@ -36,16 +36,20 @@ export interface Element {
 })
 export class Pembayaran implements OnInit {
   displayedColumns = ['nama', 'kode', 'tgl', 'ket', 'jlh'];
-  dataSource = [];
-  arrDataSource: Element[] = [];
-  sourceData = new MatTableDataSource(this.arrDataSource);
-  data_Source = this.sourceData.data;
+  dataSource: MatTableDataSource<Element>;
+  // arrDataSource: Element[] = [];
+  // sourceData = new MatTableDataSource(this.arrDataSource);
+  // data_Source = this.sourceData.data;
   ModelTransaksi: any = [];
   myControl: FormControl = new FormControl();
 
   options = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
   dialogRef: any;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  constructor(http: Http, private API: ApiService, public dialog: MatDialog, private toastr: ToastrService) { }
+
   filter(val: string): string[] {
     return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
@@ -55,26 +59,29 @@ export class Pembayaran implements OnInit {
       startWith(''),
       map(val => this.filter(val))
     );
+
     this.ambil_data();
+
+    // console.log(this.sourceData);
   }
-  constructor(http: Http, private API: ApiService, public dialog: MatDialog, private toastr: ToastrService) { }
+
 
   ambil_data() {
+
     this.API.ListPembayaran()
       .subscribe(result => {
         //console.log(result.json().Output);
-        this.dataSource = result.json().Output;
-        this.dataSource.forEach((item, index) => {
-          this.arrDataSource.push(item);
-        });
-        // console.log(this.dataSource);
+        //this.dataSource = result.json().Output;
+        this.dataSource = new MatTableDataSource(result.json().Output);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.sourceData.filter = filterValue;
+    this.dataSource.filter = filterValue;
   }
 
   save_data() {
@@ -102,8 +109,6 @@ export class Pembayaran implements OnInit {
       width: '500px',
       hasBackdrop: true,
     });
-    console.log(this.sourceData);
-    console.log(this.data_Source);
 
     this.dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

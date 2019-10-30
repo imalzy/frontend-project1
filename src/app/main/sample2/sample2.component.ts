@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -7,6 +7,14 @@ import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
 import { ToastrService } from 'ngx-toastr';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+
+export interface Element {
+  nama: string;
+  ktp: string;
+  alamat: string;
+  telpon: string;
+}
 
 @Component({
   selector: 'sample',
@@ -14,9 +22,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./sample2.component.scss'],
   animations: fuseAnimations
 })
+// tslint:disable-next-line: component-class-suffix
 export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
   displayedColumns = ['Nama Pemborong', 'NIK', 'Alamat', 'Telepon'];
-  dataSource = [];
+  dataSource: MatTableDataSource<Element>;
   ModelPemborong: any = [];
   ModelPemborongDelete: any = [];
   myControl: FormControl = new FormControl();
@@ -24,6 +33,11 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
   filteredOptions: Observable<string[]>;
   ELEMENT_DATA: Pengguna[] = [];
   dialogRef: any;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -33,17 +47,17 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
     this.ambil_data();
   }
 
-  constructor(http: Http, private API: ApiService, public dialog: MatDialog) {
-
-  }
 
   ambil_data() {
     this.API.ListPemborong()
       .subscribe(result => {
-        console.log(result.json());
-        // this.ELEMENT_DATA = result.json().Output;
-        this.dataSource = result.json().Output;
-        console.log(this.dataSource);
+        // console.log(result.json());
+        // // this.ELEMENT_DATA = result.json().Output;
+        // this.dataSource = result.json().Output;
+        // console.log(this.dataSource);
+        this.dataSource = new MatTableDataSource(result.json().Output);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
   save_data() {
@@ -62,6 +76,12 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
         }
       }
     );
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -7,6 +7,17 @@ import { ApiService } from '../../services/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { fuseAnimations } from '@fuse/animations';
 import { ToastrService } from 'ngx-toastr';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+
+export interface Element {
+  alamat_informasi: string;
+  alamat_kantor: string;
+  alamat_rumah: string;
+  informasi_lain: string;
+  ktp: string;
+  nama: string;
+  pekerjaan: string;
+}
 
 @Component({
   selector: 'pembeli',
@@ -16,11 +27,16 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class Pembeli implements OnInit {
   displayedColumns = ['nama', 'ktp', 'alamat_rumah', 'pekerjaan', 'alamat_kantor'];
-  dataSource = [];
+  dataSource: MatTableDataSource<Element>;
   ModelPembeli: any = [];
   myControl: FormControl = new FormControl();
   options = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
+
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -29,14 +45,18 @@ export class Pembeli implements OnInit {
     );
     this.ambil_data();
   }
-  constructor(http: Http, private API: ApiService, public dialog: MatDialog) { }
+
 
   ambil_data() {
     this.API.listpembeli()
       .subscribe(result => {
         console.log(result.json().Output);
-        this.dataSource = result.json().Output;
+        //this.dataSource = result.json().Output;
+        // console.log(this.dataSource);
+        this.dataSource = new MatTableDataSource(result.json().Output);
         console.log(this.dataSource);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
   save_data() {
@@ -58,6 +78,11 @@ export class Pembeli implements OnInit {
           }
         }
       );
+  }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
   filter(val: string): string[] {
