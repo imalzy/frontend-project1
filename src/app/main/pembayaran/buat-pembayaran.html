@@ -11,31 +11,9 @@
 
     <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
 
-        <!-- <form #transaksiGroup="ngForm">
-            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field fxFlex>
-                    <input required ngModel name="firstName" id="firstName" class="form-control"
-                        placeholder="First Name" #firstName="ngModel" />
-                    <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">First Name is required
-                    </div>
-                </mat-form-field>
-            </div>
-            <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center">
-                <button type="submit" class="save-button mat-accent" [disabled]="!transaksiGroup.valid"
-                    aria-label="SAVE">
-                    SAVE
-                </button>
-            </div>
-        </form> -->
-
         <form name="transaksiFrom" [formGroup]="transaksiFrom">
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <!-- <mat-select placeholder="Nama Pembeli">
-                        <mat-option *ngFor=" let tipe of namaTipe" [value]="tipe.id_tipe" name="jenis_tipe">
-                            {{tipe.jenis_tipe}}
-                        </mat-option>
-                    </mat-select> -->
                     <input matInput placeholder="Nama Pembeli" required [(ngModel)]="ModelTransaksi.idPembeli"
                         [formControl]="namaPembeliFormControl">
                     <mat-error *ngIf="namaPembeliFormControl.invalid">

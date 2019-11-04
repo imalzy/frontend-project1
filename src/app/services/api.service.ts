@@ -264,7 +264,7 @@ export class ApiService {
     formData.append('waktu_pelaksanaan', pst_pelaksanaan);
     formData.append('awal_pekerjaan', pst_awlpekerjaan);
     formData.append('akhir_pekerjaan', pst_akhirpekerjaan);
-    formData.append('cara_pembayaran', pst_carabayar);
+    formData.append('id_termin', pst_carabayar);
 
     return this.http.post(this.BaseURL + 'welcome/tambahsurat/', formData).pipe(
       map(response => {

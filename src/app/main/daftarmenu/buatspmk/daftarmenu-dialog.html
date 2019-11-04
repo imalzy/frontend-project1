@@ -7,181 +7,73 @@
             </button>
         </mat-toolbar-row>
     </mat-toolbar>
-
     <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
-        <form name="spmkForm" [formGroup]="spmkForm">
+        <form name="spmkForm" [formGroup]="spmkForm" (ngSubmit)="onSubmit()">
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="No Surat" required [(ngModel)]="ModelSurat.pst_nosurat"
+                    <input matInput placeholder="Nomor Surat" formControlName="nosurat"
                         [formControl]="nosuratFormControl">
-                    <mat-error *ngIf="nosuratFormControl.invalid">
-                        {{getRequiredErrorMessage('nosuratGroup')}}
+                    <mat-error *ngIf=nosuratFormControl.invalid>
+                        Nomor surat tidak boleh kosong
                     </mat-error>
                 </mat-form-field>
             </div>
 
-            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field fxFlex>
-                    <mat-select placeholder="Nama Pemborong" [(ngModel)]="ModelSurat.pst_idpemborong"
-                        [formControl]="idpemborongControl" required>
-                        <mat-option *ngFor=" let item of namaList" [value]="item.id_pemborong">{{item.nama}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="nosuratFormControl.invalid">
-                        {{getRequiredErrorMessage('idpemborongGroup')}}
-                    </mat-error>
-                </mat-form-field>
-            </div>
 
-            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field fxFlex>
-                    <input matInput [matDatepicker]="picker" placeholder="Tanggal Surat"
-                        [(ngModel)]="ModelSurat.pst_tglsurat" [formControl]="tglsuratControl" required>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="tglsuratControl.invalid">
-                        {{getRequiredErrorMessage('tglsuratGroup')}}
-                    </mat-error>
-                </mat-form-field>
-            </div>
+            <div formArrayName="carabayar" *ngFor="let carabayar of spmkForm.get('carabayar').controls; let i = index">
+                <div [formGroupName]="i">
+                    <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                        <mat-form-field fxFlex>
+                            <input matInput placeholder="Syarat Pembayaran" formControlName="syarat_bayar">
+                            <mat-error *ngIf=syarat_bayarFormControl.invalid>
+                                Syarat pembayaran tidak boleh kosong
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
 
-            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field fxFlex>
-                    <input matInput placeholder="Pekerjaan" [(ngModel)]="ModelSurat.pst_pekerjaan"
-                        [formControl]="pekerjaanControl">
-                    <!-- <mat-error *ngIf="pekerjaanControl.invalid">
-                        {{getRequiredErrorMessage('pekerjaanGroup')}}
-                    </mat-error> -->
-                </mat-form-field>
+                        <mat-form-field fxFlex>
+                            <textarea matInput placeholder="Keterangan" formControlName="keterangan"></textarea>
+                            <mat-error *ngIf=keteranganFormControl.invalid>
+                                Syarat pembayaran tidak boleh kosong
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
             </div>
-
-            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field fxFlex>
-                    <input matInput placeholder="Proyek" [(ngModel)]="ModelSurat.pst_proyek"
-                        [formControl]="proyekControl">
-                    <!-- <mat-error *ngIf="proyekControl.invalid">
-                        {{getRequiredErrorMessage('proyekGroup')}}
-                    </mat-error> -->
-                </mat-form-field>
-            </div>
-
-            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field fxFlex>
-                    <input matInput placeholder="Total Nilai" [(ngModel)]="ModelSurat.pst_nilai"
-                        [formControl]="totalnilaiControl">
-                    <!-- <mat-error *ngIf="totalnilaiControl.invalid">
-                        {{getRequiredErrorMessage('totalnilaiGroup')}}
-                    </mat-error> -->
-                </mat-form-field>
-            </div>
-
-            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field fxFlex>
-                    <input matInput placeholder="Waktu Pengerjaan" [(ngModel)]="ModelSurat.pst_pelaksanaan"
-                        [formControl]="waktupengerjaanControl">
-                    <!-- <mat-error *ngIf="waktupengerjaanControl.invalid">
-                        {{getRequiredErrorMessage('waktupengerjaanGroup')}}
-                    </mat-error> -->
-                </mat-form-field>
-            </div>
-
-            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field fxFlex>
-                    <input matInput placeholder="Awal Pekerjaan" [(ngModel)]="ModelSurat.pst_awlpekerjaan"
-                        [formControl]="awalkerjaControl">
-                    <!-- <mat-error *ngIf="awalkerjaControl.invalid">
-                        {{getRequiredErrorMessage('awalkerjaGroup')}}
-                    </mat-error> -->
-                </mat-form-field>
-            </div>
-
-            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field fxFlex>
-                    <input matInput placeholder="Akhir Pekerjaan" [(ngModel)]="ModelSurat.pst_akhirpekerjaan"
-                        [formControl]="akhirkerjaControl">
-                    <!-- <mat-error *ngIf="akhirkerjaControl.invalid">
-                        {{getRequiredErrorMessage('akhirkerjaGroup')}}
-                    </mat-error> -->
-                </mat-form-field>
-            </div>
-
-            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field fxFlex>
-                    <input matInput placeholder="Cara Pembayaran" [(ngModel)]="ModelSurat.pst_carabayar"
-                        [formControl]="carabayarControl">
-                    <!-- <mat-error *ngIf="carabayarControl.invalid">
-                        {{getRequiredErrorMessage('carabayarGroup')}}
-                    </mat-error> -->
-                </mat-form-field>
+            <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
+                <a (click)="addSkillButtonClick()" style="cursor: default">
+                    Add another cara bayar +
+                </a>
             </div>
 
             <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
-                <button mat-raised-button class="save-button mat-accent" aria-label="SAVE" [disabled]="spmkForm.invalid"
-                    [mat-dialog-close]="ModelSurat" (click)="showToaster()">Simpan</button>
+                <button mat-raised-button class="save-button mat-accent" type="submit" [disabled]="spmkForm.invalid"
+                    (click)="showToaster()">Simpan</button>
             </div>
         </form>
     </div>
 </div>
 
-<!-- <mat-toolbar>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <input matInput placeholder="No Surat" [(ngModel)]="ModelSurat.pst_nosurat">
-        </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <mat-select placeholder="Nama Pemborong" [(ngModel)]="ModelSurat.pst_idpemborong">
-                <mat-option *ngFor=" let item of namaList" [value]="item.id_pemborong"> {{item.nama}} </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <input matInput [matDatepicker]="picker" placeholder="Tanggal Surat" [(ngModel)]="ModelSurat.pst_tglsurat">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <textarea matInput placeholder="Pekerjaan" [(ngModel)]="ModelSurat.pst_pekerjaan"></textarea>
-        </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <textarea matInput placeholder="Proyek" [(ngModel)]="ModelSurat.pst_proyek"></textarea>
-        </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <input matInput placeholder="Total Nilai" [(ngModel)]="ModelSurat.pst_nilai">
-        </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <input matInput placeholder="Waktu Pengerjaan" [(ngModel)]="ModelSurat.pst_pelaksanaan">
-        </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <input matInput placeholder="Awal Pekerjaan" [(ngModel)]="ModelSurat.pst_awlpekerjaan">
-        </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <input matInput placeholder="Akhir Pekerjaan" [(ngModel)]="ModelSurat.pst_akhirpekerjaan">
-        </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-        <mat-form-field class="panjang">
-            <input matInput placeholder="Cara Pembayaran" [(ngModel)]="ModelSurat.pst_carabayar">
-        </mat-form-field>
-    </mat-toolbar-row>
-</mat-toolbar>
-
-<div mat-dialog-actions>
-    <button mat-button class="biru" cdkFocusInitial [mat-dialog-close]="ModelSurat"
-        (click)="showToaster()">Simpan</button>
-    <button mat-button class="merah" [mat-dialog-close]>Batal</button>
-</div> -->
+<!-- <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+        <form [formGroup]="smpkForm" novalidate (ngSubmit)="onSubmit()">
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <div class="form-group" [ngClass]="{'has-error': ((smpkForm.get('nosurat').touched ||
+                smpkForm.get('nosurat').dirty) &&
+                smpkForm.get('nosurat').errors)}">
+                    <input matInput placeholder="Nomor Surat" formControlName="nosurat"> -->
+<!--display error message if name is not valid-->
+<!-- <span class="help-block" *ngIf="((smpkForm.get('nosurat').touched ||
+                    smpkForm.get('nosurat').dirty) &&
+                    smpkForm.get('nosurat').errors)">
+                        <span *ngIf="smpkForm.get('nosurat').errors.required">
+                            First Name is Mandatory
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="margin-20">
+                <a (click)="addcarabayars()" style="cursor: default">
+                    Add another cara bayar +
+                </a>
+            </div> -->
