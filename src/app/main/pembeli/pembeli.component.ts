@@ -113,7 +113,7 @@ export class Pembeli implements OnInit {
 })
 export class Sample2ViewDialog {
   ModelPembeli: any = [];
-  constructor(
+  constructor(http: Http, private API: ApiService,
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any, private toastr: ToastrService) { }
 
@@ -138,6 +138,7 @@ export class Sample2ViewDialog {
 
   showToaster() {
     this.toastr.success("Data Berhasil disimpan", 'Informasi');
+    console.log(this.ModelPembeli);
   }
   getRequiredErrorMessage(field: any) {
     return this.pembeliForm.get(field).hasError('required') ? 'You must enter a value' : '';

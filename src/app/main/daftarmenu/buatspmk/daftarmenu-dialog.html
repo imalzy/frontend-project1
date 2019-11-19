@@ -12,43 +12,35 @@
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
                     <input matInput placeholder="Nomor Surat" formControlName="nosurat"
-                        [formControl]="nosuratFormControl">
+                        [formControl]="nosuratFormControl" [(ngModel)]="ModelSurat.idPembeli">
                     <mat-error *ngIf=nosuratFormControl.invalid>
                         Nomor surat tidak boleh kosong
                     </mat-error>
                 </mat-form-field>
             </div>
 
-
-            <div formArrayName="carabayar" *ngFor="let carabayar of spmkForm.get('carabayar').controls; let i = index">
-                <div [formGroupName]="i">
-                    <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-                        <mat-form-field fxFlex>
-                            <input matInput placeholder="Syarat Pembayaran" formControlName="syarat_bayar">
-                            <mat-error *ngIf=syarat_bayarFormControl.invalid>
-                                Syarat pembayaran tidak boleh kosong
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-
-                        <mat-form-field fxFlex>
-                            <textarea matInput placeholder="Keterangan" formControlName="keterangan"></textarea>
-                            <mat-error *ngIf=keteranganFormControl.invalid>
-                                Syarat pembayaran tidak boleh kosong
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Nama Pemborong" formControlName="nosurat"
+                        [formControl]="nosuratFormControl" [(ngModel)]="ModelSurat.idPembeli">
+                    <mat-error *ngIf=nosuratFormControl.invalid>
+                        Nomor surat tidak boleh kosong
+                    </mat-error>
+                </mat-form-field>
             </div>
+
+            <div class="kotak" *ngFor="let item of syarat_bayar; let i =index">
+                <p (click)="removeItem(i)">{{item.syarat_bayar}} {{item.keterangan}}</p>
+            </div>
+            <!-- addSkillButtonClick -->
             <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
-                <a (click)="addSkillButtonClick()" style="cursor: default">
+                <a (click)="opDialog()" style="cursor: default">
                     Add another cara bayar +
                 </a>
             </div>
-
+            <!-- [disabled]="spmkForm.invalid" -->
             <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
-                <button mat-raised-button class="save-button mat-accent" type="submit" [disabled]="spmkForm.invalid"
+                <button mat-raised-button class="save-button mat-accent" type="submit" [mat-dialog-close]="ModelSurat"
                     (click)="showToaster()">Simpan</button>
             </div>
         </form>

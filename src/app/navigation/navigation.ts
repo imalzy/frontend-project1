@@ -65,21 +65,44 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
-                id: 'accounting',
-                title: 'REKENING PERKIRAAN',
-                translate: 'NAV.DETAIL.TITLE',
-                type: 'item',
-                icon: 'insert_chart',
-                url: '/perkiraan',
+                id: 'sample',
+                title: 'AKUNTANSI',
+                translate: 'NAV.PROMO.TITLE',
+                type: 'collapsable',
+                icon: 'border_all',
+                children: [
+                    {
+                        id: 'coa',
+                        title: 'Chart Of Accounting',
+                        type: 'item',
+                        icon: 'supervisor_account',
+                        url: '/perkiraan',
+                    },
+                    {
+                        id: 'pengeluaran_kas',
+                        title: 'Pengeluaran Kas',
+                        type: 'item',
+                        icon: 'money',
+                        url: '/pengeluarankas',
+                    },
+                ]
             },
-            {
-                id: 'pengeluaran_kas',
-                title: 'PENGELUARAN KAS',
-                translate: 'NAV.DETAIL.TITLE',
-                type: 'item',
-                icon: 'insert_chart',
-                url: '/pengeluarankas',
-            },
+            // {
+            //     id: 'accounting',
+            //     title: 'REKENING PERKIRAAN',
+            //     translate: 'NAV.DETAIL.TITLE',
+            //     type: 'item',
+            //     icon: 'insert_chart',
+            //     url: '/perkiraan',
+            // },
+            // {
+            //     id: 'pengeluaran_kas',
+            //     title: 'PENGELUARAN KAS',
+            //     translate: 'NAV.DETAIL.TITLE',
+            //     type: 'item',
+            //     icon: 'insert_chart',
+            //     url: '/pengeluarankas',
+            // },
         ]
     },
     {

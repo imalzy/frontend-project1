@@ -139,10 +139,10 @@ export class DaftarMenu implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.namaList = result;
-      this.ModelSurat = result;
+      // this.namaList = result;
+      // this.ModelSurat = result;
       //console.log(this.ModelSurat = result);
-      this.save_data();
+      // this.save_data();
 
     });
   }
@@ -177,22 +177,55 @@ export class viewCetak {
   styleUrls: ['./buatspmk/daftarmenu-dialog.component.scss'],
   animations: fuseAnimations
 })
+// tslint:disable-next-line: component-class-suffix
 export class Sample2ViewDialog {
   ModelSurat: any = [];
+  syarat_bayar: any = [];
   namaList: UsrNama[];
   spmkForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
     http: Http, private API: ApiService, public dialog: MatDialog,
+    public persyaratan: MatDialogRef<dialogpembayaran>,
     public dialogRef: MatDialogRef<Sample2ViewDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any, private toastr: ToastrService) { }
 
   nosuratFormControl = new FormControl('', [Validators.required]);
+  idpemborongFromControl = new FormControl('', [Validators.required]);
+  tglSuratFromControl = new FormControl('', [Validators.required]);
+  pekerjaanFromControl = new FormControl('', [Validators.required]);
+  proyekFromControl = new FormControl('', [Validators.required]);
+  totalnilaiFromControl = new FormControl('', [Validators.required]);
+  waktuPelaksanaanFromControl = new FormControl('', [Validators.required]);
+  awalPekerjaanFromControl = new FormControl('', [Validators.required]);
+  akhirPekerjaanFromControl = new FormControl('', [Validators.required]);
 
   ngOnInit() {
+    // this.ModelSurat.no_surat = this.data.no_surat;
+    // this.ModelSurat.id_pemborong = this.data.id_pemborong;
+    // this.ModelSurat.tglsurat = this.data.tglsurat;
+    // this.ModelSurat.pekerjaan = this.data.pekerjaan;
+    // this.ModelSurat.proyek = this.data.proyek;
+    // this.ModelSurat.total_nilai = this.data.total_nilai;
+    // this.ModelSurat.waktupelaksanaan = this.data.waktupengerjaan;
+    // this.ModelSurat.awalkerja = this.data.awalkerja;
+    // this.ModelSurat.akhirkerja = this.data.akhir_kerja;
+    // this.ModelSurat.syarat_bayar = this.data.syarat_bayar;
+    // this.ModelSurat.keterangan = this.data.keterangan;
+
+    console.log(this.ModelSurat);
+
     this.spmkForm = this.formBuilder.group({
       nosurat: this.nosuratFormControl,
-      carabayar: this.formBuilder.array([this.addBayarFormGroup()])
+      idPemborong: this.idpemborongFromControl,
+      tglSurat: this.tglSuratFromControl,
+      pekerjaan: this.pekerjaanFromControl,
+      proyek: this.proyekFromControl,
+      total_nilai: this.totalnilaiFromControl,
+      waktupelaksanaan: this.waktuPelaksanaanFromControl,
+      awalkerja: this.awalPekerjaanFromControl,
+      akhirkerja: this.akhirPekerjaanFromControl
+      // carabayar: this.formBuilder.array([this.addBayarFormGroup()])
     });
 
     this.spmkForm.get('nosurat').valueChanges.subscribe(
@@ -215,22 +248,34 @@ export class Sample2ViewDialog {
   }
 
   onSubmit(): void {
-    console.log(this.spmkForm.value);
+
+    // this.API.tambah_kedua(this.ModelSurat, this.syarat_bayar).subscribe(result => {
+    //   console.log(result);
+    // const status = result.json().status;
+    // const desc = result.json().desc;
+    // if (result.status === 200) {
+    //   if (status === 'OK') {
+    //     this.ModelSurat = [];
+    //   }
+    //   console.log(this.ModelSurat);
+    // }
+
   }
 
-  syarat_bayarFormControl = new FormControl('', [Validators.required]);
   // tslint:disable-next-line: member-ordering
-  keteranganFormControl = new FormControl('');
-  addBayarFormGroup(): FormGroup {
-    return this.formBuilder.group({
-      syarat_bayar: this.syarat_bayarFormControl,
-      keterangan: this.keteranganFormControl
-    });
-  }
+  // syarat_bayarFormControl = new FormControl('', [Validators.required]);
+  // tslint:disable-next-line: member-ordering
+  // keteranganFormControl = new FormControl('');
+  // addBayarFormGroup(): FormGroup {
+  //   return this.formBuilder.group({
+  //     syarat_bayar: this.syarat_bayarFormControl,
+  //     keterangan: this.keteranganFormControl
+  //   });
+  // }
 
-  addSkillButtonClick(): void {
-    (<FormArray>this.spmkForm.get('carabayar')).push(this.addBayarFormGroup());
-  }
+  // addSkillButtonClick(): void {
+  //   (<FormArray>this.spmkForm.get('carabayar')).push(this.addBayarFormGroup());
+  // }
 
   removecarabayars(i: number) {
     const control = <FormArray>this.spmkForm.controls['carabayar'];
@@ -244,7 +289,8 @@ export class Sample2ViewDialog {
 
   showToaster() {
     this.toastr.success("Data Berhasil disimpan", 'Informasi');
-    //console.log(this.ModelSurat);
+    console.log(this.ModelSurat);
+    console.log(this.syarat_bayar);
   }
   getRequiredErrorMessage(field: any) {
     return this.spmkForm.get(field).hasError('required') ? 'You must enter a value' : '';
@@ -261,6 +307,24 @@ export class Sample2ViewDialog {
   save(model: spmk) {
     // call API to save customer
     console.log(model);
+  }
+
+  removeItem(i: number): void {
+    this.syarat_bayar.splice(i, 1);
+  }
+
+  opDialog() {
+    this.persyaratan = this.dialog.open(dialogpembayaran, {
+    });
+    this.persyaratan.afterClosed().subscribe(result => {
+
+      if (result !== '') {
+        this.syarat_bayar.push({ syarat_bayar: result.syarat_bayar, keterangan: result.keterangan });
+        console.log(this.ModelSurat);
+        console.log(result.syarat_bayar);
+        console.log(result.keterangan);
+      }
+    });
   }
 
 }
@@ -283,30 +347,28 @@ export interface carabayars {
 }
 
 @Component({
-  selector: 'daftarmenu-loading',
-  templateUrl: './daftarmenu-loading.html',
-  styleUrls: ['./daftarmenu.component.scss'],
+  selector: 'daftarmenu-pembayaran',
+  templateUrl: './daftarmenu-pembayaran.html',
   animations: fuseAnimations
 })
-export class LoadingDaftarmenu {
-  color = 'accent';
-  mode = 'indeterminate';
-  value = 30;
+export class dialogpembayaran {
+  persyaratan: any = [];
+  syaratForm: FormGroup;
   constructor(
-    public dialogRef: MatDialogRef<LoadingDaftarmenu>,
-    @Inject(MAT_DIALOG_DATA) public data: any, ) { }
+    public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private formBuilder: FormBuilder) { }
 
+  carabayarFormControl = new FormControl('', [Validators.required]);
+  keteranganFormControl = new FormControl('', [Validators.required]);
+  ngOnInit() {
+    this.syaratForm = this.formBuilder.group({
+      carabayar: this.carabayarFormControl,
+      keterangan: this.keteranganFormControl
+    });
+  }
 }
 
-/** Builds and returns a new User. */
-function createNewUser(category: string, id: string, image: string): UserData {
-
-  return {
-    id: id.toString(),
-    category: category,
-    image: image,
-  };
-}
 
 export interface UsrNama {
   id_pemborong: string;
@@ -321,6 +383,6 @@ export interface UserData {
 export const COMPONENT_LIST = [
   DaftarMenu,
   Sample2ViewDialog,
-  LoadingDaftarmenu,
+  dialogpembayaran,
   viewCetak,
 ];

@@ -14,22 +14,41 @@
         <form name="transaksiFrom" [formGroup]="transaksiFrom">
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="Nama Pembeli" required [(ngModel)]="ModelTransaksi.idPembeli"
-                        [formControl]="namaPembeliFormControl">
+                    <mat-select placeholder="Nama Pembeli" [(ngModel)]="ModelTransaksi.idPembeli"
+                        [formControl]="namaPembeliFormControl" required>
+                        <mat-option *ngFor=" let item of namaList" [value]="item.id_pembeli">{{item.nama}}
+                        </mat-option>
+                    </mat-select>
                     <mat-error *ngIf="namaPembeliFormControl.invalid">
                         {{getRequiredErrorMessage('namaPembeliGroup')}}
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+
+
+            <!-- <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="Kode Transaksi" required [(ngModel)]="ModelTransaksi.idSppr"
+                    <input matInput placeholder="Id SPPR" required [(ngModel)]="ModelTransaksi.idSppr"
                         [formControl]="transaksiFormControl">
                     <mat-error *ngIf="transaksiFormControl.invalid">
                         {{getRequiredErrorMessage('transaksiGroup')}}
                     </mat-error>
                 </mat-form-field>
+            </div> -->
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <mat-select placeholder="Id SPPR" [(ngModel)]="ModelTransaksi.idSppr"
+                        [formControl]="transaksiFormControl" required>
+                        <mat-option *ngFor=" let item of namaList" [value]="item.id_sppr">{{item.id_sppr}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="transaksiFormControl.invalid">
+                        {{getRequiredErrorMessage('transaksiGroup')}}
+                    </mat-error>
+                </mat-form-field>
             </div>
+
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
                     <input matInput placeholder="Nomor" required [(ngModel)]="ModelTransaksi.nomor"

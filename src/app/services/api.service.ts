@@ -247,6 +247,20 @@ export class ApiService {
       }));
   }
 
+  tambah_kedua(modelSurat, syaratBayar): Observable<any> {
+    const formData: FormData = new FormData();
+
+    formData.append('modelSurat', modelSurat);
+    formData.append('syaratBayar', syaratBayar);
+
+    return this.http.post(this.BaseURL + 'welcome/tambahsurat/', formData).pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      })
+    );
+  }
+
   Surat_CreateSurat(pst_nosurat: string, pst_idpemborong: string, pst_tglsurat: string, pst_pekerjaan: string,
     pst_proyek: string, pst_nilai: string, pst_pelaksanaan: string,
     pst_awlpekerjaan: string, pst_akhirpekerjaan: string,

@@ -115,6 +115,7 @@ export class Pembayaran implements OnInit {
       this.ModelTransaksi = result;
       console.log(this.ModelTransaksi);
       this.save_data();
+      this.ambil_data();
 
     });
   }
@@ -139,7 +140,7 @@ export class transaksiDialog {
 
   ModelTransaksi: any = [];
   dataSource = [];
-  listNama = [];
+  namaList = [];
   constructor(
     http: Http, private API: ApiService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<transaksiDialog>,
@@ -165,17 +166,26 @@ export class transaksiDialog {
 
   showToaster() {
     this.toastr.success("Data Berhasil disimpan", 'Informasi');
+    console.log(this.ModelTransaksi);
   }
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   ngOnInit(): void {
-
+    this.ambil_nama();
   }
 
   getRequiredErrorMessage(field: any) {
     return this.transaksiFrom.get(field).hasError('required') ? 'You must enter a value' : '';
+  }
+
+  ambil_nama() {
+    this.API.ListSppr()
+      .subscribe(result => {
+        this.namaList = result.json().Output;
+        console.log(this.namaList);
+      });
   }
 }
 
