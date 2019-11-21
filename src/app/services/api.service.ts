@@ -141,6 +141,7 @@ export class ApiService {
 
     return this.http.post(this.BaseURL + 'pembayaran/tambahPembayaran/', formData).pipe(
       map(response => {
+        console.log(response);
         return response;
       })
     );
@@ -247,15 +248,19 @@ export class ApiService {
       }));
   }
 
-  tambah_kedua(modelSurat, syaratBayar): Observable<any> {
+  tambah_kedua(syaratBayar: any): Observable<any> {
+
+    console.log(syaratBayar);
+
     const formData: FormData = new FormData();
 
-    formData.append('modelSurat', modelSurat);
-    formData.append('syaratBayar', syaratBayar);
+    // formData.append('modelSurat', modelSurat);
+    formData.append('pst_syaratbayar', syaratBayar);
 
-    return this.http.post(this.BaseURL + 'welcome/tambahsurat/', formData).pipe(
+    return this.http.post(this.BaseURL + 'welcome/tambahkedua/', formData).pipe(
       map(response => {
-        console.log(response);
+        //console.log(formData);
+        // console.log(response);
         return response;
       })
     );

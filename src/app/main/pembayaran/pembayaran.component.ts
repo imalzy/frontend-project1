@@ -88,7 +88,7 @@ export class Pembayaran implements OnInit {
     this.API.pembayaran_create(this.ModelTransaksi.idPembeli, this.ModelTransaksi.idSppr,
       this.ModelTransaksi.nomor, this.ModelTransaksi.tglTempo, this.ModelTransaksi.keterangan, this.ModelTransaksi.jlh).subscribe(
         result => {
-          console.log(result);
+          console.log('ini adalah result' + result);
           const status = result.json().status;
           const desc = result.json().desc;
 

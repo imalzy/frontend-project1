@@ -181,7 +181,7 @@ export class viewCetak {
 export class Sample2ViewDialog {
   ModelSurat: any = [];
   syarat_bayar: any = [];
-  namaList: UsrNama[];
+  namaList: any = [];
   spmkForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -201,6 +201,8 @@ export class Sample2ViewDialog {
   akhirPekerjaanFromControl = new FormControl('', [Validators.required]);
 
   ngOnInit() {
+
+    this.getnama();
     // this.ModelSurat.no_surat = this.data.no_surat;
     // this.ModelSurat.id_pemborong = this.data.id_pemborong;
     // this.ModelSurat.tglsurat = this.data.tglsurat;
@@ -286,11 +288,17 @@ export class Sample2ViewDialog {
     this.dialogRef.close();
   }
 
+  simpandata() {
+    this.API.tambah_kedua(this.syarat_bayar).subscribe(result => {
+      //console.log('Ini adalah result ' + result);
+    });
+  }
 
   showToaster() {
     this.toastr.success("Data Berhasil disimpan", 'Informasi');
-    console.log(this.ModelSurat);
-    console.log(this.syarat_bayar);
+    this.simpandata();
+    // console.log(this.ModelSurat);
+    // console.log(this.syarat_bayar);
   }
   getRequiredErrorMessage(field: any) {
     return this.spmkForm.get(field).hasError('required') ? 'You must enter a value' : '';
@@ -321,8 +329,9 @@ export class Sample2ViewDialog {
       if (result !== '') {
         this.syarat_bayar.push({ syarat_bayar: result.syarat_bayar, keterangan: result.keterangan });
         console.log(this.ModelSurat);
-        console.log(result.syarat_bayar);
-        console.log(result.keterangan);
+        console.log(this.syarat_bayar);
+        // console.log(result.syarat_bayar);
+        // console.log(result.keterangan);
       }
     });
   }

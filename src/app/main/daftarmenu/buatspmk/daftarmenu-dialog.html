@@ -12,7 +12,7 @@
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
                     <input matInput placeholder="Nomor Surat" formControlName="nosurat"
-                        [formControl]="nosuratFormControl" [(ngModel)]="ModelSurat.idPembeli">
+                        [formControl]="nosuratFormControl" [(ngModel)]="ModelSurat.pst_nosurat">
                     <mat-error *ngIf=nosuratFormControl.invalid>
                         Nomor surat tidak boleh kosong
                     </mat-error>
@@ -21,16 +21,37 @@
 
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
+                    <mat-select placeholder="Nama Pemborong" [(ngModel)]="ModelSurat.pst_idpemborong"
+                        [formControl]="idpemborongFromControl" required>
+                        <mat-option *ngFor=" let item of namaList" [value]="item.id_pemborong">{{item.nama}}
+                        </mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
+                        Nama Pemborong tidak boleh kosong
+                    </mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <!-- <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
                     <input matInput placeholder="Nama Pemborong" formControlName="nosurat"
                         [formControl]="nosuratFormControl" [(ngModel)]="ModelSurat.idPembeli">
                     <mat-error *ngIf=nosuratFormControl.invalid>
                         Nomor surat tidak boleh kosong
                     </mat-error>
                 </mat-form-field>
-            </div>
+            </div> -->
 
-            <div class="kotak" *ngFor="let item of syarat_bayar; let i =index">
-                <p (click)="removeItem(i)">{{item.syarat_bayar}} {{item.keterangan}}</p>
+            <div class="kotak">
+                <mat-card *ngFor="let item of syarat_bayar; let i =index">
+                    <button mat-icon-button aria-label="Close dialog" (click)="removeItem(i)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-card-content>
+                        <mat-card-subtitle>{{item.syarat_bayar}}</mat-card-subtitle>
+                        <mat-card-subtitle>{{item.keterangan}}</mat-card-subtitle>
+                    </mat-card-content>
+                </mat-card>
             </div>
             <!-- addSkillButtonClick -->
             <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
