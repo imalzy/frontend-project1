@@ -180,7 +180,7 @@ export class viewCetak {
 // tslint:disable-next-line: component-class-suffix
 export class Sample2ViewDialog {
   ModelSurat: any = [];
-  syarat_bayar: any = [];
+  syarat_bayar: carabayars[] = [];
   namaList: any = [];
   spmkForm: FormGroup;
 
@@ -289,9 +289,11 @@ export class Sample2ViewDialog {
   }
 
   simpandata() {
-    this.API.tambah_kedua(this.syarat_bayar).subscribe(result => {
-      //console.log('Ini adalah result ' + result);
-    });
+    this.API.tambah_kedua(this.ModelSurat.pst_nosurat, this.ModelSurat.pst_idpemborong, this.ModelSurat.pst_tglsurat,
+      this.ModelSurat.pst_pekerjaan, this.ModelSurat.pst_proyek, this.ModelSurat.pst_nilai, this.ModelSurat.pst_pelaksanaan,
+      this.ModelSurat.pst_awlpekerjaan, this.ModelSurat.pst_akhirpekerjaan, this.syarat_bayar).subscribe(result => {
+        //console.log('Ini adalah result ' + result);
+      });
   }
 
   showToaster() {
@@ -347,7 +349,6 @@ export interface spmk {
   waktupengerjaan: string;
   awalkerja: string;
   akhirkerja: string;
-  carabayar: carabayars[];
 }
 
 export interface carabayars {

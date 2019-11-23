@@ -248,19 +248,31 @@ export class ApiService {
       }));
   }
 
-  tambah_kedua(syaratBayar: any): Observable<any> {
+  tambah_kedua(pst_nosurat: string, pst_idpemborong: string, pst_tglsurat: string, pst_pekerjaan: string,
+    pst_proyek: string, pst_nilai: string, pst_pelaksanaan: string,
+    pst_awlpekerjaan: string, pst_akhirpekerjaan: string, syaratBayar: any): Observable<any> {
 
-    console.log(syaratBayar);
-
+    let opt: RequestOptions;
+    const headers = new Headers();
     const formData: FormData = new FormData();
+    formData.append('nomor_surat', pst_nosurat);
+    formData.append('id_pemborong', pst_idpemborong);
+    formData.append('tgl_surat', pst_tglsurat);
+    formData.append('pekerjaan', pst_pekerjaan);
+    formData.append('proyek', pst_proyek);
+    formData.append('total_nilai', pst_nilai);
+    formData.append('waktu_pelaksanaan', pst_pelaksanaan);
+    formData.append('awal_pekerjaan', pst_awlpekerjaan);
+    formData.append('akhir_pekerjaan', pst_akhirpekerjaan);
 
-    // formData.append('modelSurat', modelSurat);
-    formData.append('pst_syaratbayar', syaratBayar);
+    var data_syaratbayar: any = JSON.stringify(syaratBayar);
 
+    formData.append('pst_caraBayar', data_syaratbayar);
+
+    console.log('Ini data ' + data_syaratbayar);
     return this.http.post(this.BaseURL + 'welcome/tambahkedua/', formData).pipe(
       map(response => {
-        //console.log(formData);
-        // console.log(response);
+        console.log(response);
         return response;
       })
     );

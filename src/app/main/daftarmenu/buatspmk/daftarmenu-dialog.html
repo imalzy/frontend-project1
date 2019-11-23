@@ -32,15 +32,75 @@
                 </mat-form-field>
             </div>
 
-            <!-- <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="Nama Pemborong" formControlName="nosurat"
-                        [formControl]="nosuratFormControl" [(ngModel)]="ModelSurat.idPembeli">
-                    <mat-error *ngIf=nosuratFormControl.invalid>
-                        Nomor surat tidak boleh kosong
-                    </mat-error>
+                    <input matInput placeholder="Tanggal Surat" [(ngModel)]="ModelSurat.pst_tglsurat"
+                        [formControl]="tglSuratFromControl" required>
+                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
+                        Nama Pemborong tidak boleh kosong
+                    </mat-error> -->
                 </mat-form-field>
-            </div> -->
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Pekerjaan" [(ngModel)]="ModelSurat.pst_pekerjaan"
+                        [formControl]="pekerjaanFromControl" required>
+                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
+                        Nama Pemborong tidak boleh kosong
+                    </mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Proyek" [(ngModel)]="ModelSurat.pst_proyek"
+                        [formControl]="proyekFromControl" required>
+                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
+                        Nama Pemborong tidak boleh kosong
+                    </mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Total Nilai" [(ngModel)]="ModelSurat.pst_nilai"
+                        [formControl]="totalnilaiFromControl" required>
+                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
+                        Nama Pemborong tidak boleh kosong
+                    </mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Waktu Pelaksanaan" [(ngModel)]="ModelSurat.pst_pelaksanaan"
+                        [formControl]="waktuPelaksanaanFromControl" required>
+                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
+                        Nama Pemborong tidak boleh kosong
+                    </mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Awal Pekerjaan" [(ngModel)]="ModelSurat.pst_awlpekerjaan"
+                        [formControl]="awalPekerjaanFromControl" required>
+                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
+                        Nama Pemborong tidak boleh kosong
+                    </mat-error> -->
+                </mat-form-field>
+            </div>
+
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Akhir Pekerjaan" [(ngModel)]="ModelSurat.pst_akhirpekerjaan"
+                        [formControl]="akhirPekerjaanFromControl" required>
+                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
+                        Nama Pemborong tidak boleh kosong
+                    </mat-error> -->
+                </mat-form-field>
+            </div>
 
             <div class="kotak">
                 <mat-card *ngFor="let item of syarat_bayar; let i =index">
@@ -61,7 +121,7 @@
             </div>
             <!-- [disabled]="spmkForm.invalid" -->
             <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
-                <button mat-raised-button class="save-button mat-accent" type="submit" [mat-dialog-close]="ModelSurat"
+                <button mat-raised-button class="save-button mat-accent" type="submit"
                     (click)="showToaster()">Simpan</button>
             </div>
         </form>
