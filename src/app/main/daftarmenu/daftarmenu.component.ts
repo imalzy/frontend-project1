@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { locale as english } from './i18n/en';
 import { locale as turkish } from './i18n/tr';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { FuseSplashScreenService } from '../../../@fuse/services/splash-screen.service';
 import { FormControl, FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
@@ -41,7 +42,7 @@ export interface Element {
   animations: fuseAnimations
 })
 export class DaftarMenu implements OnInit {
-  displayedColumns = ['no_surat', 'pekerjaan', 'nama', 'telpon', 'total_nilai'];
+  displayedColumns = ['no_surat', 'nama', 'pekerjaan', 'telpon', 'total_nilai'];
   // dataSource = [];
   BaseURL = environment.BaseUrl;
   ModelSurat: any = [];
@@ -142,7 +143,7 @@ export class DaftarMenu implements OnInit {
       // this.namaList = result;
       // this.ModelSurat = result;
       //console.log(this.ModelSurat = result);
-      // this.save_data();
+      this.ambil_data();
 
     });
   }
@@ -230,23 +231,23 @@ export class Sample2ViewDialog {
       // carabayar: this.formBuilder.array([this.addBayarFormGroup()])
     });
 
-    this.spmkForm.get('nosurat').valueChanges.subscribe(
-      value => {
-        console.log(value);
-      }
-    );
+    // this.spmkForm.get('nosurat').valueChanges.subscribe(
+    //   value => {
+    //     console.log(value);
+    //   }
+    // );
 
-    this.spmkForm.get('carabayar').valueChanges.subscribe(
-      value => {
-        console.log(value);
-      }
-    );
+    // this.spmkForm.get('carabayar').valueChanges.subscribe(
+    //   value => {
+    //     console.log(value);
+    //   }
+    // );
 
-    this.spmkForm.valueChanges.subscribe(
-      value => {
-        console.log(JSON.stringify(value));
-      }
-    );
+    // this.spmkForm.valueChanges.subscribe(
+    //   value => {
+    //     console.log(JSON.stringify(value));
+    //   }
+    // );
   }
 
   onSubmit(): void {
@@ -359,6 +360,7 @@ export interface carabayars {
 @Component({
   selector: 'daftarmenu-pembayaran',
   templateUrl: './daftarmenu-pembayaran.html',
+  styleUrls: ['./daftarmenu.component.scss'],
   animations: fuseAnimations
 })
 export class dialogpembayaran {

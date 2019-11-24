@@ -11,8 +11,8 @@ import { StringifyOptions } from 'querystring';
 })
 export class ApiService {
   BaseURL = environment.BaseUrl;
-
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http) { }
 
   Auth_Login(Userlogin: string, Password: string): Observable<any> {
     let opt: RequestOptions;
@@ -255,15 +255,25 @@ export class ApiService {
     let opt: RequestOptions;
     const headers = new Headers();
     const formData: FormData = new FormData();
+
+    let date_surat = JSON.stringify(pst_tglsurat);
+    date_surat = date_surat.slice(1, 11);
+    let awal_kerja = JSON.stringify(pst_awlpekerjaan);
+    awal_kerja = awal_kerja.slice(1, 11);
+    let akhir_kerja = JSON.stringify(pst_akhirpekerjaan);
+    akhir_kerja = akhir_kerja.slice(1, 11);
+
+    // var date_surat = this.datePipe.transform(pst_tglsurat, 'dd-MM-yyyy');
+
     formData.append('nomor_surat', pst_nosurat);
     formData.append('id_pemborong', pst_idpemborong);
-    formData.append('tgl_surat', pst_tglsurat);
+    formData.append('tgl_surat', date_surat);
     formData.append('pekerjaan', pst_pekerjaan);
     formData.append('proyek', pst_proyek);
     formData.append('total_nilai', pst_nilai);
     formData.append('waktu_pelaksanaan', pst_pelaksanaan);
-    formData.append('awal_pekerjaan', pst_awlpekerjaan);
-    formData.append('akhir_pekerjaan', pst_akhirpekerjaan);
+    formData.append('awal_pekerjaan', awal_kerja);
+    formData.append('akhir_pekerjaan', akhir_kerja);
 
     var data_syaratbayar: any = JSON.stringify(syaratBayar);
 

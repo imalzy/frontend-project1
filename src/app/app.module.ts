@@ -95,7 +95,9 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent,
     ],
-    providers: [ApiService],
+    providers: [
+        ApiService
+    ],
     bootstrap: [
         AppComponent
     ]

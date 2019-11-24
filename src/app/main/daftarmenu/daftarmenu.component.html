@@ -55,21 +55,21 @@
                     </mat-cell>
                 </ng-container>
 
-                <!-- Image Column -->
-                <ng-container matColumnDef="pekerjaan">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Pekerjaan </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                        <p class="text-truncate">{{element.pekerjaan}}</p>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Name Column -->
                 <ng-container matColumnDef="nama">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Nama Pemborong</mat-header-cell>
                     <mat-cell *matCellDef="let element">
                         <p class="text-truncate">{{element.nama}}</p>
                     </mat-cell>
                 </ng-container>
+
+                <!-- Image Column -->
+                <ng-container matColumnDef="pekerjaan">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Pekerjaan </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <p class="text-truncate" style="white-space: unset !important;">{{element.pekerjaan}}</p>
+                    </mat-cell>
+                </ng-container>
+
 
                 <!-- Category Column -->
                 <ng-container matColumnDef="telpon">

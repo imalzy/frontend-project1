@@ -21,54 +21,65 @@
 
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <mat-select placeholder="Nama Pemborong" [(ngModel)]="ModelSurat.pst_idpemborong"
+                    <mat-select placeholder="Pilih Pemborong" [(ngModel)]="ModelSurat.pst_idpemborong"
                         [formControl]="idpemborongFromControl" required>
                         <mat-option *ngFor=" let item of namaList" [value]="item.id_pemborong">{{item.nama}}
                         </mat-option>
                     </mat-select>
-                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
+                    <mat-error *ngIf="idpemborongFromControl.invalid">
                         Nama Pemborong tidak boleh kosong
-                    </mat-error> -->
+                    </mat-error>
                 </mat-form-field>
             </div>
 
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
+
+                    <!-- <mat-form-field>
+                        <input matInput [matDatepicker]="dp3" placeholder="Input disabled" disabled>
+                        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                    </mat-form-field> -->
+
                     <input matInput placeholder="Tanggal Surat" [(ngModel)]="ModelSurat.pst_tglsurat"
-                        [formControl]="tglSuratFromControl" required>
-                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
-                        Nama Pemborong tidak boleh kosong
-                    </mat-error> -->
+                        [formControl]="tglSuratFromControl" [matDatepicker]="dp3" required readonly>
+                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                    <mat-error *ngIf="tglSuratFromControl.invalid">
+                        Tanggal Surat Tidak Boleh Kosong
+                    </mat-error>
                 </mat-form-field>
             </div>
 
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="Pekerjaan" [(ngModel)]="ModelSurat.pst_pekerjaan"
+                    <textarea matInput placeholder="Detail Pekerjaan" [(ngModel)]="ModelSurat.pst_pekerjaan"
                         [formControl]="pekerjaanFromControl" required>
-                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
-                        Nama Pemborong tidak boleh kosong
-                    </mat-error> -->
+                    </textarea>
+                    <mat-error *ngIf="pekerjaanFromControl.invalid">
+                        Detail Pekerjaan Tidak Boleh Kosong
+                    </mat-error>
                 </mat-form-field>
             </div>
 
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="Proyek" [(ngModel)]="ModelSurat.pst_proyek"
+                    <textarea matInput placeholder="Lokasi Proyek" [(ngModel)]="ModelSurat.pst_proyek"
                         [formControl]="proyekFromControl" required>
-                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
-                        Nama Pemborong tidak boleh kosong
-                    </mat-error> -->
+                    </textarea>
+                    <mat-error *ngIf="idpemborongFromControl.invalid">
+                        Lokasi Proyek Tidak Boleh Kosong
+                    </mat-error>
                 </mat-form-field>
             </div>
 
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="Total Nilai" [(ngModel)]="ModelSurat.pst_nilai"
+                    <input matInput placeholder="Total Nilai Borongan" [(ngModel)]="ModelSurat.pst_nilai"
                         [formControl]="totalnilaiFromControl" required>
-                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
-                        Nama Pemborong tidak boleh kosong
-                    </mat-error> -->
+                    <mat-error *ngIf="totalnilaiFromControl.invalid">
+                        Total Nilai Borongan Tidak Boleh Kosong
+                    </mat-error>
                 </mat-form-field>
             </div>
 
@@ -76,53 +87,58 @@
                 <mat-form-field fxFlex>
                     <input matInput placeholder="Waktu Pelaksanaan" [(ngModel)]="ModelSurat.pst_pelaksanaan"
                         [formControl]="waktuPelaksanaanFromControl" required>
-                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
-                        Nama Pemborong tidak boleh kosong
-                    </mat-error> -->
+                    <mat-error *ngIf="waktuPelaksanaanFromControl.invalid">
+                        Waktu Pelaksanaan Tidak Boleh Kosong
+                    </mat-error>
                 </mat-form-field>
             </div>
 
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="Awal Pekerjaan" [(ngModel)]="ModelSurat.pst_awlpekerjaan"
-                        [formControl]="awalPekerjaanFromControl" required>
-                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
-                        Nama Pemborong tidak boleh kosong
-                    </mat-error> -->
+                    <input matInput placeholder="Tanggal Awal Pekerjaan" [(ngModel)]="ModelSurat.pst_awlpekerjaan"
+                        [formControl]="awalPekerjaanFromControl" [matDatepicker]="dp4" required readonly>
+                    <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
+                    <mat-datepicker #dp4 disabled="false"></mat-datepicker>
+                    <mat-error *ngIf="awalPekerjaanFromControl.invalid">
+                        Tanggal Awal Kerja Tidak Boleh kosong
+                    </mat-error>
                 </mat-form-field>
             </div>
 
             <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="Akhir Pekerjaan" [(ngModel)]="ModelSurat.pst_akhirpekerjaan"
-                        [formControl]="akhirPekerjaanFromControl" required>
-                    <!-- <mat-error *ngIf="idpemborongFromControl.invalid">
-                        Nama Pemborong tidak boleh kosong
-                    </mat-error> -->
+                    <input matInput placeholder="Tanggal Akhir Pekerjaan" [(ngModel)]="ModelSurat.pst_akhirpekerjaan"
+                        [formControl]="akhirPekerjaanFromControl" [matDatepicker]="dp5" required readonly>
+                    <mat-datepicker-toggle matSuffix [for]="dp5"></mat-datepicker-toggle>
+                    <mat-datepicker #dp5 disabled="false"></mat-datepicker>
+                    <mat-error *ngIf="akhirPekerjaanFromControl.invalid">
+                        Tanggal Akhir Kerja Tidak Boleh kosong
+                    </mat-error>
                 </mat-form-field>
             </div>
 
-            <div class="kotak">
-                <mat-card *ngFor="let item of syarat_bayar; let i =index">
-                    <button mat-icon-button aria-label="Close dialog" (click)="removeItem(i)">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                    <mat-card-content>
-                        <mat-card-subtitle>{{item.syarat_bayar}}</mat-card-subtitle>
-                        <mat-card-subtitle>{{item.keterangan}}</mat-card-subtitle>
-                    </mat-card-content>
-                </mat-card>
-            </div>
+            <mat-card class="jarak" *ngFor="let item of syarat_bayar; let i =index">
+                <button mat-icon-button class="topleft" aria-label="Close dialog" (click)="removeItem(i)">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-card-content>
+                    <mat-hint class="teks">Syarat Pembayaran</mat-hint>
+                    <mat-card-subtitle>{{item.syarat_bayar}}</mat-card-subtitle>
+                    <mat-hint class="teks2">Keterangan</mat-hint>
+                    <mat-card-subtitle>{{item.keterangan}}</mat-card-subtitle>
+                </mat-card-content>
+            </mat-card>
+
             <!-- addSkillButtonClick -->
             <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
                 <a (click)="opDialog()" style="cursor: default">
-                    Add another cara bayar +
+                    Tambah cara bayar +
                 </a>
             </div>
-            <!-- [disabled]="spmkForm.invalid" -->
+            <!-- [disabled]="spmkForm.invalid" [mat-dialog-close]  -->
             <div mat-dialog-actions class="m-0" fxLayout="row" fxLayoutAlign="space-between center">
-                <button mat-raised-button class="save-button mat-accent" type="submit"
-                    (click)="showToaster()">Simpan</button>
+                <button mat-raised-button class="save-button mat-accent" type="submit" [disabled]="spmkForm.invalid"
+                    [mat-dialog-close] (click)="showToaster()">Simpan</button>
             </div>
         </form>
     </div>

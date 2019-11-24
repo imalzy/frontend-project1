@@ -1,26 +1,30 @@
-<form name="syaratForm" [formGroup]="syaratForm">
-    <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-        <mat-form-field fxFlex>
-            <input matInput placeholder="Syarat Pembayaran" formControlName="carabayar"
-                [formControl]="carabayarFormControl" [(ngModel)]="persyaratan.syarat_bayar">
-            <!-- <mat-error *ngIf=syarat_bayarFormControl.invalid>
+<div class="dialog-content-wrapper">
+    <div mat-dialog-content class="p-24 m-0" fusePerfectScrollbar>
+        <form name="syaratForm" [formGroup]="syaratForm">
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Syarat Pembayaran" formControlName="carabayar"
+                        [formControl]="carabayarFormControl" [(ngModel)]="persyaratan.syarat_bayar">
+                    <!-- <mat-error *ngIf=syarat_bayarFormControl.invalid>
                     Syarat pembayaran tidak boleh kosong
                 </mat-error> -->
-        </mat-form-field>
-    </div>
+                </mat-form-field>
+            </div>
 
-    <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
-        <mat-form-field fxFlex>
-            <textarea matInput placeholder="Keterangan" formControlName="keterangan"
-                [formControl]="keteranganFormControl" [(ngModel)]="persyaratan.keterangan"></textarea>
-            <!-- <mat-error *ngIf=keteranganFormControl.invalid>
+            <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field fxFlex>
+                    <textarea matInput placeholder="Keterangan" formControlName="keterangan"
+                        [formControl]="keteranganFormControl" [(ngModel)]="persyaratan.keterangan"></textarea>
+                    <!-- <mat-error *ngIf=keteranganFormControl.invalid>
                     Syarat pembayaran tidak boleh kosong
                 </mat-error> -->
-        </mat-form-field>
-    </div>
+                </mat-form-field>
+            </div>
 
-    <div mat-dialog-actions class=" m-0" fxLayout="row" fxLayoutAlign="space-between center">
-        <button mat-raised-button class="save-button mat-accent" type="submit"
-            [mat-dialog-close]="persyaratan">Simpan</button>
+            <div mat-dialog-actions class=" m-0" fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-raised-button class="save-button mat-accent" type="submit"
+                    [mat-dialog-close]="persyaratan">Tambah</button>
+            </div>
+        </form>
     </div>
-</form>
+</div>
